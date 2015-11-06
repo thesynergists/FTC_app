@@ -110,10 +110,9 @@ public class OurTeleOp extends OpMode
         // 1 is full down
         // direction: left_stick_x ranges from -1 to 1, where -1 is full left
         // and 1 is full right
-        float throttle = -gamepad1.left_stick_y;
-        float direction = gamepad1.left_stick_x;
-        float right = throttle - direction;
-        float left = throttle + direction;
+        float left = gamepad1.left_stick_y;
+        float right = gamepad1.right_stick_y;
+
 
         // clip the right/left values so that the values never exceed +/- 1
         right = Range.clip(right, -1, 1);
@@ -121,6 +120,7 @@ public class OurTeleOp extends OpMode
 
         // scale the joystick value to make it easier to control
         // the robot more precisely at slower speeds.
+
         right = (float)scaleInput(right);
         left =  (float)scaleInput(left);
 
