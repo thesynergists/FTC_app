@@ -41,7 +41,7 @@ import com.qualcomm.robotcore.util.Range;
  * <p>
  * Enables control of the robot via the gamepad
  */
-public class OurTeleOp extends OpMode
+public class Team7104TeleOp extends OpMode
 {
 
     DcMotor motorLeft1;
@@ -52,7 +52,7 @@ public class OurTeleOp extends OpMode
     /**
      * Constructor
      */
-    public OurTeleOp() {
+    public Team7104TeleOp() {
 
     }
 
