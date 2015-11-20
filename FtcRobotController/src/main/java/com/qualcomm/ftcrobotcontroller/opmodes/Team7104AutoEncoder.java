@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 /**
  * Created by thomasmatthews on 11/13/15.
  */
-public class Team7104AutoEncoder extends OpMode
+public class Team7104AutoEncoder extends Team7104Hardware
 {
     DcMotor motorLeft1;
     //DcMotor motorLeft2;
