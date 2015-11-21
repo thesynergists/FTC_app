@@ -8,10 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
  */
 public class Team7104AutoEncoder extends Team7104Hardware
 {
-    DcMotor motorLeft1;
-    //DcMotor motorLeft2;
-    DcMotor motorRight1;
-    //DcMotor motorRight2;
 
 
 
@@ -165,7 +161,7 @@ public class Team7104AutoEncoder extends Team7104Hardware
                 setPowerLeftMotor(-1);
                 setPowerRightMotor(1);
 
-                if (have_drive_encoders_reached(200, 200)) {
+                if (have_drive_encoders_reached(-200, 200)) {
                     reset_drive_encoders();
                     setPowerLeftMotor(0);
                     setPowerRightMotor(0);
@@ -181,14 +177,14 @@ public class Team7104AutoEncoder extends Team7104Hardware
                 }
                 break;
             //
-            // Turn right until the encoders exceed the specified values.
+            // Move backwards until the encoders exceed the specified values.
             //
             case 5:
                 run_using_encoders();
                 setPowerLeftMotor(-1);
                 setPowerRightMotor(-1);
 
-                if (have_drive_encoders_reached(700, 700)) {
+                if (have_drive_encoders_reached(-700, -700)) {
                     reset_drive_encoders();
                     setPowerLeftMotor(0);
                     setPowerRightMotor(0);
@@ -304,25 +300,8 @@ public class Team7104AutoEncoder extends Team7104Hardware
 
 
 //--------------------------------------------------------------------------------------------
-    //Definitions of setting motor methods
-    public void setPowerLeftMotor ( double level)
-    {
-        motorLeft1.setPower(level);
-    }
 
-    public void setPowerRightMotor(double level)
-    {
-        motorRight1.setPower(level);
-    }
-
-
-
-
-
-
-
-    //--------------------------------------------------------------------------------
-
+    
     //moved methods from PushBotHardware manually into here as a temporary workaround:
 
 
