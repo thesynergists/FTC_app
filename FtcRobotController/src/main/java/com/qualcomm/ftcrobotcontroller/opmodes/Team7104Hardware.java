@@ -49,7 +49,7 @@ public class Team7104Hardware extends OpMode
         motorRight1 = hardwareMap.dcMotor.get("motorRight");
         //motorRight2 = motorRight1;
 
-        motorLeft1.setDirection(DcMotor.Direction.REVERSE);
+        motorRight1.setDirection(DcMotor.Direction.REVERSE);
 
     }
 
