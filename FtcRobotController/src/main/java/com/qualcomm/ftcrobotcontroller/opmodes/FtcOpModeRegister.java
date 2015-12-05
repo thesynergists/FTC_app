@@ -54,6 +54,7 @@ public class FtcOpModeRegister implements OpModeRegister {
      *
      * If two or more op modes are registered with the same name, the app will display an error.
      */
+    manager.register("Team7104Telemetry", Team7104Telemetry.class);
     manager.register("Team7104TeleOp", Team7104TeleOp.class);
     manager.register("Team7104AutoEncoder", Team7104AutoEncoder.class);
     manager.register("NullOp", NullOp.class);

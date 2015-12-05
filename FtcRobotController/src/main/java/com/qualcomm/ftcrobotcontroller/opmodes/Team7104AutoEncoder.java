@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 /**
  * Created by thomasmatthews on 11/13/15.
  */
-public class Team7104AutoEncoder extends Team7104Hardware
+public class Team7104AutoEncoder extends Team7104Telemetry
 {
 
 
@@ -193,75 +193,12 @@ public class Team7104AutoEncoder extends Team7104Hardware
                 break;
 
 
-            //
-            // Send telemetry data to the driver station.
-            //
-
-            /*
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            */
-
-
-            //NOTE AND PLEASE FILL THESE IN LATER; BLOCKED OUT TO MAKE PROGRAM RUN AT THE MOMENT!
-            //update_telemetry(); // Update common telemetry
-            //telemetry.addData("18", "State: " + drive_state);
-
-
-
-            /*
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            !
-            */
-
-
-
+            
         }
+
+        update_telemetry(); // Update common telemetry
+        telemetry.addData("18", "State: " + drive_state);
+
     } // loop
 
     //--------------------------------------------------------------------------
