@@ -193,7 +193,7 @@ public class Team7104AutoEncoder extends Team7104Telemetry
                 break;
 
 
-            
+
         }
 
         update_telemetry(); // Update common telemetry
