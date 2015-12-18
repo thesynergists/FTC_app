@@ -100,9 +100,15 @@ public class Team7104TeleOp extends Team7104Hardware
         float right = gamepad1.right_stick_y;
 
 
+        float wrist_elevation = gamepad2.left_stick_y;
+        float wrist_rotation_left = gamepad2.left_trigger;
+        float wrist_rotation_right = gamepad2.right_trigger;
+
         // clip the right/left values so that the values never exceed +/- 1
         right = Range.clip(right, -1, 1);
         left = Range.clip(left, -1, 1);
+
+        wrist_elevation = Range.clip(wrist_elevation, -1, 1);
 
         // scale the joystick value to make it easier to control
         // the robot more precisely at slower speeds.
@@ -113,6 +119,19 @@ public class Team7104TeleOp extends Team7104Hardware
         // write the values to the motors
         setPowerLeftMotor(left);
         setPowerRightMotor(right);
+
+
+
+		//Make the IF move up and down based on controller
+		IF_change_elevation(wrist_elevation);
+
+        //Make it stop!!!
+        if(wrist_elevation == 0)
+        {
+            IF_stop_elevation();
+        }
+        
+
 
 		/*
 		 * Send telemetry data back to driver station. Note that if we are using
