@@ -2,6 +2,8 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
 /**
  * Created by thomasmatthews on 11/6/15.
@@ -12,6 +14,69 @@ public class Team7104Hardware extends OpMode
     //DcMotor motorLeft2;
     DcMotor motorRight1;
     //DcMotor motorRight2;
+
+    Servo rotation_servo;          //Make ourselves da servos! :)
+    Servo pitch_servo_left;
+    Servo pitch_servo_right;
+
+
+
+
+
+
+
+
+
+    //                                UNDER CONSTRUCTON!!!!!!!!!!!!!!!
+
+
+
+
+    /**
+     * Adjust Iron Fist elevation.
+     */
+    void IF_change_elevation (double p_position)
+    {
+        //
+        // Ensure the specific value is legal.
+        //
+        double l_position = Range.clip (p_position, Servo.MIN_POSITION, Servo.MAX_POSITION);
+
+        //
+        // Set the value.  The right servo value must be opposite of the left servo
+        // value.
+        //
+        if (pitch_servo_left != null)
+        {
+            pitch_servo_left.setPosition (l_position);
+        }
+        if (pitch_servo_right != null)
+        {
+            pitch_servo_right.setPosition (1.0 - l_position);
+        }
+
+    } // IF_change_elevation
+
+    //--------------------------------------------------------------------------
+    //
+    void IF_stop_elevation ()
+    {
+        //MAKE IT STOP!!!
+        pitch_servo_right.setPosition(.5);
+        pitch_servo_left.setPosition(.5);
+    }
+
+
+
+
+
+
+
+    //                       END OF CONSTRUCTION!!!!!!!!!!!
+
+
+
+
 
     public Team7104Hardware ()
     {
