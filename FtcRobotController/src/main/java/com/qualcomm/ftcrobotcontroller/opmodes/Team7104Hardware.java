@@ -49,7 +49,7 @@ public class Team7104Hardware extends OpMode
         motorRight1 = hardwareMap.dcMotor.get("motorRight");
         //motorRight2 = motorRight1;
 
-        motorLeft1.setDirection(DcMotor.Direction.REVERSE);
+        motorRight1.setDirection(DcMotor.Direction.REVERSE);
 
     }
 
@@ -140,4 +140,125 @@ public class Team7104Hardware extends OpMode
         setPowerRightMotor(level);
         setPowerLeftMotor(level);
     }
+
+    private boolean v_warning_generated = false;
+
+    //--------------------------------------------------------------------------
+    //
+    // v_warning_message
+    //
+    /**
+     * Store a message to the user if one has been generated.
+     */
+    private String v_warning_message = "Can't map;";
+
+
+    //--------------------------------------------------------------------------
+    //
+    // a_warning_generated
+    //
+    /**
+     * Access whether a warning has been generated.
+     */
+    boolean a_warning_generated ()
+
+    {
+        return v_warning_generated;
+
+    } // a_warning_generated
+
+    //--------------------------------------------------------------------------
+    //
+    // a_warning_message
+    //
+    /**
+     * Access the warning message.
+     */
+    String a_warning_message ()
+
+    {
+        return v_warning_message;
+
+    } // a_warning_message
+
+    void m_warning_message (String p_exception_message)
+
+    {
+        if (v_warning_generated)
+        {
+            v_warning_message += ", ";
+        }
+        v_warning_generated = true;
+        v_warning_message += p_exception_message;
+
+    } // m_warning_message
+
+    double a_left_drive_power ()
+    {
+        double l_return = 0.0;
+
+        if (motorLeft1 != null)
+        {
+            l_return = motorLeft1.getPower ();
+        }
+
+        return l_return;
+
+    } // a_left_drive_power
+
+    //--------------------------------------------------------------------------
+    //
+    // a_right_drive_power
+    //
+    /**
+     * Access the right drive motor's power level.
+     */
+    double a_right_drive_power ()
+    {
+        double l_return = 0.0;
+
+        if (motorRight1 != null)
+        {
+            l_return = motorRight1.getPower ();
+        }
+
+        return l_return;
+
+    } // a_right_drive_power
+
+    int a_left_encoder_count ()
+    {
+        int l_return = 0;
+
+        if (motorLeft1 != null)
+        {
+            l_return = motorLeft1.getCurrentPosition();
+        }
+
+        return l_return;
+
+    } // a_left_encoder_count
+
+    //--------------------------------------------------------------------------
+    //
+    // a_right_encoder_count
+    //
+    /**
+     * Access the right encoder's count.
+     */
+    int a_right_encoder_count ()
+
+    {
+        int l_return = 0;
+
+        if (motorRight1 != null)
+        {
+            l_return = motorRight1.getCurrentPosition();
+        }
+
+        return l_return;
+
+    } // a_right_encoder_count
+
+
 }

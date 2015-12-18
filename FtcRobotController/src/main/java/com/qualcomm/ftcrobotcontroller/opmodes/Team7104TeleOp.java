@@ -82,7 +82,8 @@ public class Team7104TeleOp extends Team7104Hardware
      * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#run()
      */
     @Override
-    public void loop() {
+    public void loop()
+    {
 
 		/*
 		 * Gamepad 1
