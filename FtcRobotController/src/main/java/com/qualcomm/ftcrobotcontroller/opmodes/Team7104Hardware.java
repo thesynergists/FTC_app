@@ -90,9 +90,8 @@ public class Team7104Hardware extends OpMode
      * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
      */
     @Override
-    public void init() {
-
-
+    public void init()
+    {
 		/*
 		 * Use the hardwareMap to get the dc motors and servos by name. Note
 		 * that the names of the devices must match the names used when you

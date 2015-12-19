@@ -43,13 +43,7 @@ public class Team7104AutoEncoder extends Team7104Telemetry
 
    @Override public void init()
    {
-       motorLeft1 = hardwareMap.dcMotor.get("motorLeft");
-       //motorLeft2 = motorLeft1;
-
-       motorRight1 = hardwareMap.dcMotor.get("motorRight");
-       //motorRight2 = motorRight1;
-
-       motorLeft1.setDirection(DcMotor.Direction.REVERSE);
+       super.init();
    }
 
 
