@@ -33,14 +33,15 @@ public class Team7104Hardware extends OpMode
 
 
     /**
-     * Adjust Iron Fist elevation.
+     * Adjust IronFist elevation.
      */
-    void IF_change_elevation (double p_position)
+    void IronFist_change_elevation (double p_position)
     {
         //
         // Ensure the specific value is legal.
         //
-        double l_position = Range.clip (p_position, Servo.MIN_POSITION, Servo.MAX_POSITION);
+
+        double l_position = Range.clip (p_position, 0, 1);
 
         //
         // Set the value.  The right servo value must be opposite of the left servo
@@ -55,11 +56,11 @@ public class Team7104Hardware extends OpMode
             pitch_servo_right.setPosition (1.0 - l_position);
         }
 
-    } // IF_change_elevation
+    } // IronFist_change_elevation
 
     //--------------------------------------------------------------------------
     //
-    void IF_stop_elevation ()
+    void IronFist_stop_elevation ()
     {
         //MAKE IT STOP!!!
         pitch_servo_right.setPosition(.5);

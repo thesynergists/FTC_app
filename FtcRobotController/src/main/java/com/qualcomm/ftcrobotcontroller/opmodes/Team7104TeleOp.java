@@ -109,7 +109,7 @@ public class Team7104TeleOp extends Team7104Hardware
         left = Range.clip(left, -1, 1);
 
         wrist_elevation = Range.clip(wrist_elevation, -1, 1);
-
+        double converted_wrist_elevation = (wrist_elevation + 1)/2;
         // scale the joystick value to make it easier to control
         // the robot more precisely at slower speeds.
 
@@ -123,14 +123,16 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
 		//Make the IF move up and down based on controller
-		IF_change_elevation(wrist_elevation);
+		IronFist_change_elevation(converted_wrist_elevation);
 
+
+        /*
         //Make it stop!!!
-        if(wrist_elevation == 0)
+        if(converted_wrist_elevation == .5)
         {
-            IF_stop_elevation();
+            IronFist_stop_elevation();
         }
-
+        not necessary */
 
 
 		/*
