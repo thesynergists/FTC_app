@@ -14,6 +14,8 @@ public class Team7104Hardware extends OpMode
     //DcMotor motorLeft2;
     DcMotor motorRight1;
     //DcMotor motorRight2;
+    DcMotor MMAShouldermotorLeft;
+    DcMotor MMAShouldermotorRight;
 
     Servo rotation_servo;          //Make ourselves da servos! :)
     Servo pitch_servo_left;
