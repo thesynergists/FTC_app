@@ -20,7 +20,7 @@ public class Team7104Hardware extends OpMode
     Servo rotation_servo;          //Make ourselves da servos! :)
     Servo pitch_servo_left;
     Servo pitch_servo_right;
-
+    Servo Bacon_servo;
 
 
 
