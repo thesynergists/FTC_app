@@ -19,19 +19,19 @@ public class Team7104MMAShoulderDaniel extends Team7104Hardware
     @Override
     public void loop(){
         //if joystick 2, right joystick
+        //Stop Motor
         if(gamepad2.right_stick_y < 0.01 && gamepad2.right_stick_y > -0.01)
         {
             MMAShouldermotorLeft.setPower(0);
             MMAShouldermotorRight.setPower(0);
-//Stop Motor
         }
         if(gamepad2.right_stick_y > 0.01)
         {
-
+            MMAShouldermotorLeft.setPower(15);
         }
         if(gamepad2.right_stick_y < -0.01)
         {
-
+            MMAShouldermotorLeft.setPower(-15);
         }
     }
 @Override
