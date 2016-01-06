@@ -19,7 +19,7 @@ public class Team7104BaconTeleOp extends Team7104Hardware
     @Override
     public void init () {
 
-         Bacon_servo = 0;
+         Bacon_servo.setPosition(0);
     }
     @Override
     public void loop(){

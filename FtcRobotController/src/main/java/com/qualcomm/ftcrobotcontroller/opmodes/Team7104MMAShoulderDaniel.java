@@ -11,7 +11,6 @@ public class Team7104MMAShoulderDaniel extends Team7104Hardware
     public Team7104MMAShoulderDaniel()
     {
 
-
     }
     @Override
     public void init(){
