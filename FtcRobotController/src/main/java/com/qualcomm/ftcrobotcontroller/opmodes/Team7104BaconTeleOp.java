@@ -17,18 +17,29 @@ public class Team7104BaconTeleOp extends Team7104Hardware
 
     }
     @Override
-    public void init () {
+    public void init ()
+    {
 
          Bacon_servo.setPosition(0);
     }
     @Override
     public void loop(){
-        if (gamepad1.right_bumper){
+        if (gamepad1.right_bumper)
+        {
 
+            Bacon_servo.setPosition(1);
 
         }
-        if (gamepad1.left_bumper){
+        if (gamepad1.left_bumper)
+        {
 
+            Bacon_servo.setPosition(-1);
+
+        }
+        else
+        {
+
+            Bacon_servo.setPosition(0);
 
         }
     }
