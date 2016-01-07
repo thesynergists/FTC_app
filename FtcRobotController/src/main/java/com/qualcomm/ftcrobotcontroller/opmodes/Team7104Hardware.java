@@ -114,6 +114,10 @@ public class Team7104Hardware extends OpMode
         //motorLeft2 = motorLeft1;
 
         motorRight1 = hardwareMap.dcMotor.get("motorRight");
+        //MMAShouldermotorLeft = hardwareMap.dcMotor.get("MMAShouldermotorLeft");
+        //MMAShouldermotorRight = hardwareMap.dcMotor.get("MMAShouldermotorRight");
+        pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
+        pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
         //motorRight2 = motorRight1;
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
