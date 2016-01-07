@@ -15,6 +15,13 @@ public class Team7104MMAShoulderDaniel extends Team7104Hardware
     @Override
     public void init(){
     }
+    //New Function Checking Remaining Distance from current encoder locating to location goal
+    //If the abs(current encoder value-encoder goal value)>200, then 100 power
+    //If the abs(current encoder value-encoder goal value)<200, then [abs(current encoder value-encoder goal value) * .4] power
+
+    //New Function or if statement for normal joystick (y) power mode
+    //if joystick > 0.01, then set power to (gamepad * 100)
+    //Make a bigger slow zone for jittery fingers?
     @Override
     public void loop(){
         //if joystick 2, right joystick
