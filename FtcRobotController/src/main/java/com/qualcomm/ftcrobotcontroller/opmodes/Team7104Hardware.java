@@ -88,11 +88,14 @@ public class Team7104Hardware extends OpMode
         {
             rotation_servo.setPosition(right_double_rotate);
         }
+
+        //Make servo become motionless if receiving conflicting control commands.
+        // This last part may require some testing and adjustment in case of slight sensor error...
         if (rotation_servo != null)
         {
-            if (left_double_rotate != 0 && right_double_rotate != 0)
+            if (left_double_rotate != .5 && right_double_rotate != .5)
             {
-                rotation_servo.setPosition(0);
+                rotation_servo.setPosition(.5);
             }
         }
     }
