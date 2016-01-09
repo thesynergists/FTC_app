@@ -2,6 +2,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.Hardware;
 
+//import com.qualcomm.robotcore.util.Range;
 /**
  * TeleOp Mode
  * <p>
@@ -19,8 +20,8 @@ public class Team7104BaconTeleOp extends Team7104Hardware
     @Override
     public void init ()
     {
-
-         Bacon_servo.setPosition(0);
+        super.init();
+        Bacon_servo.setPosition(0);
     }
     @Override
     public void loop(){

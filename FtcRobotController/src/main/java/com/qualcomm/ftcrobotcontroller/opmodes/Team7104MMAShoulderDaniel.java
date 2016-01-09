@@ -1,6 +1,6 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.util.Hardware;
+//import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+//import com.qualcomm.robotcore.util.Hardware;
 
 //FOR FRIDAY TESTING, try adding this line and taking out the 2 above
 //import com.qualcomm.robotcore.util.Range;
@@ -17,6 +17,7 @@ public class Team7104MMAShoulderDaniel extends Team7104Hardware
     }
     @Override
     public void init(){
+        super.init();
     }
     //New Function Checking Remaining Distance from current encoder locating to location goal
     //If the abs(current encoder value-encoder goal value)>200, then 100 power
