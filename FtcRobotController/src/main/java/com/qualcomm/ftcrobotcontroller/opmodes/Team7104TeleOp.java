@@ -101,8 +101,7 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
         float wrist_elevation = gamepad2.left_stick_y;
-        float wrist_rotation_left = gamepad2.left_trigger;
-        float wrist_rotation_right = gamepad2.right_trigger;
+
 
         // clip the right/left values so that the values never exceed +/- 1
         right = Range.clip(right, -1, 1);
@@ -120,10 +119,30 @@ public class Team7104TeleOp extends Team7104Hardware
         setPowerLeftMotor(left);
         setPowerRightMotor(right);
 
-
-
 		//Make the IF move up and down based on controller
 		IronFist_change_elevation(converted_wrist_elevation);
+
+
+
+
+        /*
+        Variables that will hold values showing
+        degree that left and right bumpers
+        are pressed in order to control Iron Fist rotation
+        (trigger buttons are analog, so adjustments were made.
+        */
+        float wrist_rotation_left = gamepad2.left_trigger;
+        float wrist_rotation_right = gamepad2.right_trigger;
+
+        wrist_rotation_left = Range.clip(wrist_rotation_left, 0, 1);
+        wrist_rotation_right = Range.clip(wrist_rotation_right, 0, 1);
+
+        //Split the range of 0 to 1 of the rotation servo between the two triggers.
+        double converted_wrist_rotation_left = (1 - wrist_rotation_left)/2;
+        double converted_wrist_rotation_right = (wrist_rotation_right + 1)/2;
+
+        //Control IF rotation.
+        Iron_Fist_rotate(converted_wrist_rotation_left, converted_wrist_rotation_right);
 
 
         /*

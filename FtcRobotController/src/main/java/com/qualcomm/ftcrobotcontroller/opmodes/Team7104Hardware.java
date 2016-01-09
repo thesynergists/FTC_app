@@ -70,7 +70,32 @@ public class Team7104Hardware extends OpMode
     }
 
 
+    /*
+    Control Iron Fist rotation.
+     */
 
+    void Iron_Fist_rotate (double left_double, double right_double)
+    {
+
+        double left_double_rotate = Range.clip (left_double, 0, 1);
+        double right_double_rotate = Range.clip (right_double, 0, 1);
+
+        if (rotation_servo != null)
+        {
+            rotation_servo.setPosition(left_double_rotate);
+        }
+        if (rotation_servo != null)
+        {
+            rotation_servo.setPosition(right_double_rotate);
+        }
+        if (rotation_servo != null)
+        {
+            if (left_double_rotate != 0 && right_double_rotate != 0)
+            {
+                rotation_servo.setPosition(0);
+            }
+        }
+    }
 
 
 
