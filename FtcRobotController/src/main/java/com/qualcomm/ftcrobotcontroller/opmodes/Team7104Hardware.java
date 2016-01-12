@@ -14,8 +14,7 @@ public class Team7104Hardware extends OpMode
     //DcMotor motorLeft2;
     DcMotor motorRight1;
     //DcMotor motorRight2;
-    DcMotor MMA_motor_Left;
-    DcMotor MMA_motor_Right;
+    DcMotor Bucket_Motor;
 
     Servo rotation_servo;          //Make ourselves da servos! :)
     Servo pitch_servo_left;
@@ -142,8 +141,7 @@ public class Team7104Hardware extends OpMode
         //motorLeft2 = motorLeft1;
 
         motorRight1 = hardwareMap.dcMotor.get("motorRight");
-        //MMA_motor_Left = hardwareMap.dcMotor.get("MMAShouldermotorLeft");
-        //MMA_motor_Right = hardwareMap.dcMotor.get("MMAShouldermotorRight");
+        //Bucket_Motor = hardwareMap.dcMotor.get("Bucket_Motor");
         //pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
         //pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
         //Bacon_servo = hardwareMap.servo.get("Bacon_servo");
