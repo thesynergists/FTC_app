@@ -142,8 +142,8 @@ public class Team7104Hardware extends OpMode
 
         motorRight1 = hardwareMap.dcMotor.get("motorRight");
         //Bucket_Motor = hardwareMap.dcMotor.get("Bucket_Motor");
-        //pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
-        //pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
+        pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
+        pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
         //Bacon_servo = hardwareMap.servo.get("Bacon_servo");
         //motorRight2 = motorRight1;
 
