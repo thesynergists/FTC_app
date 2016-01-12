@@ -27,7 +27,7 @@ public class Team7104BucketDaniel extends Team7104Hardware {
 
         //Set Bucket Motor power variable
         float BucketMotorJoystick = (gamepad2.right_stick_y);
-        float Bucket_Motor_Power = pow(BucketMotorJoystick, 3);//Equivalent to x^3? Based on https://docs.oracle.com/javase/tutorial/java/data/beyondmath.html
+        double Bucket_Motor_Power = pow(BucketMotorJoystick, 3);//Equivalent to x^3? Based on https://docs.oracle.com/javase/tutorial/java/data/beyondmath.html
 
         //if joystick 2, right joystick
         //Stop Motor
