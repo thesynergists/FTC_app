@@ -38,18 +38,18 @@ public class Team7104MMAShoulderDaniel extends Team7104Hardware
         //Stop Motor
         if(gamepad2.right_stick_y < 0.01 && gamepad2.right_stick_y > -0.01)
         {
-            MMA_motor_Left.setPower(0);
-            MMA_motor_Right.setPower(0);
+            //MMA_motor_Left.setPower(0);
+            //MMA_motor_Right.setPower(0);
         }
         if(gamepad2.right_stick_y > 0.01)
         {
-            MMA_motor_Left.setPower(MMA_Motor_Power);
-            MMA_motor_Right.setPower(MMA_Motor_Power);
+            //MMA_motor_Left.setPower(MMA_Motor_Power);
+            //MMA_motor_Right.setPower(MMA_Motor_Power);
         }
         if(gamepad2.right_stick_y < -0.01)
         {
-            MMA_motor_Left.setPower(-MMA_Motor_Power);
-            MMA_motor_Right.setPower(-MMA_Motor_Power);
+            //MMA_motor_Left.setPower(-MMA_Motor_Power);
+            //MMA_motor_Right.setPower(-MMA_Motor_Power);
         }
     }
 @Override
