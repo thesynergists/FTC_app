@@ -25,8 +25,7 @@ public class Team7104BucketDaniel extends Team7104Hardware
             {Bucket_Motor.setPower(abs(DistanceBetweenTarget_Current));} //Set power to remaining distance, must be less than 80
             else
             {Bucket_Motor.setPower(-abs(DistanceBetweenTarget_Current));}
-        } //QUESTION: Is there a way to read the value (Bucket_Motor.getCurrentPosition()-BucketPresetTarget) and determine if it is
-        //positive or negative?
+        }
     }
 
 
