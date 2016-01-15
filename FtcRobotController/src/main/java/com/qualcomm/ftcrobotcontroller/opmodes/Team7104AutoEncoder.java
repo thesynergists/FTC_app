@@ -17,7 +17,6 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      * The system calls this member when the class is instantiated.
      */
     public Team7104AutoEncoder ()
-
     {
         //
         // Initialize base classes.
@@ -48,7 +47,6 @@ public class Team7104AutoEncoder extends Team7104Telemetry
 
 
     @Override public void start ()
-
     {
         //
         // Call the Team7104Hardware (super/base class) start method.
@@ -73,12 +71,11 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      *
      * The system calls this member repeatedly while the OpMode is running.
      */
+
     @Override public void loop ()
     {
-
-
-
-        switch (drive_state) {
+        switch (drive_state)
+        {
             //
             // Synchronize the state machine and hardware.
             //
@@ -142,7 +139,8 @@ public class Team7104AutoEncoder extends Team7104Telemetry
             //
             case 2:
 
-                if (have_drive_encoders_reset()) {
+                if (have_drive_encoders_reset())
+                {
                     drive_state++;
                 }
                 break;
@@ -155,7 +153,8 @@ public class Team7104AutoEncoder extends Team7104Telemetry
                 setPowerLeftMotor(-1);
                 setPowerRightMotor(1);
 
-                if (have_drive_encoders_reached(-200, 200)) {
+                if (have_drive_encoders_reached(-200, 200))
+                {
                     reset_drive_encoders();
                     setPowerLeftMotor(0);
                     setPowerRightMotor(0);
@@ -166,7 +165,8 @@ public class Team7104AutoEncoder extends Team7104Telemetry
             // Wait...
             //
             case 4:
-                if (have_drive_encoders_reset()) {
+                if (have_drive_encoders_reset())
+                {
                     drive_state++;
                 }
                 break;
@@ -178,21 +178,19 @@ public class Team7104AutoEncoder extends Team7104Telemetry
                 setPowerLeftMotor(-1);
                 setPowerRightMotor(-1);
 
-                if (have_drive_encoders_reached(-700, -700)) {
+                if (have_drive_encoders_reached(-700, -700))
+                {
                     reset_drive_encoders();
                     setPowerLeftMotor(0);
                     setPowerRightMotor(0);
                     drive_state++;
                 }
                 break;
-
-
-
         }
+
 
         update_telemetry(); // Update common telemetry
         telemetry.addData("18", "State: " + drive_state);
-
     } // loop
 
     //--------------------------------------------------------------------------
@@ -200,9 +198,6 @@ public class Team7104AutoEncoder extends Team7104Telemetry
     // drive_state
     //variable responsible for running previous switch statement
     private int drive_state = 0;
-
-
-
 
 
 
@@ -254,15 +249,11 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      * Reset the left drive wheel encoder.
      */
     public void reset_left_drive_encoder ()
-
     {
         if (v_motor_left_drive != null)
         {
-            v_motor_left_drive.setChannelMode
-                    ( DcMotorController.RunMode.RESET_ENCODERS
-                    );
+            v_motor_left_drive.setChannelMode (DcMotorController.RunMode.RESET_ENCODERS);
         }
-
     } // reset_left_drive_encoder
 
     //--------------------------------------------------------------------------
@@ -273,15 +264,11 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      * Reset the right drive wheel encoder.
      */
     public void reset_right_drive_encoder ()
-
     {
         if (v_motor_right_drive != null)
         {
-            v_motor_right_drive.setChannelMode
-                    ( DcMotorController.RunMode.RESET_ENCODERS
-                    );
+            v_motor_right_drive.setChannelMode (DcMotorController.RunMode.RESET_ENCODERS);
         }
-
     } // reset_right_drive_encoder
 
     //--------------------------------------------------------------------------
@@ -292,17 +279,13 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      * Reset both drive wheel encoders.
      */
     public void reset_drive_encoders ()
-
     {
         //
         // Reset the motor encoders on the drive wheels.
         //
         reset_left_drive_encoder ();
         reset_right_drive_encoder ();
-
     } // reset_drive_encoders
-
-
 
 
 
@@ -325,15 +308,11 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      * Set the left drive wheel encoder to run, if the mode is appropriate.
      */
     public void run_using_left_drive_encoder ()
-
     {
         if (v_motor_left_drive != null)
         {
-            v_motor_left_drive.setChannelMode
-                    ( DcMotorController.RunMode.RUN_USING_ENCODERS
-                    );
+            v_motor_left_drive.setChannelMode (DcMotorController.RunMode.RUN_USING_ENCODERS);
         }
-
     } // run_using_left_drive_encoder
 
     //--------------------------------------------------------------------------
@@ -344,15 +323,11 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      * Set the right drive wheel encoder to run, if the mode is appropriate.
      */
     public void run_using_right_drive_encoder ()
-
     {
         if (v_motor_right_drive != null)
         {
-            v_motor_right_drive.setChannelMode
-                    ( DcMotorController.RunMode.RUN_USING_ENCODERS
-                    );
+            v_motor_right_drive.setChannelMode (DcMotorController.RunMode.RUN_USING_ENCODERS);
         }
-
     } // run_using_right_drive_encoder
 
     //--------------------------------------------------------------------------
@@ -363,14 +338,12 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      * Set both drive wheel encoders to run, if the mode is appropriate.
      */
     public void run_using_encoders ()
-
     {
         //
         // Call other members to perform the action on both motors.
         //
         run_using_left_drive_encoder ();
         run_using_right_drive_encoder ();
-
     } // run_using_encoders
     //-------------------------------------------------------------
 
@@ -386,7 +359,6 @@ public class Team7104AutoEncoder extends Team7104Telemetry
 
     //------------------------------------------------------------
     boolean has_left_drive_encoder_reached (double p_count)
-
     {
         //
         // Assume failure.
@@ -408,12 +380,10 @@ public class Team7104AutoEncoder extends Team7104Telemetry
                 l_return = true;
             }
         }
-
         //
         // Return the status.
         //
         return l_return;
-
     } // has_left_drive_encoder_reached
 
     //--------------------------------------------------------------------------
@@ -424,7 +394,6 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      * Indicate whether the right drive motor's encoder has reached a value.
      */
     boolean has_right_drive_encoder_reached (double p_count)
-
     {
         //
         // Assume failure.
@@ -446,12 +415,10 @@ public class Team7104AutoEncoder extends Team7104Telemetry
                 l_return = true;
             }
         }
-
         //
         // Return the status.
         //
         return l_return;
-
     } // has_right_drive_encoder_reached
 
     //--------------------------------------------------------------------------
@@ -461,11 +428,7 @@ public class Team7104AutoEncoder extends Team7104Telemetry
     /**
      * Indicate whether the drive motors' encoders have reached a value.
      */
-    boolean have_drive_encoders_reached
-    ( double p_left_count
-            , double p_right_count
-    )
-
+    boolean have_drive_encoders_reached (double p_left_count, double p_right_count)
     {
         //
         // Assume failure.
@@ -475,20 +438,17 @@ public class Team7104AutoEncoder extends Team7104Telemetry
         //
         // Have the encoders reached the specified values?
         //
-        if (has_left_drive_encoder_reached (p_left_count) &&
-                has_right_drive_encoder_reached (p_right_count))
+        if (has_left_drive_encoder_reached (p_left_count) && has_right_drive_encoder_reached (p_right_count))
         {
             //
             // Set the status to a positive indication.
             //
             l_return = true;
         }
-
         //
         // Return the status.
         //
         return l_return;
-
     } // have_encoders_reached
     //-------------------------------------------------
 
@@ -524,12 +484,10 @@ public class Team7104AutoEncoder extends Team7104Telemetry
             //
             l_return = true;
         }
-
         //
         // Return the status.
         //
         return l_return;
-
     } // has_left_drive_encoder_reset
 
     //--------------------------------------------------------------------------
@@ -545,7 +503,6 @@ public class Team7104AutoEncoder extends Team7104Telemetry
         // Assume failure.
         //
         boolean l_return = false;
-
         //
         // Has the right encoder reached zero?
         //
@@ -556,12 +513,10 @@ public class Team7104AutoEncoder extends Team7104Telemetry
             //
             l_return = true;
         }
-
         //
         // Return the status.
         //
         return l_return;
-
     } // has_right_drive_encoder_reset
 
     //--------------------------------------------------------------------------
@@ -577,7 +532,6 @@ public class Team7104AutoEncoder extends Team7104Telemetry
         // Assume failure.
         //
         boolean l_return = false;
-
         //
         // Have the encoders reached zero?
         //
@@ -588,12 +542,10 @@ public class Team7104AutoEncoder extends Team7104Telemetry
             //
             l_return = true;
         }
-
         //
         // Return the status.
         //
         return l_return;
-
     } // have_drive_encoders_reset
 
     //--------------------------------------------------------------------------
@@ -634,9 +586,7 @@ public class Team7104AutoEncoder extends Team7104Telemetry
         {
             l_return = v_motor_left_drive.getCurrentPosition ();
         }
-
         return l_return;
-
     } // a_left_encoder_count
 
     //--------------------------------------------------------------------------
@@ -647,7 +597,6 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      * Access the right encoder's count.
      */
     int a_right_encoder_count ()
-
     {
         int l_return = 0;
 
@@ -655,9 +604,7 @@ public class Team7104AutoEncoder extends Team7104Telemetry
         {
             l_return = v_motor_right_drive.getCurrentPosition ();
         }
-
         return l_return;
-
     } // a_right_encoder_count
 
     //--------------------------------------------------------------------------

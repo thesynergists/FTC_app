@@ -56,7 +56,6 @@ public class Team7104Hardware extends OpMode
         {
             pitch_servo_right.setPosition (1.0 - l_position);
         }
-
     } // IronFist_change_elevation
 
     //--------------------------------------------------------------------------
@@ -163,8 +162,9 @@ public class Team7104Hardware extends OpMode
      *
      * The system calls this member once when the OpMode is enabled.
      */
-    @Override public void start ()
 
+
+    @Override public void start ()
     {
         //
         // Only actions that are common to all Op-Modes (i.e. both automatic and
@@ -196,7 +196,8 @@ public class Team7104Hardware extends OpMode
          * scaled value is less than linear.  This is to make it easier to drive
          * the robot more precisely at slower speeds.
          */
-    double scaleInput(double dVal)  {
+    double scaleInput(double dVal)
+    {
         double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
                 0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
 
@@ -259,7 +260,6 @@ public class Team7104Hardware extends OpMode
      * Access whether a warning has been generated.
      */
     boolean a_warning_generated ()
-
     {
         return v_warning_generated;
 
@@ -273,14 +273,13 @@ public class Team7104Hardware extends OpMode
      * Access the warning message.
      */
     String a_warning_message ()
-
     {
         return v_warning_message;
 
     } // a_warning_message
 
-    void m_warning_message (String p_exception_message)
 
+    void m_warning_message (String p_exception_message)
     {
         if (v_warning_generated)
         {
@@ -345,7 +344,6 @@ public class Team7104Hardware extends OpMode
      * Access the right encoder's count.
      */
     int a_right_encoder_count ()
-
     {
         int l_return = 0;
 
@@ -357,6 +355,4 @@ public class Team7104Hardware extends OpMode
         return l_return;
 
     } // a_right_encoder_count
-
-
 }

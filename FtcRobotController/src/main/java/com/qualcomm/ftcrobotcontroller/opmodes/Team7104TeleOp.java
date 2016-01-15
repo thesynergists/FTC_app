@@ -44,7 +44,8 @@ public class Team7104TeleOp extends Team7104Hardware
     /**
      * Constructor
      */
-    public Team7104TeleOp() {
+    public Team7104TeleOp()
+    {
 
     }
 
@@ -54,9 +55,8 @@ public class Team7104TeleOp extends Team7104Hardware
      * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
      */
     @Override
-    public void init() {
-
-
+    public void init()
+    {
 		/*
 		 * Use the hardwareMap to get the dc motors and servos by name. Note
 		 * that the names of the devices must match the names used when you
@@ -73,7 +73,8 @@ public class Team7104TeleOp extends Team7104Hardware
 		 *    "servo_1" controls the arm joint of the manipulator.
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
-      super.init();
+
+        super.init();
     }
 
     /*

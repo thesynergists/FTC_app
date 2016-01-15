@@ -16,7 +16,8 @@ public class Team7104MMAShoulderDaniel extends Team7104Hardware
 
     }
     @Override
-    public void init(){
+    public void init()
+    {
         super.init();
     }
     //New Function Checking Remaining Distance from current encoder locating to location goal
@@ -28,8 +29,10 @@ public class Team7104MMAShoulderDaniel extends Team7104Hardware
     //(gamepad2.right_stick_y*100)
     //Or try ((gamepad2.right_stick_y ^3) *10)
     //Make a bigger slow zone for jittery fingers?
-   /* @Override
-    public void loop(){
+
+    /* @Override
+    public void loop()
+    {
 
         //Set MMA Motor power variable
         float MMA_Motor_Power = 15;
@@ -51,7 +54,10 @@ public class Team7104MMAShoulderDaniel extends Team7104Hardware
             //MMA_motor_Left.setPower(-MMA_Motor_Power);
             //MMA_motor_Right.setPower(-MMA_Motor_Power);
         }
-    }*/
-@Override
-public void stop(){}
+   }*/
+   @Override
+   public void stop()
+   {
+   
+   }
 }

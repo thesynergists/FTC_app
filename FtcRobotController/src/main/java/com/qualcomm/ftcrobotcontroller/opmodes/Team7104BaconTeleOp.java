@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.util.Hardware;
  * Enables control of the robot via the gamepad
  */
 public class Team7104BaconTeleOp extends Team7104Hardware
-
 {
 
     public Team7104BaconTeleOp()
@@ -24,7 +23,8 @@ public class Team7104BaconTeleOp extends Team7104Hardware
         Bacon_servo.setPosition(0);
     }
     @Override
-    public void loop(){
+    public void loop()
+    {
         if (gamepad1.right_bumper)
         {
 
@@ -45,7 +45,8 @@ public class Team7104BaconTeleOp extends Team7104Hardware
         }
     }
     @Override
-    public void stop(){
+    public void stop()
+    {
 
     }
 }

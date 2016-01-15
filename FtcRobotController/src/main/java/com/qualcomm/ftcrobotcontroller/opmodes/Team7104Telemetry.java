@@ -39,7 +39,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
      *     11 - The value of gamepad 1's right trigger value.
      */
     public class Team7104Telemetry extends Team7104Hardware
-
     {
         //--------------------------------------------------------------------------
         //
@@ -51,7 +50,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
          * The system calls this member when the class is instantiated.
          */
         public Team7104Telemetry ()
-
         {
             //
             // Initialize base classes.
@@ -73,7 +71,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
          * Update the telemetry with current values from the base class.
          */
         public void update_telemetry ()
-
         {
             if (a_warning_generated ())
             {
@@ -108,7 +105,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
          * Update the telemetry with current gamepad readings.
          */
         public void update_gamepad_telemetry ()
-
         {
             //
             // Send telemetry data concerning gamepads to the driver station.
@@ -131,7 +127,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
          * Update the telemetry's first message with the specified message.
          */
         public void set_first_message (String p_message)
-
         {
             telemetry.addData ( "00", p_message);
 
@@ -145,7 +140,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
          * Update the telemetry's first message to indicate an error.
          */
         public void set_error_message (String p_message)
-
         {
             set_first_message ("ERROR: " + p_message);
 
