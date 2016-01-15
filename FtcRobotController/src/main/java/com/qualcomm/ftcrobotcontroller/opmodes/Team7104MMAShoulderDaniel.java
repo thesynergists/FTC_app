@@ -15,6 +15,7 @@ public class Team7104MMAShoulderDaniel extends Team7104Hardware
     {
 
     }
+
     @Override
     public void init()
     {
@@ -55,6 +56,7 @@ public class Team7104MMAShoulderDaniel extends Team7104Hardware
             //MMA_motor_Right.setPower(-MMA_Motor_Power);
         }
    }*/
+
    @Override
    public void stop()
    {

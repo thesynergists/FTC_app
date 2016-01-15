@@ -40,11 +40,10 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      * The system calls this member once when the OpMode is enabled.
      */
 
-   @Override public void init()
-   {
-       super.init();
-   }
-
+    @Override public void init()
+    {
+        super.init();
+    }
 
     @Override public void start ()
     {
