@@ -7,13 +7,24 @@ import static java.lang.Math.*;
 public class Team7104BucketDaniel extends Team7104Hardware {
 
     void BucketPresets (float BucketPresetTarget) {
-        if(abs(Bucket_Motor.getCurrentPosition()-BucketPresetTarget) > 100) //If the abs(EncoderReading-Target)>100....
+        float DistanceBetweenTarget_Current = (Bucket_Motor.getCurrentPosition()-BucketPresetTarget);
+        if(abs(DistanceBetweenTarget_Current) > 80) //If the abs(EncoderReading-Target)>100....
         {
-            if(Bucket_Motor.getCurrentPosition()-BucketPresetTarget > 100)
+            if((DistanceBetweenTarget_Current) > 0) //If positive
             {Bucket_Motor.setPower(-80);}
             else
             {Bucket_Motor.setPower(80);}
         }
+        else {
+            if(abs(DistanceBetweenTarget_Current) < 25){ //If distance remaining is less than x, then stop the motor to help prevent motor burnout
+                Bucket_Motor.setPower(0);
+            }
+            if((DistanceBetweenTarget_Current) > 0) //If positive
+            {Bucket_Motor.setPower(abs(DistanceBetweenTarget_Current));} //Set power to remaining distance, must be less than 80
+            else
+            {Bucket_Motor.setPower(-abs(DistanceBetweenTarget_Current));}
+        } //QUESTION: Is there a way to read the value (Bucket_Motor.getCurrentPosition()-BucketPresetTarget) and determine if it is
+        //positive or negative?
     }
 
     public Team7104BucketDaniel()
