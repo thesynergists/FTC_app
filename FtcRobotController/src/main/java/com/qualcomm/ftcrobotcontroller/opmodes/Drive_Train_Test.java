@@ -30,6 +30,13 @@ public class Drive_Train_Test extends Team7104Hardware
             motorRight1.setPower(-.75);
             motorRight2.setPower(-.75);
         }
+        if (stick < .5)
+        {
+            motorLeft1.setPower(0);
+            motorLeft2.setPower(0);
+            motorRight1.setPower(0);
+            motorRight2.setPower(0);
+        }
     }
 
     @Override

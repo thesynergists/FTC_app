@@ -175,13 +175,13 @@ public class Team7104Hardware extends OpMode
         //Bucket_Motor = hardwareMap.dcMotor.get("Bucket_Motor");
         //Bacon_servo = hardwareMap.servo.get("Bacon_servo");
 
-        pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
-        pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
+        //pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
+        //pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
 
-        conveyor_servo = hardwareMap.servo.get("conveyor_servo");
+        //conveyor_servo = hardwareMap.servo.get("conveyor_servo");
 
-        //motorRight1.setDirection(DcMotor.Direction.REVERSE);
-        //motorLeft1.setDirection(DcMotor.Direction.REVERSE);
+        motorRight1.setDirection(DcMotor.Direction.REVERSE);
+        motorRight2.setDirection(DcMotor.Direction.REVERSE);
     }
 
     @Override public void loop ()
