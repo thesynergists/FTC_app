@@ -31,7 +31,7 @@ public class Team7104MMAShoulderDaniel extends Team7104Hardware
     //Or try ((gamepad2.right_stick_y ^3) *10)
     //Make a bigger slow zone for jittery fingers?
 
-    /* @Override
+    @Override
     public void loop()
     {
 
@@ -40,22 +40,25 @@ public class Team7104MMAShoulderDaniel extends Team7104Hardware
 
         //if joystick 2, right joystick
         //Stop Motor
+
         if(gamepad2.right_stick_y < 0.01 && gamepad2.right_stick_y > -0.01)
         {
             //MMA_motor_Left.setPower(0);
             //MMA_motor_Right.setPower(0);
         }
+
         if(gamepad2.right_stick_y > 0.01)
         {
             //MMA_motor_Left.setPower(MMA_Motor_Power);
             //MMA_motor_Right.setPower(MMA_Motor_Power);
         }
+
         if(gamepad2.right_stick_y < -0.01)
         {
             //MMA_motor_Left.setPower(-MMA_Motor_Power);
             //MMA_motor_Right.setPower(-MMA_Motor_Power);
         }
-   }*/
+   }
 
    @Override
    public void stop()

@@ -54,6 +54,7 @@ public class Team7104TeleOp extends Team7104Hardware
      *
      * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
      */
+
     @Override
     public void init()
     {
@@ -82,6 +83,7 @@ public class Team7104TeleOp extends Team7104Hardware
      *
      * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#run()
      */
+
     @Override
     public void loop()
     {
@@ -97,16 +99,22 @@ public class Team7104TeleOp extends Team7104Hardware
         // 1 is full down
         // direction: left_stick_x ranges from -1 to 1, where -1 is full left
         // and 1 is full right
+
         float left = gamepad1.left_stick_y;
         float right = gamepad1.right_stick_y;
-
-
-        float wrist_elevation = gamepad2.left_stick_y;
-
 
         // clip the right/left values so that the values never exceed +/- 1
         right = Range.clip(right, -1, 1);
         left = Range.clip(left, -1, 1);
+
+         // write the values to the motors
+        setPowerLeftMotor(left);
+        setPowerRightMotor(right);
+
+        /*float wrist_elevation = gamepad2.left_stick_y;
+
+
+
 
         wrist_elevation = Range.clip(wrist_elevation, -1, 1);
         double converted_wrist_elevation = (wrist_elevation + 1)/2;
@@ -116,13 +124,11 @@ public class Team7104TeleOp extends Team7104Hardware
         right = (float)scaleInput(right);
         left =  (float)scaleInput(left);
 
-        // write the values to the motors
-        setPowerLeftMotor(left);
-        setPowerRightMotor(right);
+
 
 		//Make the IF move up and down based on controller
 		IronFist_change_elevation(converted_wrist_elevation);
-
+        */
 
 
 
@@ -132,6 +138,8 @@ public class Team7104TeleOp extends Team7104Hardware
         are pressed in order to control Iron Fist rotation
         (trigger buttons are analog, so adjustments were made.
         */
+
+        /*
         float wrist_rotation_left = gamepad2.left_trigger;
         float wrist_rotation_right = gamepad2.right_trigger;
 
@@ -144,7 +152,7 @@ public class Team7104TeleOp extends Team7104Hardware
 
         //Control IF rotation.
         Iron_Fist_rotate(converted_wrist_rotation_left, converted_wrist_rotation_right);
-
+        */
 
         /*
         //Make it stop!!!
@@ -164,7 +172,6 @@ public class Team7104TeleOp extends Team7104Hardware
         telemetry.addData("Text", "*** Robot Data***");
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
-
     }
 
     /*
@@ -172,10 +179,10 @@ public class Team7104TeleOp extends Team7104Hardware
      *
      * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#stop()
      */
+
     @Override
     public void stop()
     {
 
     }
-
 }

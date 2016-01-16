@@ -11,9 +11,11 @@ import com.qualcomm.robotcore.util.Range;
 public class Team7104Hardware extends OpMode
 {
     DcMotor motorLeft1;
-    //DcMotor motorLeft2;
+    DcMotor motorLeft2;
+
     DcMotor motorRight1;
-    //DcMotor motorRight2;
+    DcMotor motorRight2;
+
     DcMotor Bucket_Motor;
 
     Servo rotation_servo;          //Make ourselves da servos! :)
@@ -136,17 +138,20 @@ public class Team7104Hardware extends OpMode
 		 *    "servo_1" controls the arm joint of the manipulator.
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
-        motorLeft1 = hardwareMap.dcMotor.get("motorLeft");
-        //motorLeft2 = motorLeft1;
+        motorLeft1 = hardwareMap.dcMotor.get("motorLeft1");
+        motorLeft2 = hardwareMap.dcMotor.get("motorLeft2");
 
-        motorRight1 = hardwareMap.dcMotor.get("motorRight");
+        motorRight1 = hardwareMap.dcMotor.get("motorRight1");
+        motorRight2 = hardwareMap.dcMotor.get("motorRight2");
+
         //Bucket_Motor = hardwareMap.dcMotor.get("Bucket_Motor");
+        //Bacon_servo = hardwareMap.servo.get("Bacon_servo");
+
         pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
         pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
-        //Bacon_servo = hardwareMap.servo.get("Bacon_servo");
-        //motorRight2 = motorRight1;
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
+        motorRight2.setDirection(DcMotor.Direction.REVERSE);
 
     }
 
@@ -226,13 +231,17 @@ public class Team7104Hardware extends OpMode
         return dScale;
     }
 
+
+
     public void setPowerRightMotor(double level)
     {
         motorRight1.setPower(level);
+        motorRight2.setPower(level);
     }
     public void setPowerLeftMotor(double level)
     {
         motorLeft1.setPower(level);
+        motorLeft2.setPower(level);
     }
     public void setPowerBothMotor(double level)
     {
