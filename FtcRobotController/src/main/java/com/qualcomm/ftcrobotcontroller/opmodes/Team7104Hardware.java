@@ -24,6 +24,8 @@ public class Team7104Hardware extends OpMode
     Servo Bacon_servo;
     Servo conveyor_servo;
 
+    DcMotor PullUp_Motor;
+
 
 
 
@@ -120,6 +122,14 @@ public class Team7104Hardware extends OpMode
             }
         }
 
+        if (conveyor_servo != null)
+        {
+            if (left_bool != true && right_bool != true)
+            {
+                conveyor_servo.setPosition(.5);
+            }
+        }
+
         //Set the conveyor_servo to stop if receiving conflicting inputs.
         if (conveyor_servo != null)
         {
@@ -178,7 +188,9 @@ public class Team7104Hardware extends OpMode
         //pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
         //pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
 
-        //conveyor_servo = hardwareMap.servo.get("conveyor_servo");
+        conveyor_servo = hardwareMap.servo.get("conveyor_servo");
+
+        //PullUp_Motor = hardwareMap.servo.get("PullUp_Motor");
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
