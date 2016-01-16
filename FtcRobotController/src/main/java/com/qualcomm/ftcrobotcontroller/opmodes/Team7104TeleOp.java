@@ -100,6 +100,9 @@ public class Team7104TeleOp extends Team7104Hardware
         // direction: left_stick_x ranges from -1 to 1, where -1 is full left
         // and 1 is full right
 
+
+
+        //STUFF FOR DRIVE TRAIN!!!
         float left = gamepad1.left_stick_y;
         float right = gamepad1.right_stick_y;
 
@@ -111,7 +114,10 @@ public class Team7104TeleOp extends Team7104Hardware
         setPowerLeftMotor(left);
         setPowerRightMotor(right);
 
-        //Conveyor_servo control.
+
+
+
+        //THE CONVEYOR BELT!
         boolean conveyor_left = gamepad1.left_bumper;
         boolean conveyor_right = gamepad1.right_bumper;
 
