@@ -21,9 +21,10 @@ public class Team7104PullUpDaniel extends Team7104Hardware
     public void loop()
     {
         //If button a is pressed
-        boolean was_pressed = false;
+        boolean was_pressed = false;    //Will help control the while loop and other commands.
+        boolean bypass = false;         //This will act as a control to determine when the right bumper has been pressed for a second time.
 
-        if (gamepad2.right_bumper)
+        if (gamepad2.right_bumper)      //Once this statement is fulfilled, the program can go on to use the 
         {
             was_pressed = true;
         }
@@ -32,13 +33,21 @@ public class Team7104PullUpDaniel extends Team7104Hardware
         {
             PullUp_Motor.setPower(.80);
 
-            if (gamepad2.right_bumper)
+            if (!gamepad2.right_bumper)
             {
-                was_pressed = false;
+                bypass = true;
             }
+
             if (gamepad2.right_trigger > 0)
             {
                 was_pressed = false;
+            }
+            if (bypass)
+            {
+                if (gamepad2.right_bumper)
+                {
+                    was_pressed = false;
+                }
             }
         }
 
