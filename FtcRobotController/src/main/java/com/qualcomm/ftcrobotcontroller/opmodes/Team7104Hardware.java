@@ -150,9 +150,8 @@ public class Team7104Hardware extends OpMode
         pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
         pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
 
-        motorRight1.setDirection(DcMotor.Direction.REVERSE);
-        motorRight2.setDirection(DcMotor.Direction.REVERSE);
-
+        //motorRight1.setDirection(DcMotor.Direction.REVERSE);
+        //motorLeft1.setDirection(DcMotor.Direction.REVERSE);
     }
 
     @Override public void loop ()
