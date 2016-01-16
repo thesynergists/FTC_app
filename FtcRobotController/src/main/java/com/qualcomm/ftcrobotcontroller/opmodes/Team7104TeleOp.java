@@ -111,9 +111,16 @@ public class Team7104TeleOp extends Team7104Hardware
         setPowerLeftMotor(left);
         setPowerRightMotor(right);
 
+        //Conveyor_servo control.
+        boolean conveyor_left = gamepad1.left_bumper;
+        boolean conveyor_right = gamepad1.right_bumper;
+
+        Conveyor_Belt_Control(conveyor_left, conveyor_right);
+
+
+
+
         /*float wrist_elevation = gamepad2.left_stick_y;
-
-
 
 
         wrist_elevation = Range.clip(wrist_elevation, -1, 1);

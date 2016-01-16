@@ -22,6 +22,7 @@ public class Team7104Hardware extends OpMode
     Servo pitch_servo_left;
     Servo pitch_servo_right;
     Servo Bacon_servo;
+    Servo conveyor_servo;
 
 
 
@@ -100,7 +101,34 @@ public class Team7104Hardware extends OpMode
         }
     }
 
+    //Control the Conveyor Belt.
+    void Conveyor_Belt_Control (boolean left_bool, boolean right_bool)
+    {
+        if (conveyor_servo != null)
+        {
+            if (left_bool)
+            {
+                conveyor_servo.setPosition(0);
+            }
+        }
 
+        if (conveyor_servo != null)
+        {
+            if (right_bool)
+            {
+                conveyor_servo.setPosition(1);
+            }
+        }
+
+        //Set the conveyor_servo to stop if receiving conflicting inputs.
+        if (conveyor_servo != null)
+        {
+            if (left_bool && right_bool)
+            {
+                conveyor_servo.setPosition(.5);
+            }
+        }
+    }
 
 
     //                       END OF CONSTRUCTION!!!!!!!!!!!
@@ -149,6 +177,8 @@ public class Team7104Hardware extends OpMode
 
         pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
         pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
+
+        conveyor_servo = hardwareMap.servo.get("conveyor_servo");
 
         //motorRight1.setDirection(DcMotor.Direction.REVERSE);
         //motorLeft1.setDirection(DcMotor.Direction.REVERSE);
