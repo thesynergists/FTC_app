@@ -1,6 +1,7 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.Hardware;
+import com.qualcomm.robotcore.util.Range;
 
 //import com.qualcomm.robotcore.util.Range;
 /**
@@ -8,7 +9,7 @@ import com.qualcomm.robotcore.util.Hardware;
  * <p>
  * Enables control of the robot via the gamepad
  */
-public class Team7104BaconTeleOp extends Team7104Hardware
+public class Team7104BaconTeleOp extends Team7104Telemetry
 {
 
     public Team7104BaconTeleOp()
@@ -21,29 +22,34 @@ public class Team7104BaconTeleOp extends Team7104Hardware
     public void init ()
     {
         super.init();
-        Bacon_servo.setPosition(0);
+        Bacon_servo.setPosition(.5);
     }
 
     @Override
     public void loop()
     {
-        if (gamepad1.right_bumper)
+        float joystick_value = Range.clip(gamepad2.left_stick_y, -1, 1);
+        double increment_add;
+        double increment_total = .5;
+        double deadzone = .1;       //Adjust the deadzone.
+
+        if (joystick_value < deadzone && joystick_value > -deadzone)
         {
+            increment_add = 0;
+            increment_total = increment_total + increment_add;
 
-            Bacon_servo.setPosition(1);
+            telemetry.addData ("Servo value: ", increment_total);
 
+            Bacon_servo.setPosition(increment_total);
         }
-        if (gamepad1.left_bumper)
+        if (joystick_value > deadzone && joystick_value < -deadzone)
         {
+            increment_add = (joystick_value)/5;
+            increment_total = increment_total + increment_add;
 
-            Bacon_servo.setPosition(-1);
+            telemetry.addData ("Servo value: ", increment_total);
 
-        }
-        else
-        {
-
-            Bacon_servo.setPosition(0);
-
+            Bacon_servo.setPosition(increment_total);
         }
     }
 
