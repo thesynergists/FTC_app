@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.util.Range;
 public class Team7104BaconTeleOp extends Team7104Telemetry
 {
 
+    double increment_total;
     public Team7104BaconTeleOp()
     {
 
@@ -23,6 +24,8 @@ public class Team7104BaconTeleOp extends Team7104Telemetry
     {
         super.init();
         Bacon_servo.setPosition(.5);
+        conveyor_servo.setPosition(.5);
+        increment_total = .5;
     }
 
     @Override
@@ -30,7 +33,7 @@ public class Team7104BaconTeleOp extends Team7104Telemetry
     {
         float joystick_value = Range.clip(gamepad2.left_stick_y, -1, 1);
         double increment_add;
-        double increment_total = .5;
+
         double deadzone = .1;       //Adjust the deadzone.
 
         if (joystick_value < deadzone && joystick_value > -deadzone)
@@ -42,12 +45,12 @@ public class Team7104BaconTeleOp extends Team7104Telemetry
 
             Bacon_servo.setPosition(increment_total);
         }
-        if (joystick_value > deadzone && joystick_value < -deadzone)
+        if (joystick_value > deadzone || joystick_value < -deadzone)
         {
             increment_add = (joystick_value)/5;
             increment_total = increment_total + increment_add;
 
-            telemetry.addData ("Servo value: ", increment_total);
+            telemetry.addData ("Servo value ", increment_total);
 
             Bacon_servo.setPosition(increment_total);
         }
