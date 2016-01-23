@@ -13,6 +13,8 @@ public class Team7104BaconTeleOp extends Team7104Telemetry
 {
 
     double increment_total;
+    boolean has_gone_to_zero;
+
     public Team7104BaconTeleOp()
     {
 
@@ -23,34 +25,59 @@ public class Team7104BaconTeleOp extends Team7104Telemetry
     public void init ()
     {
         super.init();
-        conveyor_servo.setPosition(.5);
         increment_total = .5;
+        conveyor_servo.setPosition(.64);
+        has_gone_to_zero = false;
     }
 
     @Override
     public void loop()
     {
+             //For some reason, conveyor likes moving when Bacon is told to... Someone help!
+
         float joystick_value = Range.clip(gamepad2.left_stick_y, -1, 1);
         double increment_add;
 
-        double deadzone = .1;       //Adjust the deadzone.
+        double deadzone = .5;   //Adjust the deadzone.
+        boolean was_pressed = false;
+
+        if (joystick_value == 0)
+        {
+            has_gone_to_zero = true;
+        }
+
+        if (has_gone_to_zero)
+        {
+            if (joystick_value > deadzone || joystick_value < -deadzone)
+            {
+                was_pressed = true;
+
+            }
+        }
 
         if (joystick_value < deadzone && joystick_value > -deadzone)
         {
             increment_add = 0;
             increment_total = increment_total + increment_add;
 
-            telemetry.addData ("Servo value: ", increment_total);
+            telemetry.addData ("Servo value ", increment_total);
 
-            Bacon_servo.setPosition(increment_total);
         }
         if (joystick_value > deadzone || joystick_value < -deadzone)
         {
-            increment_add = (joystick_value)/5;
-            increment_total = increment_total + increment_add;
+            if(was_pressed)
+            {
+                for (int i = 0; i < 1; i++)
+                {
+                    increment_add = (joystick_value) / 5;
+                    increment_total = increment_total + increment_add;
+                }
 
-            telemetry.addData ("Servo value ", increment_total);
+                was_pressed = false;
+                has_gone_to_zero = false;
+            }
 
+            telemetry.addData("Servo value ", increment_total);
             Bacon_servo.setPosition(increment_total);
         }
     }
