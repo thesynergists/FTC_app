@@ -17,12 +17,12 @@ public class Team7104ScoopDaniel extends Team7104Hardware
         {
             if((DistanceBetweenTarget_Current) > 0) //If positive
             {
-                Scoop_Motor.setPower(-.80);
+                Scoop_Motor.setPower(-.60);
             }
 
             else
             {
-                Scoop_Motor.setPower(.80);
+                Scoop_Motor.setPower(.60);
             }
         }
         else
