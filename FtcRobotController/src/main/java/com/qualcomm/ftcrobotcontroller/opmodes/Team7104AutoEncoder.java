@@ -10,7 +10,20 @@ public class Team7104AutoEncoder extends Team7104Telemetry
 {
 
 
+/*
 
+
+
+
+
+    TENTATIVELY, IT APPEARS THAT ENCODER VALUE OF 1120 IS EQUIVALENT TO ONE ROTATION!
+
+
+
+
+
+
+ */
     /**
      * Construct the class.
      *
@@ -104,8 +117,8 @@ public class Team7104AutoEncoder extends Team7104Telemetry
                 //
                 // Start the drive wheel motors at full power.
                 //
-                setPowerLeftMotor(1);
-                setPowerRightMotor(1);
+                setPowerLeftMotor(.8);
+                setPowerRightMotor(.8);
 
 
                 //
@@ -149,8 +162,8 @@ public class Team7104AutoEncoder extends Team7104Telemetry
             case 3:
 
                 run_using_encoders();
-                setPowerLeftMotor(-1);
-                setPowerRightMotor(1);
+                setPowerLeftMotor(-.7);
+                setPowerRightMotor(.7);
 
                 if (have_drive_encoders_reached(-200, 200))
                 {
@@ -174,8 +187,8 @@ public class Team7104AutoEncoder extends Team7104Telemetry
             //
             case 5:
                 run_using_encoders();
-                setPowerLeftMotor(-1);
-                setPowerRightMotor(-1);
+                setPowerLeftMotor(-.8);
+                setPowerRightMotor(-.8);
 
                 if (have_drive_encoders_reached(-700, -700))
                 {
@@ -249,9 +262,9 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      */
     public void reset_left_drive_encoder ()
     {
-        if (v_motor_left_drive != null)
+        if (motorLeft1 != null)
         {
-            v_motor_left_drive.setChannelMode (DcMotorController.RunMode.RESET_ENCODERS);
+            motorLeft1.setMode (DcMotorController.RunMode.RESET_ENCODERS);
         }
     } // reset_left_drive_encoder
 
@@ -264,9 +277,9 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      */
     public void reset_right_drive_encoder ()
     {
-        if (v_motor_right_drive != null)
+        if (motorRight1 != null)
         {
-            v_motor_right_drive.setChannelMode (DcMotorController.RunMode.RESET_ENCODERS);
+            motorRight1.setMode (DcMotorController.RunMode.RESET_ENCODERS);
         }
     } // reset_right_drive_encoder
 
@@ -308,9 +321,9 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      */
     public void run_using_left_drive_encoder ()
     {
-        if (v_motor_left_drive != null)
+        if (motorLeft1 != null)
         {
-            v_motor_left_drive.setChannelMode (DcMotorController.RunMode.RUN_USING_ENCODERS);
+            motorLeft1.setMode (DcMotorController.RunMode.RUN_USING_ENCODERS);
         }
     } // run_using_left_drive_encoder
 
@@ -323,9 +336,9 @@ public class Team7104AutoEncoder extends Team7104Telemetry
      */
     public void run_using_right_drive_encoder ()
     {
-        if (v_motor_right_drive != null)
+        if (motorRight1 != null)
         {
-            v_motor_right_drive.setChannelMode (DcMotorController.RunMode.RUN_USING_ENCODERS);
+            motorRight1.setMode (DcMotorController.RunMode.RUN_USING_ENCODERS);
         }
     } // run_using_right_drive_encoder
 
@@ -364,14 +377,14 @@ public class Team7104AutoEncoder extends Team7104Telemetry
         //
         boolean l_return = false;
 
-        if (v_motor_left_drive != null)
+        if (motorLeft1 != null)
         {
             //
             // Has the encoder reached the specified values?
             //
             // TODO Implement stall code using these variables.
             //
-            if (Math.abs (v_motor_left_drive.getCurrentPosition ()) > p_count)
+            if (Math.abs (motorLeft1.getCurrentPosition ()) > p_count)
             {
                 //
                 // Set the status to a positive indication.
@@ -399,14 +412,14 @@ public class Team7104AutoEncoder extends Team7104Telemetry
         //
         boolean l_return = false;
 
-        if (v_motor_right_drive != null)
+        if (motorRight1 != null)
         {
             //
             // Have the encoders reached the specified values?
             //
             // TODO Implement stall code using these variables.
             //
-            if (Math.abs (v_motor_right_drive.getCurrentPosition ()) > p_count)
+            if (Math.abs (motorRight1.getCurrentPosition ()) > p_count)
             {
                 //
                 // Set the status to a positive indication.
@@ -554,17 +567,6 @@ public class Team7104AutoEncoder extends Team7104Telemetry
 
 
 
-    //---------------------------------------------------------------------
-    //v_motor_drive variables:
-
-    private DcMotor v_motor_left_drive;
-    private DcMotor v_motor_right_drive;
-
-
-    //---------------------------------------
-
-
-
     //a_encoder_count methods:
 
 
@@ -581,9 +583,9 @@ public class Team7104AutoEncoder extends Team7104Telemetry
     {
         int l_return = 0;
 
-        if (v_motor_left_drive != null)
+        if (motorLeft1 != null)
         {
-            l_return = v_motor_left_drive.getCurrentPosition ();
+            l_return = motorLeft1.getCurrentPosition ();
         }
         return l_return;
     } // a_left_encoder_count
@@ -599,9 +601,9 @@ public class Team7104AutoEncoder extends Team7104Telemetry
     {
         int l_return = 0;
 
-        if (v_motor_right_drive != null)
+        if (motorRight1 != null)
         {
-            l_return = v_motor_right_drive.getCurrentPosition ();
+            l_return = motorRight1.getCurrentPosition ();
         }
         return l_return;
     } // a_right_encoder_count

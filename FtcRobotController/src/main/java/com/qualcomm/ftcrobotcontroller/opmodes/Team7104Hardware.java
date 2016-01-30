@@ -22,7 +22,8 @@ public class Team7104Hardware extends OpMode
     Servo pitch_servo_left;
     Servo pitch_servo_right;
     Servo Bacon_servo;
-    Servo conveyor_servo;
+    Servo Conveyor_servo;
+    Servo Sweep_servo;
 
     DcMotor PullUp_Motor;
 
@@ -31,11 +32,7 @@ public class Team7104Hardware extends OpMode
 
 
 
-
-
     //                                UNDER CONSTRUCTION!!!!!!!!!!!!!!!
-
-
 
 
     /**
@@ -106,39 +103,63 @@ public class Team7104Hardware extends OpMode
     //Control the Conveyor Belt.
     void Conveyor_Belt_Control (boolean left_bool, boolean right_bool)
     {
-        if (conveyor_servo != null)
+        if (Conveyor_servo == null)
         {
-            if (left_bool)
-            {
-                conveyor_servo.setPosition(0);
-            }
+            return;
+        }
+        if (left_bool)
+        {
+            Conveyor_servo.setPosition(0);
         }
 
-        if (conveyor_servo != null)
+        if (right_bool)
         {
-            if (right_bool)
-            {
-                conveyor_servo.setPosition(1);
-            }
+            Conveyor_servo.setPosition(1);
         }
 
-        if (conveyor_servo != null)
+        if (left_bool != true && right_bool != true)
         {
-            if (left_bool != true && right_bool != true)
-            {
-                conveyor_servo.setPosition(.5);
-            }
+            Conveyor_servo.setPosition(.5);
         }
 
         //Set the conveyor_servo to stop if receiving conflicting inputs.
-        if (conveyor_servo != null)
+        if (left_bool && right_bool)
         {
-            if (left_bool && right_bool)
-            {
-                conveyor_servo.setPosition(.5);
-            }
+            Conveyor_servo.setPosition(.5);
         }
     }
+
+
+    //Control the Sweeper
+    void Sweep_Control (boolean left_bool, boolean right_bool)
+    {
+        if (Sweep_servo == null)
+        {
+            return;
+        }
+        if (left_bool)
+        {
+            Sweep_servo.setPosition(0);
+        }
+
+        if (right_bool)
+        {
+            Sweep_servo.setPosition(1);
+        }
+
+        if (left_bool != true && right_bool != true)
+        {
+            Sweep_servo.setPosition(.5);
+        }
+
+        //Set the conveyor_servo to stop if receiving conflicting inputs.
+        if (left_bool && right_bool)
+        {
+            Sweep_servo.setPosition(.5);
+        }
+    }
+
+
 
 
     //                       END OF CONSTRUCTION!!!!!!!!!!!
@@ -176,6 +197,8 @@ public class Team7104Hardware extends OpMode
 		 *    "servo_1" controls the arm joint of the manipulator.
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
+
+        
         motorLeft1 = hardwareMap.dcMotor.get("motorLeft1");
         motorLeft2 = hardwareMap.dcMotor.get("motorLeft2");
 
@@ -183,12 +206,14 @@ public class Team7104Hardware extends OpMode
         motorRight2 = hardwareMap.dcMotor.get("motorRight2");
 
         Scoop_Motor = hardwareMap.dcMotor.get("Scoop_Motor");
-        Bacon_servo = hardwareMap.servo.get("Bacon_servo");
+
+        //Bacon_servo = hardwareMap.servo.get("Bacon_servo");
 
         //pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
         //pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
 
-        conveyor_servo = hardwareMap.servo.get("conveyor_servo");
+        Sweep_servo = hardwareMap.servo.get("Sweep_servo");
+        Conveyor_servo = hardwareMap.servo.get("Conveyor_servo");
 
         //PullUp_Motor = hardwareMap.servo.get("PullUp_Motor");
 

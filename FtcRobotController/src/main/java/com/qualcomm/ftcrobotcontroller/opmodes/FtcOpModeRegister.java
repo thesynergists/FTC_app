@@ -69,7 +69,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register ("PushBotManual", PushBotManual.class);
     manager.register("Drive_Train_Test", Drive_Train_Test.class);
     manager.register("Team7104PullUpDaniel", Team7104PullUpDaniel.class);
-
+    manager.register("Team7104LeverFlippers", Team7104LeverFlippers.class);
     manager.register("Bacon_stupid_Telop", Bacon_stupid_Teleop.class);
 
     /*

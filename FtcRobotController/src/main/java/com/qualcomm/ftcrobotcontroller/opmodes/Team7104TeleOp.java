@@ -76,6 +76,8 @@ public class Team7104TeleOp extends Team7104Hardware
 		 */
 
         super.init();
+        conveyor_servo.setPosition(.5);
+        Bacon_servo.setPosition(.5);
     }
 
     /*
@@ -99,7 +101,9 @@ public class Team7104TeleOp extends Team7104Hardware
         // 1 is full down
         // direction: left_stick_x ranges from -1 to 1, where -1 is full left
         // and 1 is full right
+        float scoop = gamepad2.right_stick_y;
 
+        Scoop_Motor.setPower(scoop);
 
 
         //STUFF FOR DRIVE TRAIN!!!
