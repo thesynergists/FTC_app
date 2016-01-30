@@ -118,7 +118,7 @@ public class Team7104ScoopDaniel extends Team7104Hardware
 
         //Begin Scoop Fine-Tuning
         //Set Scoop Motor power variable
-        double Scoop_Motor_value = Range.clip(gamepad2.right_stick_y, -.96, .96);
+        double Scoop_Motor_value = Range.clip(gamepad2.right_stick_y, -.84, .84);
         double Scoop_Motor_Power = pow(Scoop_Motor_value, 3);//Equivalent to x^3? Based on https://docs.oracle.com/javase/tutorial/java/data/beyondmath.html
 
         //if joystick 2, right joystick

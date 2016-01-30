@@ -33,6 +33,8 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.util.Range;
 
+import static java.lang.Math.pow;
+
 /**
  * TeleOp Mode
  * <p>
@@ -76,8 +78,6 @@ public class Team7104TeleOp extends Team7104Hardware
 		 */
 
         super.init();
-        conveyor_servo.setPosition(.5);
-        Bacon_servo.setPosition(.5);
     }
 
     /*
@@ -126,6 +126,55 @@ public class Team7104TeleOp extends Team7104Hardware
         boolean conveyor_right = gamepad1.right_bumper;
 
         Conveyor_Belt_Control(conveyor_left, conveyor_right);
+
+
+
+
+
+
+
+
+        //Scoop!!!
+        //Begin Scoop Fine-Tuning
+        //Set Scoop Motor power variable
+        double Scoop_Motor_value = Range.clip(gamepad2.right_stick_y, -.84, .84);
+        double Scoop_Motor_Power = pow(Scoop_Motor_value, 3);//Equivalent to x^3? Based on https://docs.oracle.com/javase/tutorial/java/data/beyondmath.html
+
+        //if joystick 2, right joystick
+        //Stop Motor
+        if (gamepad2.right_stick_y < 0.05 && gamepad2.right_stick_y > -0.05)
+        {
+            Scoop_Motor.setPower(0);
+            telemetry.addData("Scoop motor value", Scoop_Motor.getPower());
+        }
+
+        if (gamepad2.right_stick_y > 0.05 || gamepad2.right_stick_y < -.05)
+        {
+            Scoop_Motor.setPower(Scoop_Motor_Power);
+            telemetry.addData("Scoop motor value", Scoop_Motor.getPower());
+        }
+        //END Scoop Fine-Tuning
+
+        telemetry.addData("Encoder value", Scoop_Motor.getCurrentPosition());
+
+
+
+
+        //We still need preset encoder values and buttons. The above is a temperory manual workaround.
+
+
+
+
+
+
+
+
+        //Sweeper!!!
+
+        boolean left1 = gamepad2.left_bumper;
+        boolean right1 = gamepad2.right_bumper;
+
+        Sweep_Control(left1, right1);
 
 
 

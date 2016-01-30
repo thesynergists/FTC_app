@@ -127,13 +127,15 @@ public class Team7104AutoEncoder extends Team7104Telemetry
                 // If they haven't, then the op-mode remains in this state (i.e this
                 // block will be executed the next time this method is called).
                 //
-                if (have_drive_encoders_reached(1000, 1000)) //these parameters will affect motor value before change
+                if (have_drive_encoders_reached(-1000, -1000)) //these parameters will affect motor value before change
                 {
                     //
                     // Reset the encoders to ensure they are at a known good value.
                     //
                     reset_drive_encoders();
 
+
+                    run_using_encoders();
                     //
                     // Stop the motors.
                     //
@@ -165,7 +167,7 @@ public class Team7104AutoEncoder extends Team7104Telemetry
                 setPowerLeftMotor(-.7);
                 setPowerRightMotor(.7);
 
-                if (have_drive_encoders_reached(-200, 200))
+                if (have_drive_encoders_reached(200, -200))
                 {
                     reset_drive_encoders();
                     setPowerLeftMotor(0);
@@ -190,7 +192,7 @@ public class Team7104AutoEncoder extends Team7104Telemetry
                 setPowerLeftMotor(-.8);
                 setPowerRightMotor(-.8);
 
-                if (have_drive_encoders_reached(-700, -700))
+                if (have_drive_encoders_reached(700, 700))
                 {
                     reset_drive_encoders();
                     setPowerLeftMotor(0);
@@ -203,6 +205,7 @@ public class Team7104AutoEncoder extends Team7104Telemetry
 
         update_telemetry(); // Update common telemetry
         telemetry.addData("18", "State: " + drive_state);
+        telemetry.addData("Current encoder counts:" + a_left_encoder_count(), a_right_encoder_count());
     } // loop
 
     //--------------------------------------------------------------------------

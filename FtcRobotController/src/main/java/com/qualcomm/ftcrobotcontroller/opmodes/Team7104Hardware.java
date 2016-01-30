@@ -198,7 +198,7 @@ public class Team7104Hardware extends OpMode
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
 
-        
+
         motorLeft1 = hardwareMap.dcMotor.get("motorLeft1");
         motorLeft2 = hardwareMap.dcMotor.get("motorLeft2");
 

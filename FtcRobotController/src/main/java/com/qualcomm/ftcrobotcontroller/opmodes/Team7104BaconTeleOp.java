@@ -26,7 +26,7 @@ public class Team7104BaconTeleOp extends Team7104Telemetry
     {
         super.init();
         increment_total = .5;
-        conveyor_servo.setPosition(.64);
+        Conveyor_servo.setPosition(.64);
         has_gone_to_zero = false;
     }
 
