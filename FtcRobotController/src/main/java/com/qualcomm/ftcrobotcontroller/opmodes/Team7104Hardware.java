@@ -130,38 +130,6 @@ public class Team7104Hardware extends OpMode
     }
 
 
-    //Control the Sweeper
-    void Sweep_Control (boolean left_bool, boolean right_bool)
-    {
-        if (Sweep_servo == null)
-        {
-            return;
-        }
-        if (left_bool)
-        {
-            Sweep_servo.setPosition(0);
-        }
-
-        if (right_bool)
-        {
-            Sweep_servo.setPosition(1);
-        }
-
-        if (left_bool != true && right_bool != true)
-        {
-            Sweep_servo.setPosition(.5);
-        }
-
-        //Set the conveyor_servo to stop if receiving conflicting inputs.
-        if (left_bool && right_bool)
-        {
-            Sweep_servo.setPosition(.5);
-        }
-    }
-
-
-
-
     //                       END OF CONSTRUCTION!!!!!!!!!!!
 
 

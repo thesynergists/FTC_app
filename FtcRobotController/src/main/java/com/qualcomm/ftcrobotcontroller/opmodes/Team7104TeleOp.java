@@ -56,6 +56,10 @@ public class Team7104TeleOp extends Team7104Hardware
      *
      * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
      */
+    boolean was_pressed_y = false;
+    boolean was_pressed_a = false;
+    boolean bypass_y = false;
+    boolean bypass_a = false;
 
     @Override
     public void init()
@@ -160,7 +164,7 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
 
-        //We still need preset encoder values and buttons. The above is a temperory manual workaround.
+        //We still need preset encoder values and buttons. The above is a temporary manual workaround.
 
 
 
@@ -171,10 +175,108 @@ public class Team7104TeleOp extends Team7104Hardware
 
         //Sweeper!!!
 
-        boolean left1 = gamepad2.left_bumper;
-        boolean right1 = gamepad2.right_bumper;
 
-        Sweep_Control(left1, right1);
+        boolean locked_controls = false;
+        if (gamepad1.a && gamepad1.y)       //Pressing A and Y buttons at same time will reset Sweeper.
+        {
+            locked_controls = true;
+            Sweep_servo.setPosition(.5);
+        }
+
+
+
+
+        if (gamepad1.a)
+        {
+            was_pressed_a = true;
+        }
+
+        if (was_pressed_a)
+        {
+            if (!locked_controls)
+            {
+                Sweep_servo.setPosition(.1);        //FORWARD SWEEPER!!!
+            }
+
+            if (was_pressed_y)
+            {
+                was_pressed_y = false;
+                bypass_y = false;
+            }
+
+            if (!gamepad1.a)
+            {
+                bypass_a = true;
+            }
+
+            if (bypass_a)
+            {
+                if(gamepad1.a)
+                {
+                    was_pressed_a = false;
+                }
+            }
+        }
+
+        if (!was_pressed_a && !was_pressed_y)
+        {
+            Sweep_servo.setPosition(.5);
+        }
+
+        if (gamepad1.a && gamepad1.y)
+        {
+            locked_controls = true;
+            Sweep_servo.setPosition(.5);
+        }
+
+
+
+
+        if (gamepad1.y)
+        {
+            was_pressed_y = true;
+        }
+
+        if (was_pressed_y)
+        {
+            if (!locked_controls)
+            {
+                Sweep_servo.setPosition(.9);        //REVERSE SWEEPER!!!
+            }
+
+            if (was_pressed_a)
+            {
+                was_pressed_a = false;
+                bypass_a = false;
+            }
+
+            if (!gamepad1.y)
+            {
+                bypass_y = true;
+            }
+
+            if (bypass_y)
+            {
+                if (gamepad1.y)
+                {
+                    was_pressed_y = false;
+                }
+            }
+        }
+
+
+        if (locked_controls)
+        {
+            was_pressed_y = false;
+            was_pressed_a = false;
+            bypass_y = false;
+            bypass_a = false;
+        }
+
+        if (!was_pressed_a && !was_pressed_y)
+        {
+            Sweep_servo.setPosition(.5);
+        }
 
 
 
