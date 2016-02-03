@@ -186,6 +186,11 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
 
+        if(!was_pressed_a)
+        {
+            bypass_a = false;
+        }
+
         if (gamepad1.a)
         {
             was_pressed_a = true;
@@ -231,6 +236,11 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
 
+
+        if (!was_pressed_y)
+        {
+            bypass_y = false;
+        }
 
         if (gamepad1.y)
         {
