@@ -27,7 +27,7 @@ public class Team7104LeverFlippers extends Team7104Hardware
         boolean left1 = gamepad2.left_bumper;
         boolean right1 = gamepad2.right_bumper;
 
-        Sweep_Control(left1, right1);
+        //Sweep_Control(left1, right1);
     }
 
     @Override
