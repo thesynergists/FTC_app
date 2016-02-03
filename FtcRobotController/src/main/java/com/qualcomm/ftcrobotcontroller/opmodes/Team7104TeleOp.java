@@ -60,6 +60,8 @@ public class Team7104TeleOp extends Team7104Hardware
     boolean was_pressed_a = false;
     boolean bypass_y = false;
     boolean bypass_a = false;
+    boolean the_stop_button_y = false;
+    boolean the_stop_button_a = false;
 
     @Override
     public void init()
@@ -186,11 +188,22 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
 
-
-        if (gamepad1.a)
+        if (the_stop_button_a)
         {
-            was_pressed_a = true;
+            if (!gamepad1.a)
+            {
+                the_stop_button_a = false;
+            }
         }
+
+        if (!the_stop_button_a)
+        {
+            if (gamepad1.a)
+            {
+                was_pressed_a = true;
+            }
+        }
+
 
         if (was_pressed_a)
         {
@@ -216,6 +229,7 @@ public class Team7104TeleOp extends Team7104Hardware
                 {
                     was_pressed_a = false;
                     bypass_a = false;
+                    the_stop_button_a = true;
                 }
             }
         }
@@ -235,10 +249,22 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
 
-        if (gamepad1.y)
+        if (the_stop_button_y)
         {
-            was_pressed_y = true;
+            if (!gamepad1.y)
+            {
+                the_stop_button_y = false;
+            }
         }
+
+        if (!the_stop_button_y)
+        {
+            if (gamepad1.y)
+            {
+                was_pressed_y = true;
+            }
+        }
+
 
         if (was_pressed_y)
         {
@@ -264,6 +290,7 @@ public class Team7104TeleOp extends Team7104Hardware
                 {
                     was_pressed_y = false;
                     bypass_y = false;
+                    the_stop_button_y = true;
                 }
             }
         }
@@ -275,6 +302,8 @@ public class Team7104TeleOp extends Team7104Hardware
             was_pressed_a = false;
             bypass_y = false;
             bypass_a = false;
+            the_stop_button_y = false;
+            the_stop_button_a = false;
         }
 
         if (!was_pressed_a && !was_pressed_y)
