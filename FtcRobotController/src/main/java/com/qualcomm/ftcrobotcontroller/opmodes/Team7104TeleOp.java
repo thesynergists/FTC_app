@@ -186,10 +186,6 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
 
-        if(!was_pressed_a)
-        {
-            bypass_a = false;
-        }
 
         if (gamepad1.a)
         {
@@ -219,6 +215,7 @@ public class Team7104TeleOp extends Team7104Hardware
                 if(gamepad1.a)
                 {
                     was_pressed_a = false;
+                    bypass_a = false;
                 }
             }
         }
@@ -237,10 +234,6 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
 
-        if (!was_pressed_y)
-        {
-            bypass_y = false;
-        }
 
         if (gamepad1.y)
         {
@@ -270,6 +263,7 @@ public class Team7104TeleOp extends Team7104Hardware
                 if (gamepad1.y)
                 {
                     was_pressed_y = false;
+                    bypass_y = false;
                 }
             }
         }
