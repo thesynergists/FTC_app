@@ -109,12 +109,12 @@ public class Team7104Hardware extends OpMode
         }
         if (left_bool)
         {
-            Conveyor_servo.setPosition(0);
+            Conveyor_servo.setPosition(1);
         }
 
         if (right_bool)
         {
-            Conveyor_servo.setPosition(1);
+            Conveyor_servo.setPosition(0);
         }
 
         if (left_bool != true && right_bool != true)
@@ -269,13 +269,13 @@ public class Team7104Hardware extends OpMode
 
     public void setPowerRightMotor(double level)
     {
-        motorRight1.setPower(level);
-        motorRight2.setPower(level);
+        motorRight1.setPower(-level);
+        motorRight2.setPower(-level);
     }
     public void setPowerLeftMotor(double level)
     {
-        motorLeft1.setPower(level);
-        motorLeft2.setPower(level);
+        motorLeft1.setPower(-level);
+        motorLeft2.setPower(-level);
     }
     public void setPowerBothMotor(double level)
     {
