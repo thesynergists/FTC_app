@@ -57,6 +57,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("Team7104Telemetry", Team7104Telemetry.class);
     manager.register("Team7104TeleOp", Team7104TeleOp.class);
     manager.register("Team7104AutoEncoder", Team7104AutoEncoder.class);
+    manager.register("Team7104AutoR_FloorGoal", Team7104AutoR_FloorGoal.class);
     manager.register("NullOp", NullOp.class);
     //manager.register("Team7104MMAShoulderDaniel", Team7104MMAShoulderDaniel.class);
     manager.register("Team7104BaconTeleOp", Team7104BaconTeleOp.class);
