@@ -48,6 +48,9 @@ public class Team7104AutoR_FloorGoal extends Team7104Telemetry
 
     @Override public void init()
     {
+        BaconColor.enableLed(false);
+        FloorRightColor.enableLed(false);
+        FloorLeftColor.enableLed(false);
         //Servos to initial position
         super.init();
     }
@@ -183,6 +186,10 @@ public class Team7104AutoR_FloorGoal extends Team7104Telemetry
         update_telemetry(); // Update common telemetry
         telemetry.addData("18", "State: " + drive_state);
         telemetry.addData("Current Encoder Counts:" + a_left_encoder_count(), a_right_encoder_count());
+        telemetry.addData("Right Floor Color Sensor", String.valueOf(FloorRightColor.argb()));
+        telemetry.addData("Left Floor Color Sensor", String.valueOf(FloorRightColor.argb()));
+
+
         //telemetry.addData("Current Timer Reading:" + ElapsedTime());
     } // loop
 
