@@ -143,7 +143,7 @@ public class Team7104TeleOp extends Team7104Hardware
         //Scoop!!!
         //Begin Scoop Fine-Tuning
         //Set Scoop Motor power variable
-        double Scoop_Motor_value = Range.clip(gamepad2.right_stick_y, -.84, .84);
+        double Scoop_Motor_value = Range.clip(gamepad2.right_stick_y, -.70, .70);
         //double Scoop_Motor_Power = pow(Scoop_Motor_value, 3);//Equivalent to x^3? Based on https://docs.oracle.com/javase/tutorial/java/data/beyondmath.htm
         double Scoop_Motor_Power = Scoop_Motor_value;
         //if joystick 2, right joystick

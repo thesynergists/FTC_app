@@ -9,7 +9,7 @@ public class Team7104LeverFlippers extends Team7104Hardware
     {
 
     }
-
+    
     @Override
     public void init()
     {
@@ -19,15 +19,25 @@ public class Team7104LeverFlippers extends Team7104Hardware
     @Override
     public void loop()
     {
-        boolean left = gamepad1.left_bumper;
-        boolean right = gamepad1.right_bumper;
+        if (gamepad1.left_trigger > 0)
+        {
+            Flipper_Servo_Left.setPosition(.75);
+        }
 
-        Conveyor_Belt_Control(left, right);
+        if (gamepad1.right_trigger > 0)
+        {
+            Flipper_Servo_Right.setPosition(.25);
+        }
 
-        boolean left1 = gamepad2.left_bumper;
-        boolean right1 = gamepad2.right_bumper;
+        if (gamepad1.left_trigger == 0)
+        {
+            Flipper_Servo_Left.setPosition(.5);
+        }
 
-        //Sweep_Control(left1, right1);
+        if (gamepad1.right_trigger == 0)
+        {
+            Flipper_Servo_Right.setPosition(.5);
+        }
     }
 
     @Override

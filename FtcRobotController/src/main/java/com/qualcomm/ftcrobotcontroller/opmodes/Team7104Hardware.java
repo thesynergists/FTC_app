@@ -18,12 +18,16 @@ public class Team7104Hardware extends OpMode
 
     DcMotor Scoop_Motor;
 
+
     Servo rotation_servo;          //Make ourselves da servos! :)
     Servo pitch_servo_left;
     Servo pitch_servo_right;
     Servo Bacon_servo;
     Servo Conveyor_servo;
     Servo Sweep_servo;
+
+    Servo Flipper_Servo_Left;
+    Servo Flipper_Servo_Right;
 
     DcMotor PullUp_Motor;
 
@@ -182,6 +186,9 @@ public class Team7104Hardware extends OpMode
 
         Sweep_servo = hardwareMap.servo.get("Sweep_servo");
         Conveyor_servo = hardwareMap.servo.get("Conveyor_servo");
+
+        Flipper_Servo_Left = hardwareMap.servo.get("Flipper_Servo_Left");
+        Flipper_Servo_Right = hardwareMap.servo.get("Flipper_Servo_Right");
 
         //PullUp_Motor = hardwareMap.servo.get("PullUp_Motor");
 

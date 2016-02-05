@@ -43,7 +43,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 public class K9TeleOp extends OpMode {
-	
+
 	/*
 	 * Note: the configuration of the servos is such that
 	 * as the arm servo approaches 0, the arm position moves up (away from the floor).
