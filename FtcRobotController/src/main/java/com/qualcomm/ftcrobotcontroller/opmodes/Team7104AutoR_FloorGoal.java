@@ -362,6 +362,8 @@ public class Team7104AutoR_FloorGoal extends Team7104Telemetry
      * Indicate whether the drive motors' encoders have reached a value.
      */
     /* ENCODERCOUNTS TO INCHES
+    In English....
+      See Dropbox in the SW folder
     void double have_yNeveRest_encoders_reached_x_inches(double MotorType, double desired_left_value) {
     desired_left_value =
 
