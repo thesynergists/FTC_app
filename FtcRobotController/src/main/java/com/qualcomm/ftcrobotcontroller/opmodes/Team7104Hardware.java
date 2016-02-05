@@ -186,9 +186,9 @@ public class Team7104Hardware extends OpMode
         Sweep_servo = hardwareMap.servo.get("Sweep_servo");
         Conveyor_servo = hardwareMap.servo.get("Conveyor_servo");
 
-        BaconColor = hardwareMap.colorSensor.get("BaconColor");
-        FloorLeftColor = hardwareMap.colorSensor.get("FloorLeftColor");
-        FloorRightColor = hardwareMap.colorSensor.get("FloorRightColor");
+        BaconColor = hardwareMap.colorSensor.get("Bacon_Color");
+        FloorLeftColor = hardwareMap.colorSensor.get("Floor_Left_Color");
+        FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
 
         //PullUp_Motor = hardwareMap.servo.get("PullUp_Motor");
 

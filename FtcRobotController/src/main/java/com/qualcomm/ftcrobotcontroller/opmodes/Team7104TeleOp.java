@@ -135,6 +135,10 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
 
+        //LEVER FLIPPER!
+        float lever_left = gamepad1.left_trigger;
+        float lever_right = gamepad1.right_trigger;
+        if()
 
 
 
