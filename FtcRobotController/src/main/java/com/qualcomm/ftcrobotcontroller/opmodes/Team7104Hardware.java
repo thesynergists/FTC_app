@@ -3,6 +3,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.util.Range;
 
 /**
@@ -31,7 +32,9 @@ public class Team7104Hardware extends OpMode
 
     DcMotor PullUp_Motor;
 
-
+    ColorSensor BaconColor;
+    ColorSensor FloorRightColor;
+    ColorSensor FloorLeftColor;
 
 
 
@@ -187,8 +190,14 @@ public class Team7104Hardware extends OpMode
         Sweep_servo = hardwareMap.servo.get("Sweep_servo");
         Conveyor_servo = hardwareMap.servo.get("Conveyor_servo");
 
+<<<<<<< HEAD
         Flipper_Servo_Left = hardwareMap.servo.get("Flipper_Servo_Left");
         Flipper_Servo_Right = hardwareMap.servo.get("Flipper_Servo_Right");
+=======
+        BaconColor = hardwareMap.colorSensor.get("Bacon_Color");
+        FloorLeftColor = hardwareMap.colorSensor.get("Floor_Left_Color");
+        FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
+>>>>>>> origin/master
 
         //PullUp_Motor = hardwareMap.servo.get("PullUp_Motor");
 
