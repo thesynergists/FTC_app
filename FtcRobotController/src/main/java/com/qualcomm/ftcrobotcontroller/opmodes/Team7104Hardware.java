@@ -188,16 +188,22 @@ public class Team7104Hardware extends OpMode
         //pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
 
         Sweep_servo = hardwareMap.servo.get("Sweep_servo");
-        Conveyor_servo = hardwareMap.servo.get("Conveyor_servo");
+        Sweep_servo.setPosition(.5);
 
-<<<<<<< HEAD
+        Conveyor_servo = hardwareMap.servo.get("Conveyor_servo");
+        Conveyor_servo.setPosition(.5);
+
+
+
         Flipper_Servo_Left = hardwareMap.servo.get("Flipper_Servo_Left");
+        Flipper_Servo_Left.setPosition(.40);
         Flipper_Servo_Right = hardwareMap.servo.get("Flipper_Servo_Right");
-=======
+        Flipper_Servo_Right.setPosition(.57);
+
         BaconColor = hardwareMap.colorSensor.get("Bacon_Color");
         FloorLeftColor = hardwareMap.colorSensor.get("Floor_Left_Color");
         FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
->>>>>>> origin/master
+
 
         //PullUp_Motor = hardwareMap.servo.get("PullUp_Motor");
 
@@ -285,13 +291,13 @@ public class Team7104Hardware extends OpMode
 
     public void setPowerRightMotor(double level)
     {
-        motorRight1.setPower(-level);
-        motorRight2.setPower(-level);
+        motorLeft1.setPower(-level);
+        motorLeft2.setPower(-level);
     }
     public void setPowerLeftMotor(double level)
     {
-        motorLeft1.setPower(-level);
-        motorLeft2.setPower(-level);
+        motorRight1.setPower(-level);
+        motorRight2.setPower(-level);
     }
     public void setPowerBothMotor(double level)
     {

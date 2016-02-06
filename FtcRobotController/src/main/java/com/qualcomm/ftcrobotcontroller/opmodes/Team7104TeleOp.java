@@ -63,29 +63,13 @@ public class Team7104TeleOp extends Team7104Hardware
     boolean the_stop_button_y = false;
     boolean the_stop_button_a = false;
 
+    /*
     @Override
     public void init()
     {
-		/*
-		 * Use the hardwareMap to get the dc motors and servos by name. Note
-		 * that the names of the devices must match the names used when you
-		 * configured your robot and created the configuration file.
-		 */
-		
-		/*
-		 * For the demo Tetrix K9 bot we assume the following,
-		 *   There are two motors "motor_1" and "motor_2"
-		 *   "motor_1" is on the right side of the bot.
-		 *   "motor_2" is on the left side of the bot and reversed.
-		 *   
-		 * We also assume that there are two servos "servo_1" and "servo_6"
-		 *    "servo_1" controls the arm joint of the manipulator.
-		 *    "servo_6" controls the claw joint of the manipulator.
-		 */
-
         super.init();
     }
-
+    */
     /*
      * This method will be called repeatedly in a loop
      *
@@ -125,6 +109,28 @@ public class Team7104TeleOp extends Team7104Hardware
         setPowerRightMotor(right);
 
 
+        //FLIPPERS!!!
+
+        if (gamepad1.left_trigger > 0)
+        {
+            Flipper_Servo_Right.setPosition(1);
+        }
+
+        if (gamepad1.right_trigger > 0)
+        {
+            Flipper_Servo_Left.setPosition(0);
+        }
+
+        if (gamepad1.left_trigger == 0)
+        {
+            Flipper_Servo_Right.setPosition(.57);
+        }
+
+        if (gamepad1.right_trigger == 0)
+        {
+            Flipper_Servo_Left.setPosition(.40);
+        }
+
 
 
         //THE CONVEYOR BELT!
@@ -132,15 +138,6 @@ public class Team7104TeleOp extends Team7104Hardware
         boolean conveyor_right = gamepad1.right_bumper;
 
         Conveyor_Belt_Control(conveyor_left, conveyor_right);
-
-
-
-        //LEVER FLIPPER!
-        float lever_left = gamepad1.left_trigger;
-        float lever_right = gamepad1.right_trigger;
-        if()
-
-
 
 
 
