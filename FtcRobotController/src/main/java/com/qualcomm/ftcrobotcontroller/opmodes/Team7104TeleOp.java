@@ -164,7 +164,7 @@ public class Team7104TeleOp extends Team7104Hardware
         }
 
 
-        double Scoop_Motor_value = Range.clip(gamepad2.right_stick_y, -.4, .4);
+        double Scoop_Motor_value = Range.clip(gamepad2.right_stick_y, -.2, .2);
         double Scoop_Motor_Power = Scoop_Motor_value;//Equivalent to x^3? Based on https://docs.oracle.com/javase/tutorial/java/data/beyondmath.htm
 
         //if joystick 2, right joystick

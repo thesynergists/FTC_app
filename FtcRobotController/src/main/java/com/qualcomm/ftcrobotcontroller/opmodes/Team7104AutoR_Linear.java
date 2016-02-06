@@ -94,7 +94,8 @@ public class Team7104AutoR_Linear extends LinearOpMode
         mStateTime.reset();
         while(mStateTime.time() <= .5)
         {
-            StopAllMotors();
+            MotorLeftPower(0);
+            MotorRightPower(0);
         }
 
         mStateTime.reset();
@@ -108,18 +109,24 @@ public class Team7104AutoR_Linear extends LinearOpMode
         mStateTime.reset();
         while(mStateTime.time() <= .5)
         {
-            StopAllMotors();
+            MotorLeftPower(0);
+            MotorRightPower(0);
         }
 
         mStateTime.reset();
-        while(mStateTime.time() <= 1)
+        while(mStateTime.time() <= 1.7)
         {
             telemetry.addData("State: forward", 2);
-            MotorRightPower(-.5); //DRIVE FORWARD INTO FLOOR GOAL
-            MotorLeftPower(-.5);
+            MotorRightPower(-.3); //DRIVE FORWARD INTO FLOOR GOAL
+            MotorLeftPower(-.3);
         }//Wait...wait...wait
-        StopAllMotors();
-        telemetry.addData("State: done", 3);
+
+        if(mStateTime.time() <= 10 && mStateTime.time() > 1.7)
+        {
+            MotorLeftPower(0);
+            MotorRightPower(0);
+            telemetry.addData("State: done", 3);
+        }
     }
 
     public void MotorRightPower(double RightPower)
@@ -131,12 +138,5 @@ public class Team7104AutoR_Linear extends LinearOpMode
     {
         motorRight1.setPower(LeftPower);
         motorRight2.setPower(LeftPower);
-    }
-    public void StopAllMotors()
-    {
-        motorLeft1.setPower(0);
-        motorLeft2.setPower(0);
-        motorRight1.setPower(0);
-        motorRight2.setPower(0);
     }
 }
