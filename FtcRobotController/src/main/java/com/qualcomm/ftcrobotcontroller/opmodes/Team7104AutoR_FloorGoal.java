@@ -55,6 +55,7 @@ public class Team7104AutoR_FloorGoal extends Team7104Telemetry
         FloorRightColor.enableLed(false);
         FloorLeftColor.enableLed(false);
         reset_drive_encoders();
+        mStateTime.reset();
         //Servos to initial position
 
     }
@@ -95,24 +96,35 @@ public class Team7104AutoR_FloorGoal extends Team7104Telemetry
             case 0:
                 //reset_drive_encoders();
                 run_using_encoders();
+                mStateTime.reset();
+                motorLeft1.setPower(-.7);
+                motorLeft2.setPower(-.7);
+                motorRight1.setPower(-.7);
+                motorRight2.setPower(-.7);
                 drive_state++;
                 break;
 
             case 1: //Drive Forward towards Floor Goal
-                //
-                // Tell the system that motor encoders will be used.  This call MUST
-                // be in this state and NOT the previous or the encoders will not
-                // work.  It doesn't need to be in subsequent states.
-                //
-                //run_using_encoders();
-
-                //
-                // Start the drive wheel motors at full power.
-                //
-                setPowerLeftMotor(.8);
-                setPowerRightMotor(.8);
+                //setPowerLeftMotor(-.7);
+                //setPowerRightMotor(-.7);
+                //setPowerBothMotor(-.7);
 
 
+                if(mStateTime.time() >= 10)
+                {
+                    stop_motors_and_get_position_and_reset_time();
+                    drive_state++;
+                }
+            case 2: //Turn Left
+                setPowerLeftMotor(-.3);
+                setPowerRightMotor(.3);
+
+                if(mStateTime.time() >= 1)
+                {
+                    stop_motors_and_get_position_and_reset_time();
+                    drive_state++;
+                }
+                /*
                 //
                 // Have the motor shafts turned the required amount?
                 //
@@ -121,7 +133,7 @@ public class Team7104AutoR_FloorGoal extends Team7104Telemetry
                 //
 
                 //have_drive_encoders_reached_x_inches(1000, 1000)
-                if (have_drive_encoders_reached(100, 100)) //these parameters will affect motor value before change
+                if (have_drive_encoders_reached(-100, -100)) //these parameters will affect motor value before change
                 {
                     //
                     // Reset the encoders to ensure they are at a known good value.
@@ -149,7 +161,7 @@ public class Team7104AutoR_FloorGoal extends Team7104Telemetry
                 }
                 break;*/
 
-            case 2: //Turn Left into Floor Goal
+            /*case 2: //Turn Left into Floor Goal
                 //run_using_encoders();
                 setPowerLeftMotor(-.7);
                 setPowerRightMotor(.7);
@@ -171,7 +183,7 @@ public class Team7104AutoR_FloorGoal extends Team7104Telemetry
                 }
                 break;
 */
-            case 5: //Drive Forwards For Time to Push Debris into Floor Goal & Park in Goal
+            /*case 5: //Drive Forwards For Time to Push Debris into Floor Goal & Park in Goal
                 setPowerLeftMotor(.4);
                 setPowerRightMotor(.4);
 
@@ -180,7 +192,7 @@ public class Team7104AutoR_FloorGoal extends Team7104Telemetry
                     stop_motors_and_get_position();
                     drive_state++;
                 }
-                break;
+                break;*/
         }
 
 
@@ -189,6 +201,8 @@ public class Team7104AutoR_FloorGoal extends Team7104Telemetry
         telemetry.addData("Current Encoder Counts:" + a_left_encoder_count(), a_right_encoder_count());
         telemetry.addData("Right Floor Color Sensor", String.valueOf(FloorRightColor.argb()));
         telemetry.addData("Left Floor Color Sensor", String.valueOf(FloorRightColor.argb()));
+        telemetry.addData("Left Motor Power:", String.valueOf(motorLeft1.getPower()));
+        telemetry.addData("Right Motor Power:", String.valueOf(motorRight1.getPower()));
 
 
         //telemetry.addData("Current Timer Reading:" + ElapsedTime());
@@ -223,12 +237,13 @@ public class Team7104AutoR_FloorGoal extends Team7104Telemetry
 
 
 
-public void stop_motors_and_get_position()
+public void stop_motors_and_get_position_and_reset_time()
 {
     setPowerLeftMotor(0);
     setPowerRightMotor(0);
     LeftDriveEncoders = motorLeft1.getCurrentPosition();
     RightDriveEncoders = motorRight1.getCurrentPosition();
+    mStateTime.reset();
 }
 
 
