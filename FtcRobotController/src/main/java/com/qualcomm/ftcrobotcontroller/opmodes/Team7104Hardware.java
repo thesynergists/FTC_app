@@ -26,6 +26,7 @@ public class Team7104Hardware extends OpMode
     Servo Bacon_servo;
     Servo Conveyor_servo;
     Servo Sweep_servo;
+    Servo Climber_servo;
 
     Servo Flipper_Servo_Left;
     Servo Flipper_Servo_Right;

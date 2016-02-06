@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
- * Created by Daniel on 2/5/2016.
+ * Created by thomasmatthews on 2/6/16.
  */
-public class Team7104AutoR_Linear extends LinearOpMode
+public class Team7104AutoClimbersRedProto extends LinearOpMode
 {
 
     DcMotor motorLeft1;
@@ -27,6 +27,7 @@ public class Team7104AutoR_Linear extends LinearOpMode
     Servo Bacon_servo;
     Servo Conveyor_servo;
     Servo Sweep_servo;
+    Servo Climber_servo;
 
     Servo Flipper_Servo_Left;
     Servo Flipper_Servo_Right;
@@ -45,6 +46,8 @@ public class Team7104AutoR_Linear extends LinearOpMode
 
         motorLeft1 = hardwareMap.dcMotor.get("motorLeft1");
         motorLeft2 = hardwareMap.dcMotor.get("motorLeft2");
+
+        Climber_servo = hardwareMap.servo.get("Climber_servo");
 
         motorRight1 = hardwareMap.dcMotor.get("motorRight1");
         motorRight2 = hardwareMap.dcMotor.get("motorRight2");
@@ -98,7 +101,7 @@ public class Team7104AutoR_Linear extends LinearOpMode
         }
 
         mStateTime.reset();
-        while(mStateTime.time() <= 1.3)
+        while(mStateTime.time() <= .65)
         {
             telemetry.addData("State: turning", 1);
             MotorRightPower(.4); //TURN TO FLOOR GOAL
@@ -118,8 +121,26 @@ public class Team7104AutoR_Linear extends LinearOpMode
             MotorRightPower(-.5); //DRIVE FORWARD INTO FLOOR GOAL
             MotorLeftPower(-.5);
         }//Wait...wait...wait
+
         StopAllMotors();
-        telemetry.addData("State: done", 3);
+
+        telemetry.addData("State: deploy climbers", 3);
+
+        mStateTime.reset();
+        while(mStateTime.time() <= 2)
+        {
+            Climber_servo.setPosition(.5);
+        }
+
+        telemetry.addData("State: return climber servo", 4);
+
+        mStateTime.reset();
+        while (mStateTime.time() <= 2)
+        {
+            Climber_servo.setPosition(0);
+        }
+
+        telemetry.addData("State: end of autonomous", 5);
     }
 
     public void MotorRightPower(double RightPower)

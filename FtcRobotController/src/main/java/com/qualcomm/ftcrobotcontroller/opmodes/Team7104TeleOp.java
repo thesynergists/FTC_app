@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.util.Range;
 
 import static java.lang.Math.pow;
@@ -111,27 +112,25 @@ public class Team7104TeleOp extends Team7104Hardware
 
         //FLIPPERS!!!
 
-        if (gamepad1.left_trigger > 0)
+        if (gamepad2.left_trigger > 0)
         {
             Flipper_Servo_Right.setPosition(1);
         }
 
-        if (gamepad1.right_trigger > 0)
+        if (gamepad2.right_trigger > 0)
         {
             Flipper_Servo_Left.setPosition(0);
         }
 
-        if (gamepad1.left_trigger == 0)
-        {
-            Flipper_Servo_Right.setPosition(.57);
-        }
-
-        if (gamepad1.right_trigger == 0)
+        if (gamepad2.right_trigger == 0)
         {
             Flipper_Servo_Left.setPosition(.40);
         }
 
-
+        if (gamepad2.left_trigger == 0)
+        {
+            Flipper_Servo_Right.setPosition(.57);
+        }
 
         //THE CONVEYOR BELT!
         boolean conveyor_left = gamepad1.left_bumper;
@@ -144,6 +143,27 @@ public class Team7104TeleOp extends Team7104Hardware
         //Scoop!!!
         //Begin Scoop Fine-Tuning
         //Set Scoop Motor power variable
+
+        if (gamepad2.a)
+        {
+            Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+            Scoop_Motor.setTargetPosition(0);      //Preset for Collecting Debris
+
+        }
+
+        if (gamepad2.b)
+        {
+            Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+            Scoop_Motor.setTargetPosition(500);      //Preset for Dumping Debris into Conveyor
+        }
+
+        if (gamepad2.y)
+        {
+            Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+            Scoop_Motor.setTargetPosition(-600);     //Preset for Storage
+        }
+
+
         double Scoop_Motor_value = Range.clip(gamepad2.right_stick_y, -.4, .4);
         double Scoop_Motor_Power = Scoop_Motor_value;//Equivalent to x^3? Based on https://docs.oracle.com/javase/tutorial/java/data/beyondmath.htm
 
@@ -151,12 +171,14 @@ public class Team7104TeleOp extends Team7104Hardware
         //Stop Motor
         if (gamepad2.right_stick_y < 0.05 && gamepad2.right_stick_y > -0.05)
         {
+            Scoop_Motor.setMode((DcMotorController.RunMode.RUN_USING_ENCODERS));
             Scoop_Motor.setPower(0);
             telemetry.addData("Scoop motor value", Scoop_Motor.getPower());
         }
 
         if (gamepad2.right_stick_y > 0.05 || gamepad2.right_stick_y < -.05)
         {
+            Scoop_Motor.setMode((DcMotorController.RunMode.RUN_USING_ENCODERS));
             Scoop_Motor.setPower(Scoop_Motor_Power);
             telemetry.addData("Scoop motor value", Scoop_Motor.getPower());
         }
