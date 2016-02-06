@@ -48,11 +48,12 @@ public class Team7104AutoR_FloorGoal extends Team7104Telemetry
 
     @Override public void init()
     {
+        super.init();
         BaconColor.enableLed(false);
         FloorRightColor.enableLed(false);
         FloorLeftColor.enableLed(false);
         //Servos to initial position
-        super.init();
+
     }
 
     @Override public void start ()
