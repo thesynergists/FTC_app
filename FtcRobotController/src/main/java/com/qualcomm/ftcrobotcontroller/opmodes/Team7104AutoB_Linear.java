@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
- * Created by Daniel on 2/5/2016.
+ * Created by thomasmatthews on 2/6/16.
  */
-public class Team7104AutoR_Linear extends LinearOpMode
+public class Team7104AutoB_Linear extends  LinearOpMode
 {
 
     DcMotor motorLeft1;
@@ -41,7 +41,8 @@ public class Team7104AutoR_Linear extends LinearOpMode
     private ElapsedTime TotalTime = new ElapsedTime();
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() throws InterruptedException
+    {
 
         motorLeft1 = hardwareMap.dcMotor.get("motorLeft1");
         motorLeft2 = hardwareMap.dcMotor.get("motorLeft2");
@@ -87,8 +88,8 @@ public class Team7104AutoR_Linear extends LinearOpMode
         while(mStateTime.time() <= 4.9)
         {
             telemetry.addData("State: forward", 0);
-            MotorRightPower(-.7); //DRIVE FORWARD TO BEACON
-            MotorLeftPower(-.7);
+            MotorRightPower(.7); //DRIVE FORWARD TO BEACON
+            MotorLeftPower(.7);
         }//Wait...wait...wait
 
         mStateTime.reset();
@@ -101,8 +102,8 @@ public class Team7104AutoR_Linear extends LinearOpMode
         while(mStateTime.time() <= 1.3)
         {
             telemetry.addData("State:turning", 1);
-            MotorRightPower(.4); //TURN TO FLOOR GOAL
-            MotorLeftPower(-.4);
+            MotorRightPower(-.4); //TURN TO FLOOR GOAL
+            MotorLeftPower(.4);
         }//Wait...wait...wait
 
         mStateTime.reset();
@@ -115,8 +116,8 @@ public class Team7104AutoR_Linear extends LinearOpMode
         while(mStateTime.time() <= 1)
         {
             telemetry.addData("State: forward", 2);
-            MotorRightPower(-.5); //DRIVE FORWARD INTO FLOOR GOAL
-            MotorLeftPower(-.5);
+            MotorRightPower(.5); //DRIVE FORWARD INTO FLOOR GOAL
+            MotorLeftPower(.5);
         }//Wait...wait...wait
         StopAllMotors();
         telemetry.addData("State: done", 3);
