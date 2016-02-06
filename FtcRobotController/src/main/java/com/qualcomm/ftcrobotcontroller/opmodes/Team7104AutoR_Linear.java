@@ -1,5 +1,7 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import android.provider.Telephony;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -37,6 +39,7 @@ public class Team7104AutoR_Linear extends LinearOpMode {
     ColorSensor FloorLeftColor;
 
     private ElapsedTime mStateTime = new ElapsedTime();
+    private ElapsedTime TotalTime = new ElapsedTime();
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -74,32 +77,59 @@ public class Team7104AutoR_Linear extends LinearOpMode {
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
 
-        mStateTime.reset();
+
 
         // wait for the start button to be pressed
         waitForStart();
+        TotalTime.reset();
+        telemetry.addData("Total time", TotalTime);
 
-        MotorRightPower(.7); //DRIVE FORWARD TO BEACON
-        MotorLeftPower(.7);
-        while(mStateTime.time() >= 10){}//Wait...wait...wait
-        StopAllMotors();
+        mStateTime.reset();
+        while(mStateTime.time() <= 4.9)
+        {
+            telemetry.addData("State: forward", 0);
+            MotorRightPower(-.7); //DRIVE FORWARD TO BEACON
+            MotorLeftPower(-.7);
+        }//Wait...wait...wait
 
-        MotorRightPower(-.5); //TURN TO FLOOR GOAL
-        MotorLeftPower(.5);
-        while(mStateTime.time() >= 2){}//Wait...wait...wait
-        StopAllMotors();
+        mStateTime.reset();
+        while(mStateTime.time() <= .5)
+        {
+            StopAllMotors();
+        }
 
-        MotorRightPower(.3); //DRIVE FORWARD INTO FLOOR GOAL
-        MotorLeftPower(.3);
-        while(mStateTime.time() >= 10){}//Wait...wait...wait
+        mStateTime.reset();
+        while(mStateTime.time() <= 1.3)
+        {
+            telemetry.addData("State:turning", 1);
+            MotorRightPower(.4); //TURN TO FLOOR GOAL
+            MotorLeftPower(-.4);
+        }//Wait...wait...wait
+
+        mStateTime.reset();
+        while(mStateTime.time() <= .5)
+        {
+            StopAllMotors();
+        }
+
+        mStateTime.reset();
+        while(mStateTime.time() <= 1)
+        {
+            telemetry.addData("State: forward", 2);
+            MotorRightPower(-.5); //DRIVE FORWARD INTO FLOOR GOAL
+            MotorLeftPower(-.5);
+        }//Wait...wait...wait
         StopAllMotors();
+        telemetry.addData("State: done", 3);
     }
 
-public void MotorRightPower(double RightPower){
-    motorRight1.setPower(RightPower);
-    motorRight2.setPower(RightPower);
-}
-    public void MotorLeftPower(double LeftPower){
+    public void MotorRightPower(double RightPower)
+    {
+        motorLeft1.setPower(RightPower);
+        motorLeft2.setPower(RightPower);
+    }
+    public void MotorLeftPower(double LeftPower)
+    {
         motorRight1.setPower(LeftPower);
         motorRight2.setPower(LeftPower);
     }
