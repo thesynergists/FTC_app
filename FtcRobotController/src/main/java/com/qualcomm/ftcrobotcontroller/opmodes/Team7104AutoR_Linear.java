@@ -84,11 +84,11 @@ public class Team7104AutoR_Linear extends LinearOpMode
         telemetry.addData("Total time", TotalTime);
 
         mStateTime.reset();
-        while(mStateTime.time() <= 4.9)
+        while(mStateTime.time() <= 7)
         {
             telemetry.addData("State: forward", 0);
-            MotorRightPower(-.7); //DRIVE FORWARD TO BEACON
-            MotorLeftPower(-.7);
+            MotorRightPower(-.5); //DRIVE FORWARD TO BEACON
+            MotorLeftPower(-.5);
         }//Wait...wait...wait
 
         mStateTime.reset();
@@ -121,7 +121,7 @@ public class Team7104AutoR_Linear extends LinearOpMode
             MotorLeftPower(-.3);
         }//Wait...wait...wait
 
-        if(mStateTime.time() <= 10 && mStateTime.time() > 1.7)
+        while(mStateTime.time() <= 3 && mStateTime.time() > 1.7)
         {
             MotorLeftPower(0);
             MotorRightPower(0);
