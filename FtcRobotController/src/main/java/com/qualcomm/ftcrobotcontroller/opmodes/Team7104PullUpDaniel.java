@@ -11,24 +11,62 @@ public class Team7104PullUpDaniel extends Team7104Hardware
     {
 
     }
+
+    boolean was_pressed_pull = false;         //Will help control the while loop and other commands.
+    boolean bypass_pull = false;             //This will act as a control to determine when the right bumper has been pressed for a second time.
+    boolean the_stop_button_pull = false;
+
+    /*
     @Override
     public void init()
     {
         super.init();
     }
+    */
 
     @Override
     public void loop()
     {
-        //If button a is pressed
-        boolean was_pressed = false;    //Will help control the while loop and other commands.
-        boolean bypass = false;         //This will act as a control to determine when the right bumper has been pressed for a second time.
-
-        if (gamepad2.right_bumper)      //Once this statement is fulfilled, the program can go on to use the
+        if (the_stop_button_pull)
         {
-            was_pressed = true;
+            if (!gamepad2.right_bumper && gamepad2.right_trigger == 0)
+            {
+                the_stop_button_pull = false;
+            }
         }
 
+        if (!the_stop_button_pull)
+        {
+            if (gamepad2.right_bumper)
+            {
+                was_pressed_pull = true;
+            }
+        }
+
+        if (was_pressed_pull)
+        {
+            if (PullUp_Motor.getCurrentPosition() < 200)
+            {
+                PullUp_Motor.setPower(.80);
+            }
+
+            if (!gamepad2.right_bumper)
+            {
+                bypass_pull = true;
+            }
+
+            if (bypass_pull)
+            {
+                if (gamepad2.right_bumper || gamepad2.right_trigger > 0)
+                {
+                    was_pressed_pull = false;
+                    bypass_pull = false;
+                    the_stop_button_pull = true;
+                }
+            }
+        }
+
+        /*
         while (was_pressed && PullUp_Motor.getCurrentPosition() < 200)    //200 is going to be determined as set distance for PullUp_Motor to extend.
         {
             PullUp_Motor.setPower(.80);     //As long as motor has not reached preset limit and
@@ -51,8 +89,10 @@ public class Team7104PullUpDaniel extends Team7104Hardware
                 }
             }
         }
+        */
 
-        if(!was_pressed || PullUp_Motor.getCurrentPosition() >= 200)    //After one of the loop conditions has become false, set motor to stop.
+
+        if(!was_pressed_pull || PullUp_Motor.getCurrentPosition() >= 200)    //After one of the loop conditions has become false, set motor to stop.
         {
             PullUp_Motor.setPower(0);
         }

@@ -43,6 +43,23 @@ public class Team7104Hardware extends OpMode
     //                                UNDER CONSTRUCTION!!!!!!!!!!!!!!!
 
 
+
+
+    //Climber!!!
+    void Climber_dump (boolean dump_active)
+    {
+        if (dump_active)
+        {
+            Climber_servo.setPosition(.5);
+        }
+
+        if (!dump_active)
+        {
+            Climber_servo.setPosition(0);
+        }
+    }
+
+
     /**
      * Adjust IronFist elevation.
      */
@@ -194,7 +211,8 @@ public class Team7104Hardware extends OpMode
         Conveyor_servo = hardwareMap.servo.get("Conveyor_servo");
         Conveyor_servo.setPosition(.5);
 
-
+        Climber_servo = hardwareMap.servo.get("Climber_servo");
+        Climber_servo.setPosition(0);                               //Hopefully the neutral position...
 
         Flipper_Servo_Left = hardwareMap.servo.get("Flipper_Servo_Left");
         Flipper_Servo_Left.setPosition(.40);

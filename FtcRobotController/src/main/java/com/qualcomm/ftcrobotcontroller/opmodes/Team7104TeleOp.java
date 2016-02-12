@@ -92,9 +92,6 @@ public class Team7104TeleOp extends Team7104Hardware
         // 1 is full down
         // direction: left_stick_x ranges from -1 to 1, where -1 is full left
         // and 1 is full right
-        float scoop = gamepad2.right_stick_y;
-
-        Scoop_Motor.setPower(scoop);
 
 
         //STUFF FOR DRIVE TRAIN!!!
@@ -110,11 +107,42 @@ public class Team7104TeleOp extends Team7104Hardware
         setPowerRightMotor(right);
 
 
+        //CLIMBER!!!
+        Climber_dump(gamepad1.b);
+
+
         //FLIPPERS!!!
 
+        if (gamepad2.dpad_left)
+        {
+            Flipper_Servo_Right.setPosition(1);
+        }
+
+        if (!gamepad2.dpad_left)
+        {
+            Flipper_Servo_Right.setPosition(.57);
+        }
+
+        if (gamepad2.dpad_right)
+        {
+            Flipper_Servo_Left.setPosition(0);
+        }
+
+        if (!gamepad2.dpad_right)
+        {
+            Flipper_Servo_Left.setPosition(.40);
+        }
+
+
+        /*
         if (gamepad2.left_trigger > 0)
         {
             Flipper_Servo_Right.setPosition(1);
+        }
+
+        if (gamepad2.left_trigger == 0)
+        {
+            Flipper_Servo_Right.setPosition(.57);
         }
 
         if (gamepad2.right_trigger > 0)
@@ -126,11 +154,7 @@ public class Team7104TeleOp extends Team7104Hardware
         {
             Flipper_Servo_Left.setPosition(.40);
         }
-
-        if (gamepad2.left_trigger == 0)
-        {
-            Flipper_Servo_Right.setPosition(.57);
-        }
+        */
 
         //THE CONVEYOR BELT!
         boolean conveyor_left = gamepad1.left_bumper;
@@ -140,52 +164,59 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
 
-        //Scoop!!!
-        //Begin Scoop Fine-Tuning
-        //Set Scoop Motor power variable
+        //SCOOP!!!
 
         if (gamepad2.a)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-            Scoop_Motor.setTargetPosition(0);      //Preset for Collecting Debris
-
+            Scoop_Motor.setTargetPosition(0);       //Preset for Collecting Debris
+            Scoop_Motor.setPower(.2);               //You set this as the max power the motor can have...
+                                                    // (foresee issues depending on which side you are on)
         }
 
         if (gamepad2.b)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
             Scoop_Motor.setTargetPosition(500);      //Preset for Dumping Debris into Conveyor
+            Scoop_Motor.setPower(.2);
         }
 
         if (gamepad2.y)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
             Scoop_Motor.setTargetPosition(-600);     //Preset for Storage
+            Scoop_Motor.setPower(.2);
         }
 
+        if (gamepad2.x)
+        {
+            int hover_position = Scoop_Motor.getCurrentPosition();
+            Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+            Scoop_Motor.setTargetPosition(hover_position);
+            Scoop_Motor.setPower(.2);
+        }
 
         double Scoop_Motor_value = Range.clip(gamepad2.right_stick_y, -.2, .2);
         double Scoop_Motor_Power = Scoop_Motor_value;//Equivalent to x^3? Based on https://docs.oracle.com/javase/tutorial/java/data/beyondmath.htm
 
         //if joystick 2, right joystick
         //Stop Motor
-        if (gamepad2.right_stick_y < 0.05 && gamepad2.right_stick_y > -0.05)
+
+        if (gamepad2.right_stick_y < 0.05 && gamepad2.right_stick_y > -0.05 && !gamepad2.a && !gamepad2.b && !gamepad2.y && !gamepad2.x)
         {
             Scoop_Motor.setMode((DcMotorController.RunMode.RUN_USING_ENCODERS));
             Scoop_Motor.setPower(0);
-            telemetry.addData("Scoop motor value", Scoop_Motor.getPower());
         }
 
         if (gamepad2.right_stick_y > 0.05 || gamepad2.right_stick_y < -.05)
         {
             Scoop_Motor.setMode((DcMotorController.RunMode.RUN_USING_ENCODERS));
             Scoop_Motor.setPower(Scoop_Motor_Power);
-            telemetry.addData("Scoop motor value", Scoop_Motor.getPower());
         }
         //END Scoop Fine-Tuning
 
         telemetry.addData("Encoder value", Scoop_Motor.getCurrentPosition());
-
+        telemetry.addData("Scoop motor value", Scoop_Motor.getPower());
 
 
 
