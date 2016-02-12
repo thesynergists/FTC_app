@@ -231,16 +231,13 @@ public class Team7104TeleOp extends Team7104Hardware
 
         //Sweeper!!!
 
-
         boolean locked_controls = false;
         if (gamepad1.a && gamepad1.y)       //Pressing A and Y buttons at same time will reset Sweeper.
         {
             locked_controls = true;
             Sweep_servo.setPosition(.5);
         }
-
-
-
+        
 
         if (the_stop_button_a)
         {
@@ -257,7 +254,6 @@ public class Team7104TeleOp extends Team7104Hardware
                 was_pressed_a = true;
             }
         }
-
 
         if (was_pressed_a)
         {

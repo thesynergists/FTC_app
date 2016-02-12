@@ -59,10 +59,9 @@ public class Team7104Hardware extends OpMode
         }
     }
 
+    /*
+    //Adjust IronFist elevation.
 
-    /**
-     * Adjust IronFist elevation.
-     */
     void IronFist_change_elevation (double p_position)
     {
         //
@@ -94,10 +93,7 @@ public class Team7104Hardware extends OpMode
         pitch_servo_left.setPosition(.5);
     }
 
-
-    /*
-    Control Iron Fist rotation.
-     */
+    //Control Iron Fist rotation.
 
     void Iron_Fist_rotate (double left_double, double right_double)
     {
@@ -124,6 +120,7 @@ public class Team7104Hardware extends OpMode
             }
         }
     }
+    */
 
     //Control the Conveyor Belt.
     void Conveyor_Belt_Control (boolean left_bool, boolean right_bool)
