@@ -25,8 +25,21 @@ public class Team7104PullUpDaniel extends Team7104Hardware
     */
 
     @Override
-    public void loop()
-    {
+    public void loop() {
+
+
+        //Temporary stuff.
+        if (gamepad2.left_bumper)
+        {
+            PullUp_Motors_SetPower(-.2);
+        }
+        if(!gamepad2.left_bumper)
+        {
+            PullUp_Motors_SetPower(0);
+        }
+
+
+
         if (the_stop_button_pull)
         {
             if (!gamepad2.right_bumper && gamepad2.right_trigger == 0)
@@ -45,7 +58,7 @@ public class Team7104PullUpDaniel extends Team7104Hardware
 
         if (was_pressed_pull)
         {
-            if (PullUp_Motor_String.getCurrentPosition() < 200)
+            if (PullUp_Motor_String.getCurrentPosition() < 5000)
             {
                 PullUp_Motors_SetPower(.80);
             }
@@ -92,19 +105,21 @@ public class Team7104PullUpDaniel extends Team7104Hardware
         */
 
 
-        if(!was_pressed_pull || PullUp_Motor_String.getCurrentPosition() >= 200)    //After one of the loop conditions has become false, set motor to stop.
+        if (!was_pressed_pull || PullUp_Motor_String.getCurrentPosition() >= 5000)    //After one of the loop conditions has become false, set motor to stop.
         {
             PullUp_Motors_SetPower(0);
         }
 
         float bring_back = Range.clip(gamepad2.right_trigger, 0, .8F);  //At any time (as long as robot is not moving motor forward with while loop),
-                                                                    //the right trigger may be used to cause the arm to retract.
+        //the right trigger may be used to cause the arm to retract.
 
         if (bring_back > 0)  //At any time (as long as robot is not moving motor forward with while loop),
-                             //the right trigger may be used to cause the arm to retract.
+        //the right trigger may be used to cause the arm to retract.
         {
             PullUp_Motors_SetPower(-bring_back);
         }
+        //telemetry.addData("PullUpEncoder_String", PullUp_Motor_String.getCurrentPosition());
+        //telemetry.addData("PullUpPower_String", PullUp_Motor_String.getPower());
     }
 
     @Override

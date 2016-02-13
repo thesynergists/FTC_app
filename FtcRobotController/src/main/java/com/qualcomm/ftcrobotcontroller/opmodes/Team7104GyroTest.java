@@ -62,6 +62,7 @@ public class Team7104GyroTest extends LinearOpMode{
 
         headingTarget = 90;
 
+        /*
         do {
             headingCurrent = sensorGyro.getHeading();
             if(headingCurrent > 180){
@@ -75,6 +76,7 @@ public class Team7104GyroTest extends LinearOpMode{
 
         }
         while()
+        */
 
 
     }
