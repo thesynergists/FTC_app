@@ -31,7 +31,8 @@ public class Team7104Hardware extends OpMode
     Servo Flipper_Servo_Left;
     Servo Flipper_Servo_Right;
 
-    DcMotor PullUp_Motor;
+    DcMotor PullUp_Motor_Tape;
+    DcMotor PullUp_Motor_String;
 
     ColorSensor BaconColor;
     ColorSensor FloorRightColor;
@@ -44,6 +45,12 @@ public class Team7104Hardware extends OpMode
 
 
 
+    //PullUp_Motors
+    void PullUp_Motors_SetPower (double Power)
+    {
+        PullUp_Motor_String.setPower(Power);
+        PullUp_Motor_Tape.setPower(Power);
+    }
 
     //Climber!!!
     void Climber_dump (boolean dump_active)
@@ -222,7 +229,8 @@ public class Team7104Hardware extends OpMode
         FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
 
 
-        //PullUp_Motor = hardwareMap.servo.get("PullUp_Motor");
+        PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
+        PullUp_Motor_String = hardwareMap.dcMotor.get("PullUp_Motor_String");
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
