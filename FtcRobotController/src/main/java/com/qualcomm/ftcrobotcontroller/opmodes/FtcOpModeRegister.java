@@ -62,8 +62,8 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("Team7104AutoB_Linear", Team7104AutoB_Linear.class);
     manager.register("NullOp", NullOp.class);
     //manager.register("Team7104MMAShoulderDaniel", Team7104MMAShoulderDaniel.class);
-    manager.register("Team7104BaconTeleOp", Team7104BaconTeleOp.class);
-    manager.register("Team7104ScoopDaniel", Team7104ScoopDaniel.class);
+    //manager.register("Team7104BaconTeleOp", Team7104BaconTeleOp.class);
+    //manager.register("Team7104ScoopDaniel", Team7104ScoopDaniel.class);
     manager.register("Team7104EncoderTest", Team7104EncoderTest.class);
     manager.register("Team7104GyroTest", Team7104GyroTest.class);
 
@@ -72,10 +72,10 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("K9Line", K9Line.class);
     //manager.register ("PushBotAuto", PushBotAuto.class);
     //manager.register ("PushBotManual", PushBotManual.class);
-    manager.register("Drive_Train_Test", Drive_Train_Test.class);
+    //manager.register("Drive_Train_Test", Drive_Train_Test.class);
     manager.register("Team7104PullUpDaniel", Team7104PullUpDaniel.class);
-    manager.register("Team7104LeverFlippers", Team7104LeverFlippers.class);
-    manager.register("Bacon_stupid_Telop", Bacon_stupid_Teleop.class);
+    //manager.register("Team7104LeverFlippers", Team7104LeverFlippers.class);
+    //manager.register("Bacon_stupid_Telop", Bacon_stupid_Teleop.class);
 
     /*
      * Uncomment any of the following lines if you want to register an op mode.

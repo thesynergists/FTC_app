@@ -14,6 +14,13 @@ public class Team7104GyroTest extends LinearOpMode{
 
     DcMotor motorRight1;
     DcMotor motorRight2;
+    GyroSensor sensorGyro;
+
+    int headingTarget;
+    int headingCurrent;
+    int headingError;
+    double driveSteering;
+    double driveGain = 0.7;
 
     //int CurrentPositionatEndOfEncoderRun;
 
@@ -25,6 +32,8 @@ public class Team7104GyroTest extends LinearOpMode{
 
         motorRight1 = hardwareMap.dcMotor.get("motorRight1");
         motorRight2 = hardwareMap.dcMotor.get("motorRight2");
+
+        sensorGyro = hardwareMap.gyroSensor.get("gyro");
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
@@ -38,12 +47,35 @@ public class Team7104GyroTest extends LinearOpMode{
         motorRight1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         motorRight2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         waitOneFullHardwareCycle();
+        sensorGyro.calibrate();
         telemetry.clearData();
+        while (sensorGyro.isCalibrating())  {
+            telemetry.addData("Gyro Sensor Calibrating.......", 1);
+        }
+        telemetry.addData("Initialization Complete", 2);
 
         waitForStart();
         motorLeft1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorLeft2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+
+        headingTarget = 90;
+
+        do {
+            headingCurrent = sensorGyro.getHeading();
+            if(headingCurrent > 180){
+                headingCurrent = headingCurrent-360;
+            }
+
+            headingError = headingTarget-headingCurrent;
+            driveSteering = headingError*driveGain;
+            
+
+
+        }
+        while()
+
+
     }
 }

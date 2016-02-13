@@ -9,6 +9,13 @@ import static java.lang.Math.*;
  * Created by Daniel on 2/12/2016.
  */
 
+/*
+    Encoder Counts/Revolution
+    NeveRest 20: 560
+    NeveRest 40: 1120
+    NeveRest 60: 1680
+*/
+
 public class Team7104EncoderTest extends LinearOpMode{
 
     DcMotor motorLeft1;
@@ -18,6 +25,8 @@ public class Team7104EncoderTest extends LinearOpMode{
     DcMotor motorRight2;
 
     int CurrentPositionatEndOfEncoderRun;
+    final int SLEEP = 250;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -32,14 +41,14 @@ public class Team7104EncoderTest extends LinearOpMode{
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
 
         waitOneFullHardwareCycle();
-        CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
-
+ //plugged into port 5 on IC2
         //Scoop_Motor = hardwareMap.dcMotor.get("Scoop_Motor");
         motorLeft1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         motorLeft2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         motorRight1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         motorRight2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         waitOneFullHardwareCycle();
+        CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
         telemetry.clearData();
 
         waitForStart();
@@ -48,19 +57,23 @@ public class Team7104EncoderTest extends LinearOpMode{
         motorRight1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
-        RunWithEncoders(-.6, 10000, 250);
-        RunWithEncoders(.5, 9000, 250);
-        RunWithEncoders(-.8, 500, 250);
+        RunWithEncoders(-.4, 10, 1);
+        RunWithEncoders(.4, 5, 2);
+        RunWithEncoders(-.4, 10, 3);
     }
-    public void RunWithEncoders(double SetPower, int TargetPosition, int Sleep) throws InterruptedException {
+    public double EncoderCountsToInches(int InchesTarget) {
+         return ((InchesTarget*1680)/(2*PI*(11/4)));
+    }
+    public void RunWithEncoders(double SetPower, int TargetPosition, int TelemetryPosition) throws InterruptedException {
         {
+            telemetry.addData("Position in Program", TelemetryPosition);
             motorLeft1.setPower(SetPower);
             motorLeft2.setPower(SetPower);
             motorRight1.setPower(SetPower);
             motorRight2.setPower(SetPower);
 
             telemetry.addData("Set Power", 1);
-            while (abs(CurrentPositionatEndOfEncoderRun - motorLeft1.getCurrentPosition()) < abs(TargetPosition)) {
+            while (abs(CurrentPositionatEndOfEncoderRun - motorLeft1.getCurrentPosition()) < abs(EncoderCountsToInches(TargetPosition))) {
                 telemetry.addData("Wait For Position", 2);
                 telemetry.addData("Current Encoder Counts Right:", String.valueOf(motorRight1.getCurrentPosition()));
                 telemetry.addData("Current Encoder Counts Left:", String.valueOf(motorLeft1.getCurrentPosition()));
@@ -76,11 +89,11 @@ public class Team7104EncoderTest extends LinearOpMode{
             motorRight1.setPower(0);
             motorRight2.setPower(0);
 
-            sleep(Sleep);
+            sleep(SLEEP);
             CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
             telemetry.addData("Current Encoder Counts @ End of Run:", String.valueOf(CurrentPositionatEndOfEncoderRun));
             waitOneFullHardwareCycle();
-            sleep(Sleep);
+            sleep(SLEEP);
         }
     }
 }
