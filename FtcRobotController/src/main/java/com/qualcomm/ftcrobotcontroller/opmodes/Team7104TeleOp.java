@@ -169,23 +169,23 @@ public class Team7104TeleOp extends Team7104Hardware
         if (gamepad2.a)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-            Scoop_Motor.setTargetPosition(0);       //Preset for Collecting Debris
-            Scoop_Motor.setPower(.2);               //You set this as the max power the motor can have...
+            Scoop_Motor.setTargetPosition(640);       //Preset for Collecting Debris
+            Scoop_Motor.setPower(.1);               //You set this as the max power the motor can have...
                                                     // (foresee issues depending on which side you are on)
         }
 
         if (gamepad2.b)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-            Scoop_Motor.setTargetPosition(500);      //Preset for Dumping Debris into Conveyor
-            Scoop_Motor.setPower(.2);
+            Scoop_Motor.setTargetPosition(280);      //Preset for Dumping Debris into Conveyor
+            Scoop_Motor.setPower(.1);
         }
 
         if (gamepad2.y)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-            Scoop_Motor.setTargetPosition(-600);     //Preset for Storage
-            Scoop_Motor.setPower(.2);
+            Scoop_Motor.setTargetPosition(30);     //Preset for Storage
+            Scoop_Motor.setPower(.1);
         }
 
         if (gamepad2.x)
@@ -193,10 +193,10 @@ public class Team7104TeleOp extends Team7104Hardware
             int hover_position = Scoop_Motor.getCurrentPosition();
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
             Scoop_Motor.setTargetPosition(hover_position);
-            Scoop_Motor.setPower(.2);
+            Scoop_Motor.setPower(.1);
         }
 
-        double Scoop_Motor_value = Range.clip(gamepad2.right_stick_y, -.2, .2);
+        double Scoop_Motor_value = Range.clip(gamepad2.right_stick_y, -.1, .1);
         double Scoop_Motor_Power = Scoop_Motor_value;//Equivalent to x^3? Based on https://docs.oracle.com/javase/tutorial/java/data/beyondmath.htm
 
         //if joystick 2, right joystick
@@ -215,11 +215,6 @@ public class Team7104TeleOp extends Team7104Hardware
         }
         //END Scoop Fine-Tuning
 
-        telemetry.addData("Encoder value", Scoop_Motor.getCurrentPosition());
-        telemetry.addData("Scoop motor value", Scoop_Motor.getPower());
-
-
-
         //We still need preset encoder values and buttons. The above is a temporary manual workaround.
 
 
@@ -237,7 +232,7 @@ public class Team7104TeleOp extends Team7104Hardware
             locked_controls = true;
             Sweep_servo.setPosition(.5);
         }
-        
+
 
         if (the_stop_button_a)
         {
@@ -421,8 +416,13 @@ public class Team7104TeleOp extends Team7104Hardware
 		 * are currently write only.
 		 */
         telemetry.addData("Text", "*** Robot Data***");
+
+        telemetry.addData("Encoder value", Scoop_Motor.getCurrentPosition());
+        telemetry.addData("Scoop motor value", Scoop_Motor.getPower());
+        /*
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
+        */
     }
 
     /*

@@ -197,7 +197,8 @@ public class Team7104Hardware extends OpMode
 
         Scoop_Motor = hardwareMap.dcMotor.get("Scoop_Motor");
 
-        //Bacon_servo = hardwareMap.servo.get("Bacon_servo");
+        Bacon_servo = hardwareMap.servo.get("Bacon_servo");
+        Bacon_servo.setPosition(.5);
 
         //pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
         //pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
