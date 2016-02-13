@@ -29,10 +29,10 @@ public class Team7104EncoderTest extends LinearOpMode{
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
 
         //Scoop_Motor = hardwareMap.dcMotor.get("Scoop_Motor");
-        motorLeft1.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
-        motorLeft2.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
-        motorRight1.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
-        motorRight2.setChannelMode(DcMotorController.RunMode.RESET_ENCODERS);
+        motorLeft1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        motorLeft2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        motorRight1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        motorRight2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
 
         waitForStart();
 
