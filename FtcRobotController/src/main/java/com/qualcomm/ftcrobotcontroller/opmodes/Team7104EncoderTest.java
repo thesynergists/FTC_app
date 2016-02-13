@@ -3,6 +3,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import static java.lang.Math.*;
 
 /**
  * Created by Daniel on 2/12/2016.
@@ -15,6 +16,8 @@ public class Team7104EncoderTest extends LinearOpMode{
 
     DcMotor motorRight1;
     DcMotor motorRight2;
+
+    int CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -43,52 +46,40 @@ public class Team7104EncoderTest extends LinearOpMode{
         motorRight1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
-        motorLeft1.setPower(-.5);
-        motorLeft2.setPower(-.5);
-        motorRight1.setPower(-.5);
-        motorRight2.setPower(-.5);
+        RunWithEncoders(-.3, 10000, 250);
+        RunWithEncoders(.3, 500, 250);
+    }
 
-        telemetry.addData("Set Power", 1);
-        while(motorLeft1.getCurrentPosition() < 10000) {
-            telemetry.addData("Wait For Position", 2);
-            telemetry.addData("Current Encoder Counts Right:", String.valueOf(motorRight1.getCurrentPosition()));
-            telemetry.addData("Current Encoder Counts Left:", String.valueOf(motorLeft1.getCurrentPosition()));
-            telemetry.addData("Left Motor Power:", String.valueOf(motorLeft1.getPower()));
-            telemetry.addData("Left Motor Power:", String.valueOf(motorLeft2.getPower()));
-            telemetry.addData("Right Motor Power:", String.valueOf(motorRight1.getPower()));
-            telemetry.addData("Left Motor Power:", String.valueOf(motorRight2.getPower()));
-            //waitOneFullHardwareCycle();
+    void RunWithEncoders(double SetPower, int TargetPosition, int Sleep) throws InterruptedException {
+        {
+            motorLeft1.setPower(SetPower);
+            motorLeft2.setPower(SetPower);
+            motorRight1.setPower(SetPower);
+            motorRight2.setPower(SetPower);
+
+            telemetry.addData("Set Power", 1);
+            while(abs(CurrentPositionatEndOfEncoderRun-motorLeft1.getCurrentPosition()) < abs(TargetPosition)) {
+                telemetry.addData("Wait For Position", 2);
+                telemetry.addData("Current Encoder Counts Right:", String.valueOf(motorRight1.getCurrentPosition()));
+                telemetry.addData("Current Encoder Counts Left:", String.valueOf(motorLeft1.getCurrentPosition()));
+                telemetry.addData("Left Motor Power:", String.valueOf(motorLeft1.getPower()));
+                telemetry.addData("Left Motor Power:", String.valueOf(motorLeft2.getPower()));
+                telemetry.addData("Right Motor Power:", String.valueOf(motorRight1.getPower()));
+                telemetry.addData("Left Motor Power:", String.valueOf(motorRight2.getPower()));
+                //waitOneFullHardwareCycle();
+            }
+            telemetry.addData("Stop Motors", 3);
+            motorLeft1.setPower(0);
+            motorLeft2.setPower(0);
+            motorRight1.setPower(0);
+            motorRight2.setPower(0);
+
+            sleep(Sleep);
+            CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
+            telemetry.addData("Current Encoder Counts @ End of Run:", String.valueOf(CurrentPositionatEndOfEncoderRun));
+            waitOneFullHardwareCycle();
+            sleep(Sleep);
         }
-        telemetry.addData("Stop Motors", 3);
-        motorLeft1.setPower(0);
-        motorLeft2.setPower(0);
-        motorRight1.setPower(0);
-        motorRight2.setPower(0);
-
-
-        sleep(2000);
-        //Round #2
-        motorLeft1.setPower(.5);
-        motorLeft2.setPower(.5);
-        motorRight1.setPower(.5);
-        motorRight2.setPower(.5);
-
-        telemetry.addData("Set Power", 1);
-        while(motorLeft1.getCurrentPosition() > 0) {
-            telemetry.addData("Wait For Position", 2);
-            telemetry.addData("Current Encoder Counts Right:", String.valueOf(motorRight1.getCurrentPosition()));
-            telemetry.addData("Current Encoder Counts Left:", String.valueOf(motorLeft1.getCurrentPosition()));
-            telemetry.addData("Left Motor Power:", String.valueOf(motorLeft1.getPower()));
-            telemetry.addData("Left Motor Power:", String.valueOf(motorLeft2.getPower()));
-            telemetry.addData("Right Motor Power:", String.valueOf(motorRight1.getPower()));
-            telemetry.addData("Left Motor Power:", String.valueOf(motorRight2.getPower()));
-            //waitOneFullHardwareCycle();
-        }
-        telemetry.addData("Stop Motors", 3);
-        motorLeft1.setPower(0);
-        motorLeft2.setPower(0);
-        motorRight1.setPower(0);
-        motorRight2.setPower(0);
     }
 }
 //  eg: if (Math.abs(target-position) < 100) stop motor.
