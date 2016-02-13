@@ -64,13 +64,14 @@ public class Team7104TeleOp extends Team7104Hardware
     boolean the_stop_button_y = false;
     boolean the_stop_button_a = false;
 
-    /*
+
     @Override
     public void init()
     {
         super.init();
+        Scoop_Motor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
     }
-    */
+
     /*
      * This method will be called repeatedly in a loop
      *
@@ -292,8 +293,6 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
 
-
-
         if (the_stop_button_y)
         {
             if (!gamepad1.y)
@@ -309,7 +308,6 @@ public class Team7104TeleOp extends Team7104Hardware
                 was_pressed_y = true;
             }
         }
-
 
         if (was_pressed_y)
         {
@@ -340,7 +338,6 @@ public class Team7104TeleOp extends Team7104Hardware
             }
         }
 
-
         if (locked_controls)
         {
             was_pressed_y = false;
@@ -355,8 +352,6 @@ public class Team7104TeleOp extends Team7104Hardware
         {
             Sweep_servo.setPosition(.5);
         }
-
-
 
 
         /*float wrist_elevation = gamepad2.left_stick_y;
@@ -375,7 +370,6 @@ public class Team7104TeleOp extends Team7104Hardware
 		//Make the IF move up and down based on controller
 		IronFist_change_elevation(converted_wrist_elevation);
         */
-
 
 
         /*
@@ -416,7 +410,6 @@ public class Team7104TeleOp extends Team7104Hardware
 		 * are currently write only.
 		 */
         telemetry.addData("Text", "*** Robot Data***");
-
         telemetry.addData("Encoder value", Scoop_Motor.getCurrentPosition());
         telemetry.addData("Scoop motor value", Scoop_Motor.getPower());
         /*
