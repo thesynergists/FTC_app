@@ -18,7 +18,10 @@ public class Team7104GyroTest extends LinearOpMode{
 
     int headingTarget;
     int headingCurrent;
-    int headingError;
+    int headingPrevious;
+    final int SLEEP = 250;
+    double headingDifference;
+    double SetPower;
     double driveSteering;
     double driveGain = 0.7;
 
@@ -60,24 +63,49 @@ public class Team7104GyroTest extends LinearOpMode{
         motorRight1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
-        headingTarget = 90;
+        headingTarget = 90; //Code Turn Limits from -180 < Theta < +180....HW Limits likely -170 to 170
+        SetPower = .5;
+        headingPrevious = sensorGyro.getHeading();
 
-        /*
-        do {
+
+        do
+        {
             headingCurrent = sensorGyro.getHeading();
-            if(headingCurrent > 180){
-                headingCurrent = headingCurrent-360;
+
+            if(abs(headingPrevious-headingCurrent) > headingTarget) //If the difference is greater than the target
+            {
+                headingDifference = abs(abs(headingPrevious-headingCurrent)-360); //Then the difference can be corrected by -360
+            }
+            else
+            {
+                headingDifference = abs(headingPrevious-headingCurrent); //Otherwise, difference is in a good zone
+            }
+            if(abs(headingTarget) > 180)
+            {
+                telemetry.addData("|Target Heading| > 180* !!!!!!!!!", 1); //If Target is over limit....then CAUTION!!!
             }
 
-            headingError = headingTarget-headingCurrent;
-            driveSteering = headingError*driveGain;
-            
+            motorLeft1.setPower(-SetPower);
+            motorLeft2.setPower(-SetPower);
+            motorRight1.setPower(SetPower);
+            motorRight2.setPower(SetPower);
 
-
+            telemetry.addData("Previous:", String.valueOf(headingPrevious));
+            telemetry.addData("Current:", String.valueOf(headingCurrent));
+            telemetry.addData("Target:", String.valueOf(headingTarget));
+            telemetry.addData("Difference:", String.valueOf(headingDifference));
         }
-        while()
-        */
+        while(abs(headingDifference)<abs(headingTarget));
 
+        motorLeft1.setPower(0);
+        motorLeft2.setPower(0);
+        motorRight1.setPower(0);
+        motorRight2.setPower(0);
 
+        sleep(SLEEP);
+        headingPrevious = motorLeft1.getCurrentPosition();
+        telemetry.addData("Previous Heading:", String.valueOf(headingPrevious));
+        waitOneFullHardwareCycle();
+        sleep(SLEEP);
     }
 }
