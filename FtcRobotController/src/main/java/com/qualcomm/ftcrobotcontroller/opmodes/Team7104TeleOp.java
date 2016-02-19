@@ -409,7 +409,7 @@ public class Team7104TeleOp extends Team7104Hardware
 		 * will return a null value. The legacy NXT-compatible motor controllers
 		 * are currently write only.
 		 */
-        telemetry.addData("Text", "*** Robot Data***");
+        //telemetry.addData("Text", "*** Robot Data***");
         telemetry.addData("Encoder value", Scoop_Motor.getCurrentPosition());
         telemetry.addData("Scoop motor value", Scoop_Motor.getPower());
         /*

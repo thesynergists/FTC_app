@@ -54,12 +54,30 @@ public class Team7104Hardware extends OpMode
         PullUp_Motor_Tape.setPower(Power);
     }
 
+    /*
     //Climber!!!
     void Climber_dump (boolean dump_active)
     {
         if (dump_active)
         {
             Climber_servo.setPosition(.6);
+        }
+
+        if (!dump_active)
+        {
+            Climber_servo.setPosition(0);
+        }
+    }
+    */
+
+    void Climber_dump (boolean dump_active)
+    {
+        double position = 0;
+
+        while (dump_active && Climber_servo.getPosition() < .6)
+        {
+            position = position + .01;
+            Climber_servo.setPosition(position);
         }
 
         if (!dump_active)
