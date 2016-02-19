@@ -70,20 +70,10 @@ public class Team7104GyroTest extends LinearOpMode{
         headingCurrent = sensorGyro.getHeading();
         waitOneFullHardwareCycle();
 
-        if(abs(headingPrevious-headingCurrent) > headingTarget) //If the difference is greater than the target
-        {
-            headingDifference = abs(abs(headingPrevious-headingCurrent)-360); //Then the difference can be corrected by -360
-        }
-        else
-        {
-            headingDifference = abs(headingPrevious-headingCurrent); //Otherwise, difference is in a good zone
-        }
-        if(abs(headingTarget) > 180)
-        {
-            telemetry.addData("|Target Heading| > 180* !!!!!!!!!", 1); //If Target is over limit....then CAUTION!!!
-        }
+        GyroHeadingDifference();
 
         telemetry.addData("Heading Previous", headingPrevious);
+        telemetry.addData("Heading Current", headingCurrent);
         telemetry.addData("Heading Difference", headingDifference);
         telemetry.addData("Heading Target", headingTarget);
         sleep(5000);
@@ -98,18 +88,7 @@ public class Team7104GyroTest extends LinearOpMode{
         {
             headingCurrent = sensorGyro.getHeading();
 
-            if(abs(headingPrevious-headingCurrent) > headingTarget) //If the difference is greater than the target
-            {
-                headingDifference = abs(abs(headingPrevious-headingCurrent)-360); //Then the difference can be corrected by -360
-            }
-            else
-            {
-                headingDifference = abs(headingPrevious-headingCurrent); //Otherwise, difference is in a good zone
-            }
-            if(abs(headingTarget) > 180)
-            {
-                telemetry.addData("|Target Heading| > 180* !!!!!!!!!", 1); //If Target is over limit....then CAUTION!!!
-            }
+            GyroHeadingDifference();
 
             telemetry.addData("Previous:", String.valueOf(headingPrevious));
             telemetry.addData("Current:", String.valueOf(headingCurrent));
@@ -127,5 +106,20 @@ public class Team7104GyroTest extends LinearOpMode{
         telemetry.addData("Previous Heading:", String.valueOf(headingPrevious));
         waitOneFullHardwareCycle();
         sleep(SLEEP);
+    }
+    public void GyroHeadingDifference()
+    {
+        if(abs(headingPrevious-headingCurrent) > headingTarget) //If the difference is greater than the target
+        {
+            headingDifference = abs(abs(headingPrevious-headingCurrent)-360); //Then the difference can be corrected by -360
+        }
+        else
+        {
+            headingDifference = abs(headingPrevious-headingCurrent); //Otherwise, difference is in a good zone
+        }
+        if(abs(headingTarget) > 180)
+        {
+            telemetry.addData("|Target Heading| > 180* !!!!!!!!!", 1); //If Target is over limit....then CAUTION!!!
+        }
     }
 }

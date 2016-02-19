@@ -50,6 +50,7 @@ public class Team7104EncoderTest extends LinearOpMode{
         waitOneFullHardwareCycle();
         CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
         telemetry.clearData();
+        telemetry.addData("Ready for Program", 1);
 
         waitForStart();
         motorLeft1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
@@ -67,6 +68,9 @@ public class Team7104EncoderTest extends LinearOpMode{
     public void RunWithEncoders(double SetPower, int TargetPosition, int TelemetryPosition) throws InterruptedException {
         {
             telemetry.addData("Position in Program", TelemetryPosition);
+            telemetry.addData("Distance (In):", TargetPosition);
+            telemetry.addData("Motor Power", SetPower);
+            sleep(1000);
             motorLeft1.setPower(SetPower);
             motorLeft2.setPower(SetPower);
             motorRight1.setPower(SetPower);
@@ -80,7 +84,7 @@ public class Team7104EncoderTest extends LinearOpMode{
                 telemetry.addData("Left Motor Power:", String.valueOf(motorLeft1.getPower()));
                 telemetry.addData("Left Motor Power:", String.valueOf(motorLeft2.getPower()));
                 telemetry.addData("Right Motor Power:", String.valueOf(motorRight1.getPower()));
-                telemetry.addData("Left Motor Power:", String.valueOf(motorRight2.getPower()));
+                telemetry.addData("Right Motor Power:", String.valueOf(motorRight2.getPower()));
                 //waitOneFullHardwareCycle();
             }
             telemetry.addData("Stop Motors", 3);
