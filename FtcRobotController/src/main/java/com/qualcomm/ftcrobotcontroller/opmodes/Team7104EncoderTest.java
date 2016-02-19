@@ -51,6 +51,8 @@ public class Team7104EncoderTest extends LinearOpMode{
         CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
         telemetry.clearData();
         telemetry.addData("Ready for Program", 1);
+        sleep(2000);
+        telemetry.addData("Waiting.....waiting......waiting.....",1);
 
         waitForStart();
         motorLeft1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
