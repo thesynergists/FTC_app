@@ -49,10 +49,8 @@ public class Team7104EncoderTest extends LinearOpMode{
         waitOneFullHardwareCycle();
         CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
         telemetry.clearData();
+        sleep(1000);
         telemetry.addData("Ready for Program", 1);
-        sleep(2000);
-        telemetry.addData("Waiting.....waiting......waiting.....",1);
-        telemetry.addData("Revert #2?", 1);
 
         waitForStart();
         motorLeft1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
@@ -60,14 +58,23 @@ public class Team7104EncoderTest extends LinearOpMode{
         motorRight1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
-        RunWithEncoders(-.4, -.4, 10, 1);
-        RunWithEncoders(.4,.4, 5, 2);
-        RunWithEncoders(-.4,-.4, 10, 3);
+        //RunWithEncoders(-.5, .5, 30, 1);
+        //sleep(2000);
+        //RunWithEncoders(.5, .5, 5, 2);
+        //sleep(2000);
+        //RunWithEncoders(-.5,-.5, 35, 3);
+        //sleep(2000);
+        RunWithEncoders(.8,-.8, 11.25, 3);
+        sleep(5000);
+        RunWithEncoders(-.8,.8, 11.5, 3);
+        sleep(5000);
+        RunWithEncoders(.8,-.8, 11.75, 3);
+        sleep(5000);
     }
-    public double EncoderCountsToInches(int InchesTarget) {
+    public double EncoderCountsToInches(double InchesTarget) {
          return ((InchesTarget*1680)/(2*PI*(11/4)));
     }
-    public void RunWithEncoders(double SetPowerLeft, double SetPowerRight, int TargetPosition, int TelemetryPosition) throws InterruptedException {
+    public void RunWithEncoders(double SetPowerLeft, double SetPowerRight, double TargetPosition, int TelemetryPosition) throws InterruptedException {
         {
             telemetry.addData("Position in Program", TelemetryPosition);
             telemetry.addData("Distance (In):", TargetPosition);
