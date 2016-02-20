@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 /**
@@ -39,7 +40,7 @@ public class Team7104Hardware extends OpMode
     ColorSensor FloorRightColor;
     ColorSensor FloorLeftColor;
 
-    DcMotorController thatguy;
+    ElapsedTime Climber_loop = new ElapsedTime();
 
 
 
@@ -54,7 +55,7 @@ public class Team7104Hardware extends OpMode
         PullUp_Motor_Tape.setPower(Power);
     }
 
-    /*
+
     //Climber!!!
     void Climber_dump (boolean dump_active)
     {
@@ -68,8 +69,9 @@ public class Team7104Hardware extends OpMode
             Climber_servo.setPosition(0);
         }
     }
-    */
 
+
+    /* Es much strangeness.
     void Climber_dump (boolean dump_active)
     {
         double set_position = 0;
@@ -85,14 +87,21 @@ public class Team7104Hardware extends OpMode
             max_position = 0;
         }
 
-        while (Climber_servo.getPosition() < max_position && set_position < 0.9)
+        while (Climber_servo.getPosition() < max_position && set_position < 0.6)
         {
-            set_position = set_position + .1;
-            telemetry.addData("Climber Position", Climber_servo.getPosition());
-            telemetry.addData("Set Position", set_position);
+
+            set_position = set_position + .01;
             Climber_servo.setPosition(set_position);
+            telemetry.addData("Climber Position", Climber_servo.getPosition());
+
+            Climber_loop.reset();
+            while (Climber_loop.time() < .10)
+            {
+                telemetry.addData("Set Position", set_position);
+            }
         }
     }
+    */
 
     /*
     //Adjust IronFist elevation.
@@ -256,9 +265,8 @@ public class Team7104Hardware extends OpMode
         FloorLeftColor = hardwareMap.colorSensor.get("Floor_Left_Color");
         FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
 
-        thatguy = hardwareMap.dcMotorController.get("thatguy");
-        PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
-        PullUp_Motor_String = hardwareMap.dcMotor.get("PullUp_Motor_String");
+        //PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
+        //PullUp_Motor_String = hardwareMap.dcMotor.get("PullUp_Motor_String");
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);

@@ -32,6 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import static java.lang.Math.pow;
@@ -63,7 +64,6 @@ public class Team7104TeleOp extends Team7104Hardware
     boolean bypass_a = false;
     boolean the_stop_button_y = false;
     boolean the_stop_button_a = false;
-
 
     @Override
     public void init()
