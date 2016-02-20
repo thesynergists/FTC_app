@@ -16,6 +16,9 @@ import static java.lang.Math.*;
     NeveRest 20: 560
     NeveRest 40: 1120
     NeveRest 60: 1680
+
+    Turning With Encoders...Approximately:
+      90*~11.5 inches
 */
 public class Team7104AutoHardware extends LinearOpMode{
 
@@ -86,8 +89,8 @@ public class Team7104AutoHardware extends LinearOpMode{
         FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
         sensorGyro = hardwareMap.gyroSensor.get("gyro");
 
-        PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
-        PullUp_Motor_String = hardwareMap.dcMotor.get("PullUp_Motor_String");
+        //PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
+        //PullUp_Motor_String = hardwareMap.dcMotor.get("PullUp_Motor_String");
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
@@ -100,26 +103,27 @@ public class Team7104AutoHardware extends LinearOpMode{
         motorRight2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         waitOneFullHardwareCycle();
         CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
-        telemetry.addData("Encoder Initializaiton Complete", 2);
+        telemetry.addData("Encoder Initializaiton Complete", 1);
         sleep(1500);
 
         //GYRO Setup
         sensorGyro.calibrate();
         while (sensorGyro.isCalibrating())  {
-            telemetry.addData("Gyro Sensor Calibrating.......", 1);
+            telemetry.addData("Gyro Sensor Calibrating.......", 2);
         }
-        telemetry.addData("Gyro Calibration Complete", 2);
+        telemetry.addData("Gyro Calibration Complete", 3);
         waitOneFullHardwareCycle();
         sleep(2000);
         headingPrevious = sensorGyro.getHeading();
         waitOneFullHardwareCycle();
         headingCurrent = sensorGyro.getHeading();
         waitOneFullHardwareCycle();
-        telemetry.addData("Gyro Initialization Complete", 2);
+        telemetry.addData("Gyro Initialization Complete", 4);
         telemetry.clearData();
         GyroHeadingDifference(); //Calculate Gyro Difference
         sleep(1000);
-        telemetry.addData("Initialization Complete, Ready for Program", 1);
+        telemetry.addData("Initialization Complete, Ready for Program", 5);
+        telemetry.addData("Go!", 6);
 
         waitForStart();
 
@@ -131,15 +135,15 @@ public class Team7104AutoHardware extends LinearOpMode{
 
     //REUSABLE FUNCTIONS
     //ENCODERS
-    public double EncoderCountsToInches(int InchesTarget) {
+    public double EncoderCountsToInches(double InchesTarget) {
         return ((InchesTarget*1680)/(2*PI*(11/4)));
     }
-    public void RunWithEncoders(double SetPowerLeft, double SetPowerRight, int TargetPosition, int TelemetryPosition) throws InterruptedException
+    public void RunWithEncoders(double SetPowerLeft, double SetPowerRight, double TargetPosition, int TelemetryPosition) throws InterruptedException
     {
-        telemetry.addData("Position in Program", TelemetryPosition);
-        telemetry.addData("Distance (In):", TargetPosition);
-        telemetry.addData("Motor Power Left/Right" + SetPowerLeft, SetPowerRight);
-        sleep(1000);
+        //telemetry.addData("Position in Program", TelemetryPosition);
+        //telemetry.addData("Distance (In):", TargetPosition);
+        //telemetry.addData("Motor Power Left/Right" + SetPowerLeft, SetPowerRight);
+        //sleep(1000);
         motorLeft1.setPower(SetPowerLeft);
         motorLeft2.setPower(SetPowerLeft);
         motorRight1.setPower(SetPowerRight);
@@ -147,16 +151,20 @@ public class Team7104AutoHardware extends LinearOpMode{
 
         telemetry.addData("Set Power", 1);
         while (abs(CurrentPositionatEndOfEncoderRun - motorLeft1.getCurrentPosition()) < abs(EncoderCountsToInches(TargetPosition))) {
-            telemetry.addData("Wait For Position", 2);
-            telemetry.addData("Current Encoder Counts Right:", String.valueOf(motorRight1.getCurrentPosition()));
-            telemetry.addData("Current Encoder Counts Left:", String.valueOf(motorLeft1.getCurrentPosition()));
-            telemetry.addData("Left Motor Power:", String.valueOf(motorLeft1.getPower()));
-            telemetry.addData("Left Motor Power:", String.valueOf(motorLeft2.getPower()));
-            telemetry.addData("Right Motor Power:", String.valueOf(motorRight1.getPower()));
-            telemetry.addData("Right Motor Power:", String.valueOf(motorRight2.getPower()));
+            telemetry.addData("Position in Program", TelemetryPosition);
+            telemetry.addData("Distance (In):", TargetPosition);
+            telemetry.addData("Motor Power Left/Right" + SetPowerLeft, SetPowerRight);
+
+            //telemetry.addData("Wait For Position", 2);
+            //telemetry.addData("Current Encoder Counts Right:", String.valueOf(motorRight1.getCurrentPosition()));
+            //telemetry.addData("Current Encoder Counts Left:", String.valueOf(motorLeft1.getCurrentPosition()));
+            //telemetry.addData("Left Motor Power:", String.valueOf(motorLeft1.getPower()));
+            //telemetry.addData("Left Motor Power:", String.valueOf(motorLeft2.getPower()));
+            //telemetry.addData("Right Motor Power:", String.valueOf(motorRight1.getPower()));
+            //telemetry.addData("Right Motor Power:", String.valueOf(motorRight2.getPower()));
                 //waitOneFullHardwareCycle();
         }
-        telemetry.addData("Stop Motors", 3);
+        telemetry.addData("Stop Motors", 1);
         motorLeft1.setPower(0);
         motorLeft2.setPower(0);
         motorRight1.setPower(0);
@@ -164,6 +172,7 @@ public class Team7104AutoHardware extends LinearOpMode{
 
         sleep(SLEEP);
         CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
+        telemetry.addData("Total Distance 'Run':", TargetPosition);
         telemetry.addData("Current Encoder Counts @ End of Run:", String.valueOf(CurrentPositionatEndOfEncoderRun));
         waitOneFullHardwareCycle();
         headingPrevious = sensorGyro.getHeading();
