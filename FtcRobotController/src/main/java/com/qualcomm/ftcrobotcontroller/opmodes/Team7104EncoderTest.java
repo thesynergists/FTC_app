@@ -41,8 +41,7 @@ public class Team7104EncoderTest extends LinearOpMode{
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
 
         waitOneFullHardwareCycle();
- //plugged into port 5 on IC2
-        //Scoop_Motor = hardwareMap.dcMotor.get("Scoop_Motor");
+
         motorLeft1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         motorLeft2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         motorRight1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
@@ -61,23 +60,23 @@ public class Team7104EncoderTest extends LinearOpMode{
         motorRight1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
-        RunWithEncoders(-.4, 10, 1);
-        RunWithEncoders(.4, 5, 2);
-        RunWithEncoders(-.4, 10, 3);
+        RunWithEncoders(-.4, -.4, 10, 1);
+        RunWithEncoders(.4,.4, 5, 2);
+        RunWithEncoders(-.4,-.4, 10, 3);
     }
     public double EncoderCountsToInches(int InchesTarget) {
          return ((InchesTarget*1680)/(2*PI*(11/4)));
     }
-    public void RunWithEncoders(double SetPower, int TargetPosition, int TelemetryPosition) throws InterruptedException {
+    public void RunWithEncoders(double SetPowerLeft, double SetPowerRight, int TargetPosition, int TelemetryPosition) throws InterruptedException {
         {
             telemetry.addData("Position in Program", TelemetryPosition);
             telemetry.addData("Distance (In):", TargetPosition);
-            telemetry.addData("Motor Power", SetPower);
+            telemetry.addData("Motor Power Left/Right" + SetPowerLeft, SetPowerRight);
             sleep(1000);
-            motorLeft1.setPower(SetPower);
-            motorLeft2.setPower(SetPower);
-            motorRight1.setPower(SetPower);
-            motorRight2.setPower(SetPower);
+            motorLeft1.setPower(SetPowerLeft);
+            motorLeft2.setPower(SetPowerLeft);
+            motorRight1.setPower(SetPowerRight);
+            motorRight2.setPower(SetPowerRight);
 
             telemetry.addData("Set Power", 1);
             while (abs(CurrentPositionatEndOfEncoderRun - motorLeft1.getCurrentPosition()) < abs(EncoderCountsToInches(TargetPosition))) {
