@@ -72,17 +72,25 @@ public class Team7104Hardware extends OpMode
 
     void Climber_dump (boolean dump_active)
     {
-        double position = 0;
+        double set_position = 0;
+        double max_position = 0;
 
-        while (dump_active && Climber_servo.getPosition() < .6)
+        if (dump_active)
         {
-            position = position + .01;
-            Climber_servo.setPosition(position);
+            max_position = .6;
         }
 
         if (!dump_active)
         {
-            Climber_servo.setPosition(0);
+            max_position = 0;
+        }
+
+        while (Climber_servo.getPosition() < max_position && set_position < 0.9)
+        {
+            set_position = set_position + .1;
+            telemetry.addData("Climber Position", Climber_servo.getPosition());
+            telemetry.addData("Set Position", set_position);
+            Climber_servo.setPosition(set_position);
         }
     }
 
