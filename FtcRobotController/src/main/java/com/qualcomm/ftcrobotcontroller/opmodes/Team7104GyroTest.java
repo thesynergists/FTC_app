@@ -8,85 +8,52 @@ import static java.lang.Math.*;
 /**
  * Created by Daniel on 2/13/2016.
  */
-public class Team7104GyroTest extends LinearOpMode{
-    DcMotor motorLeft1;
-    DcMotor motorLeft2;
-
-    DcMotor motorRight1;
-    DcMotor motorRight2;
-    GyroSensor sensorGyro;
-
-    int headingTarget;
-    int headingCurrent;
-    int headingPrevious;
-    final int SLEEP = 250;
-    double headingDifference;
-    double SetPower;
-    double driveSteering;
-    double driveGain = 0.7;
-
-    //int CurrentPositionatEndOfEncoderRun;
+public class Team7104GyroTest extends Team7104AutoHardware{
 
     @Override
     public void runOpMode() throws InterruptedException {
-
-        motorLeft1 = hardwareMap.dcMotor.get("motorLeft1");
-        motorLeft2 = hardwareMap.dcMotor.get("motorLeft2");
-
-        motorRight1 = hardwareMap.dcMotor.get("motorRight1");
-        motorRight2 = hardwareMap.dcMotor.get("motorRight2");
-
-        sensorGyro = hardwareMap.gyroSensor.get("gyro");
-
-        motorRight1.setDirection(DcMotor.Direction.REVERSE);
-        motorRight2.setDirection(DcMotor.Direction.REVERSE);
-
-        waitOneFullHardwareCycle();
-        //CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
-
-        //Scoop_Motor = hardwareMap.dcMotor.get("Scoop_Motor");
-        motorLeft1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        motorLeft2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        motorRight1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        motorRight2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        waitOneFullHardwareCycle();
-        sensorGyro.calibrate();
-        telemetry.clearData();
-        while (sensorGyro.isCalibrating())  {
-            telemetry.addData("Gyro Sensor Calibrating.......", 1);
-        }
-        telemetry.addData("Initialization Complete", 2);
-
-        waitForStart();
-        motorLeft1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-        motorLeft2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-        motorRight1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-        motorRight2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-
         headingTarget = 90; //Code Turn Limits from -180 < Theta < +180....HW Limits likely -170 to 170
         SetPower = .5;
-        headingPrevious = sensorGyro.getHeading();
-        waitOneFullHardwareCycle();
-        headingCurrent = sensorGyro.getHeading();
-        waitOneFullHardwareCycle();
 
-        GyroHeadingDifference();
+        super.runOpMode();
 
         telemetry.addData("Heading Previous", headingPrevious);
         telemetry.addData("Heading Current", headingCurrent);
         telemetry.addData("Heading Difference", headingDifference);
         telemetry.addData("Heading Target", headingTarget);
-        sleep(5000);
+        sleep(2000);
 
-        //motorLeft1.setPower(-SetPower);
-       // motorLeft2.setPower(-SetPower);
-       // motorRight1.setPower(SetPower);
-       // motorRight2.setPower(SetPower);
+        /*motorLeft1.setPower(-SetPower);
         waitOneFullHardwareCycle();
+        motorLeft2.setPower(-SetPower);
+        waitOneFullHardwareCycle();
+        motorRight1.setPower(SetPower);
+        waitOneFullHardwareCycle();
+        motorRight2.setPower(SetPower);
+        waitOneFullHardwareCycle();*/
+        //Switch Left Direction from - to +
+        //Right 2? Is negative now?
+        motorLeft1.setPower(.5);
+        //waitOneFullHardwareCycle();
+        motorLeft2.setPower(.5);
+        //waitOneFullHardwareCycle();
+        motorRight1.setPower(-.5);
+        //waitOneFullHardwareCycle();
+        motorRight2.setPower(-.5);
+        //waitOneFullHardwareCycle();
 
         while(abs(headingDifference)<abs(headingTarget))
         {
             headingCurrent = sensorGyro.getHeading();
+
+            motorLeft1.setPower(SetPower);
+            //waitOneFullHardwareCycle();
+            motorLeft2.setPower(SetPower);
+            //waitOneFullHardwareCycle();
+            motorRight1.setPower(SetPower);
+            //waitOneFullHardwareCycle();
+            motorRight2.setPower(-SetPower);
+            //waitOneFullHardwareCycle();
 
             GyroHeadingDifference();
 
@@ -94,6 +61,8 @@ public class Team7104GyroTest extends LinearOpMode{
             telemetry.addData("Current:", String.valueOf(headingCurrent));
             telemetry.addData("Target:", String.valueOf(headingTarget));
             telemetry.addData("Difference:", String.valueOf(headingDifference));
+            telemetry.addData("Motor Power Left:" + motorLeft1.getPower(), motorLeft2.getPower());
+            telemetry.addData("Motor Power Right:" + motorRight1.getPower(), motorRight2.getPower());
         }
 
         motorLeft1.setPower(0);
