@@ -25,17 +25,27 @@ public class Team7104PullUpDaniel extends Team7104Hardware
     */
 
     @Override
-    public void loop() {
-
+    public void loop()
+    {
 
         //Temporary stuff.
         if (gamepad2.left_bumper)
         {
-            PullUp_Motors_SetPower(-.2);
+            PullUp_Motor_Tape.setPower(-.4);
         }
         if(!gamepad2.left_bumper)
         {
-            PullUp_Motors_SetPower(0);
+            PullUp_Motor_Tape.setPower(0);
+        }
+
+        if (gamepad2.left_trigger > 0)
+        {
+            PullUp_Motor_String.setPower(.8);   //String takes values backwards from Tape?
+        }
+
+        if (gamepad2.left_trigger == 0)
+        {
+            PullUp_Motor_String.setPower(0);
         }
 
 
@@ -102,13 +112,14 @@ public class Team7104PullUpDaniel extends Team7104Hardware
                 }
             }
         }
-        */
+
 
 
         if (!was_pressed_pull || PullUp_Motor_String.getCurrentPosition() >= 5000)    //After one of the loop conditions has become false, set motor to stop.
         {
             PullUp_Motors_SetPower(0);
         }
+        */
 
         float bring_back = Range.clip(gamepad2.right_trigger, 0, .8F);  //At any time (as long as robot is not moving motor forward with while loop),
         //the right trigger may be used to cause the arm to retract.

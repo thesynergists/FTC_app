@@ -51,8 +51,8 @@ public class Team7104Hardware extends OpMode
     //PullUp_Motors
     void PullUp_Motors_SetPower (double Power)
     {
-        PullUp_Motor_String.setPower(Power);
-        PullUp_Motor_Tape.setPower(Power);
+        PullUp_Motor_String.setPower(-Power);
+        PullUp_Motor_Tape.setPower(.29 * Power);
     }
 
 
@@ -265,8 +265,8 @@ public class Team7104Hardware extends OpMode
         FloorLeftColor = hardwareMap.colorSensor.get("Floor_Left_Color");
         FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
 
-        //PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
-        //PullUp_Motor_String = hardwareMap.dcMotor.get("PullUp_Motor_String");
+        PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
+        PullUp_Motor_String = hardwareMap.dcMotor.get("PullUp_Motor_String");
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
