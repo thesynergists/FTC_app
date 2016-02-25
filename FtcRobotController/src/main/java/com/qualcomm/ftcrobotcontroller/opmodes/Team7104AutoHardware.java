@@ -20,7 +20,7 @@ import static java.lang.Math.*;
     Turning With Encoders...Approximately:
       90*~11.5 inches
 */
-public class Team7104AutoHardware extends LinearOpMode{
+public class Team7104AutoHardware extends LinearOpMode {
 
     DcMotor motorLeft1;
     DcMotor motorLeft2;
@@ -108,7 +108,7 @@ public class Team7104AutoHardware extends LinearOpMode{
 
         //GYRO Setup
         sensorGyro.calibrate();
-        while (sensorGyro.isCalibrating())  {
+        while (sensorGyro.isCalibrating()) {
             telemetry.addData("Gyro Sensor Calibrating.......", 2);
         }
         telemetry.addData("Gyro Calibration Complete", 3);
@@ -136,10 +136,10 @@ public class Team7104AutoHardware extends LinearOpMode{
     //REUSABLE FUNCTIONS
     //ENCODERS
     public double EncoderCountsToInches(double InchesTarget) {
-        return ((InchesTarget*1680)/(2*PI*(11/4)));
+        return ((InchesTarget * 1680) / (2 * PI * (11 / 4)));
     }
-    public void RunWithEncoders(double SetPowerLeft, double SetPowerRight, double TargetPosition, int TelemetryPosition) throws InterruptedException
-    {
+
+    public void RunWithEncoders(double SetPowerLeft, double SetPowerRight, double TargetPosition, int TelemetryPosition) throws InterruptedException {
         //telemetry.addData("Position in Program", TelemetryPosition);
         //telemetry.addData("Distance (In):", TargetPosition);
         //telemetry.addData("Motor Power Left/Right" + SetPowerLeft, SetPowerRight);
@@ -162,7 +162,7 @@ public class Team7104AutoHardware extends LinearOpMode{
             //telemetry.addData("Left Motor Power:", String.valueOf(motorLeft2.getPower()));
             //telemetry.addData("Right Motor Power:", String.valueOf(motorRight1.getPower()));
             //telemetry.addData("Right Motor Power:", String.valueOf(motorRight2.getPower()));
-                //waitOneFullHardwareCycle();
+            //waitOneFullHardwareCycle();
         }
         telemetry.addData("Stop Motors", 1);
         motorLeft1.setPower(0);
@@ -179,19 +179,16 @@ public class Team7104AutoHardware extends LinearOpMode{
         waitOneFullHardwareCycle();
         sleep(SLEEP);
     }
+
     //GYRO
-    public void GyroHeadingDifference()
-    {
-        if(abs(headingPrevious-headingCurrent) > headingTarget) //If the difference is greater than the target
+    public void GyroHeadingDifference() {
+        if (abs(headingPrevious - headingCurrent) > headingTarget) //If the difference is greater than the target
         {
-            headingDifference = abs(abs(headingPrevious-headingCurrent)-360); //Then the difference can be corrected by -360
+            headingDifference = abs(abs(headingPrevious - headingCurrent) - 360); //Then the difference can be corrected by -360
+        } else {
+            headingDifference = abs(headingPrevious - headingCurrent); //Otherwise, difference is in a good zone
         }
-        else
-        {
-            headingDifference = abs(headingPrevious-headingCurrent); //Otherwise, difference is in a good zone
-        }
-        if(abs(headingTarget) > 180)
-        {
+        if (abs(headingTarget) > 180) {
             telemetry.addData("|Target Heading| > 180* !!!!!!!!!", 1); //If Target is over limit....then CAUTION!!!
         }
     }

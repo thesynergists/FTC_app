@@ -23,11 +23,11 @@ public class Team7104EncoderTest extends Team7104AutoHardware{
         //sleep(2000);
         //RunWithEncoders(-.5,-.5, 35, 3);
         //sleep(2000);
-        RunWithEncoders(.8,.8, 40, 1);
+        RunWithEncoders(.8,.8, 10, 1);
         sleep(5000);
-        RunWithEncoders(.5,-.5, 8, 2);
+        RunWithEncoders(-.5,.5, 11.5, 2);
         sleep(5000);
-        RunWithEncoders(.5,.5, 10, 3);
+        RunWithEncoders(.6,.6, 40, 3);
         sleep(5000);
     }
 }
