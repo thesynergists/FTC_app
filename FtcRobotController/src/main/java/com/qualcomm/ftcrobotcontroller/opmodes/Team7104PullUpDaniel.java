@@ -31,19 +31,44 @@ public class Team7104PullUpDaniel extends Team7104Hardware
         //Temporary stuff.
         if (gamepad2.left_bumper)
         {
-            PullUp_Motor_Tape.setPower(-.4);
+            PullUp_Motors_SetPower(.8);
         }
-        if(!gamepad2.left_bumper)
+        if(!gamepad2.left_bumper && gamepad2.left_trigger == 0)
         {
-            PullUp_Motor_Tape.setPower(0);
+            PullUp_Motors_SetPower(0);
         }
 
         if (gamepad2.left_trigger > 0)
         {
-            PullUp_Motor_String.setPower(.8);   //String takes values backwards from Tape?
+            PullUp_Motors_SetPower(-.8);
         }
 
-        if (gamepad2.left_trigger == 0)
+        if (gamepad2.dpad_right)
+        {
+            PullUp_Motor_Tape.setPower(.8);
+        }
+
+        if (gamepad2.dpad_left)
+        {
+            PullUp_Motor_Tape.setPower(-.8);
+        }
+
+        if (!gamepad2.dpad_left && !gamepad2.dpad_right && !gamepad2.left_bumper && gamepad2.left_trigger == 0)
+        {
+            PullUp_Motor_Tape.setPower(0);
+        }
+
+        if (gamepad2.dpad_up)
+        {
+            PullUp_Motor_String.setPower(-.6);
+        }
+
+        if (gamepad2.dpad_down)
+        {
+            PullUp_Motor_String.setPower(.6);
+        }
+
+        if (!gamepad2.dpad_down && !gamepad2.dpad_up && !gamepad2.left_bumper && gamepad2.left_trigger == 0)
         {
             PullUp_Motor_String.setPower(0);
         }
