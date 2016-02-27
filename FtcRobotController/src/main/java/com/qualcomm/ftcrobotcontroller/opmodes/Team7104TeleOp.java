@@ -485,6 +485,15 @@ public class Team7104TeleOp extends Team7104Hardware
     @Override
     public void stop()
     {
-
+        Conveyor_servo.setPosition(.5);
+        PullUp_Motor_String.setPower(0);
+        PullUp_Motor_Tape.setPower(0);
+        setPowerLeftMotor(0);
+        setPowerRightMotor(0);
+        Flipper_Servo_Left.setPosition(.40);
+        Flipper_Servo_Right.setPosition(.57);
+        Climber_servo.setPosition(0);
+        Scoop_Motor.setPower(0);
+        Sweep_servo.setPosition(.5);
     }
 }
