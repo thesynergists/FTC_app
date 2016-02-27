@@ -91,13 +91,13 @@ public class Team7104AutoR_Linear extends LinearOpMode
 
 
         mStateTime.reset();
-        while (mStateTime.time() < 2)
+        while (mStateTime.time() < 2)       //Extra time
         {
 
         }
 
         mStateTime.reset();
-        while(mStateTime.time() <= 5)
+        while(mStateTime.time() <= 5.5)
         {
             telemetry.addData("State: forward", 0);
             MotorRightPower(.5); //DRIVE FORWARD TO BEACON
@@ -112,7 +112,7 @@ public class Team7104AutoR_Linear extends LinearOpMode
         }
 
         mStateTime.reset();
-        while(mStateTime.time() <= 1.3)
+        while(mStateTime.time() <= 2)
         {
             telemetry.addData("State: turning", 1);
             MotorRightPower(.4); //TURN TO FLOOR GOAL
@@ -127,22 +127,23 @@ public class Team7104AutoR_Linear extends LinearOpMode
         }
 
         mStateTime.reset();
-        while(mStateTime.time() <= 1.4)
+        while(mStateTime.time() <= 1)
         {
             telemetry.addData("State: forward", 2);
-            MotorRightPower(.3); //DRIVE FORWARD INTO FLOOR GOAL
-            MotorLeftPower(.3);
+            MotorRightPower(.5); //DRIVE FORWARD INTO FLOOR GOAL
+            MotorLeftPower(.5);
         }//Wait...wait...wait
 
-        while(mStateTime.time() <= 3 && mStateTime.time() > 1.4)
+        while(mStateTime.time() <= 3 && mStateTime.time() > 1)
         {
             MotorLeftPower(0);
             MotorRightPower(0);
             telemetry.addData("State: done", 3);
         }
 
+
         Scoop_Motor.setTargetPosition(30);
-        Scoop_Motor.setPower(.1);
+        Scoop_Motor.setPower(.2);
     }
 
     public void MotorRightPower(double RightPower)

@@ -65,6 +65,14 @@ public class Team7104TeleOp extends Team7104Hardware
     boolean the_stop_button_y = false;
     boolean the_stop_button_a = false;
 
+
+    boolean was_pressed_left_flipper = false;
+    boolean was_pressed_right_flipper = false;
+    boolean bypass_left_flipper = false;
+    boolean bypass_right_flipper = false;
+    boolean the_stop_button_left_flipper = false;
+    boolean the_stop_button_right_flipper = false;
+
     @Override
     public void init()
     {
@@ -166,6 +174,105 @@ public class Team7104TeleOp extends Team7104Hardware
 
         //FLIPPERS!!!
 
+
+
+
+        if (the_stop_button_left_flipper)
+        {
+            if (!gamepad2.dpad_right)
+            {
+                the_stop_button_left_flipper = false;
+            }
+        }
+
+        if (!the_stop_button_left_flipper)
+        {
+            if (gamepad2.dpad_right)
+            {
+                was_pressed_left_flipper = true;
+            }
+        }
+
+        if (was_pressed_left_flipper)
+        {
+            Flipper_Servo_Left.setPosition(0);
+
+            if (!gamepad2.dpad_right)
+            {
+                bypass_left_flipper = true;
+            }
+
+            if (bypass_left_flipper)
+            {
+                if (gamepad2.dpad_right)
+                {
+                    was_pressed_left_flipper = false;
+                    bypass_left_flipper = false;
+                    the_stop_button_left_flipper = true;
+                }
+            }
+        }
+
+        if (!was_pressed_left_flipper)
+        {
+            Flipper_Servo_Left.setPosition(.40);
+        }
+
+
+
+
+
+
+
+
+
+        if (the_stop_button_right_flipper)
+        {
+            if (!gamepad2.dpad_left)
+            {
+                the_stop_button_right_flipper = false;
+            }
+        }
+
+        if (!the_stop_button_right_flipper)
+        {
+            if (gamepad2.dpad_left)
+            {
+                was_pressed_right_flipper = true;
+            }
+        }
+
+        if (was_pressed_right_flipper)
+        {
+            Flipper_Servo_Right.setPosition(1);
+
+            if (!gamepad2.dpad_left)
+            {
+                bypass_right_flipper = true;
+            }
+
+            if (bypass_right_flipper)
+            {
+                if (gamepad2.dpad_left)
+                {
+                    was_pressed_right_flipper = false;
+                    bypass_right_flipper = false;
+                    the_stop_button_right_flipper = true;
+                }
+            }
+        }
+
+        if (!was_pressed_right_flipper)
+        {
+            Flipper_Servo_Right.setPosition(.57);
+        }
+
+
+
+
+
+
+        /*
         if (gamepad2.dpad_left)
         {
             Flipper_Servo_Right.setPosition(1);
@@ -185,6 +292,7 @@ public class Team7104TeleOp extends Team7104Hardware
         {
             Flipper_Servo_Left.setPosition(.40);
         }
+        */
 
 
         /*
