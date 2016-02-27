@@ -157,7 +157,7 @@ public class Team7104TeleOp extends Team7104Hardware
         float left = gamepad1.left_stick_y;
         float right = gamepad1.right_stick_y;
 
-        // clip the right/left values so that the values never exceed +/- 1 (changed range to -.8 to .8 to prevent motor overdrive.
+        // clip the right/left values so that the values never exceed +/- 1 (changed range to -.8 to .8 to prevent motor overdrive.)
         right = Range.clip(right, -.80F, .80F);
         left = Range.clip(left, -.80F, .80F);
 
