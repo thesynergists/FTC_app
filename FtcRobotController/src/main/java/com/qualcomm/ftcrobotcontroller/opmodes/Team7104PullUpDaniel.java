@@ -31,7 +31,7 @@ public class Team7104PullUpDaniel extends Team7104Hardware
         //Temporary stuff.
         if (gamepad2.left_bumper)
         {
-            PullUp_Motors_SetPower(.8);
+            PullUp_Motors_SetPower(1.0);
         }
         if(!gamepad2.left_bumper && gamepad2.left_trigger == 0)
         {
@@ -40,17 +40,17 @@ public class Team7104PullUpDaniel extends Team7104Hardware
 
         if (gamepad2.left_trigger > 0)
         {
-            PullUp_Motors_SetPower(-.8);
+            PullUp_Motors_SetPower(-1.0);
         }
 
         if (gamepad2.dpad_right)
         {
-            PullUp_Motor_Tape.setPower(.8);
+            PullUp_Motor_Tape.setPower(1.0);
         }
 
         if (gamepad2.dpad_left)
         {
-            PullUp_Motor_Tape.setPower(-.8);
+            PullUp_Motor_Tape.setPower(-1.0);
         }
 
         if (!gamepad2.dpad_left && !gamepad2.dpad_right && !gamepad2.left_bumper && gamepad2.left_trigger == 0)
@@ -60,12 +60,12 @@ public class Team7104PullUpDaniel extends Team7104Hardware
 
         if (gamepad2.dpad_up)
         {
-            PullUp_Motor_String.setPower(-.6);
+            PullUp_Motor_String.setPower(1.0);
         }
 
         if (gamepad2.dpad_down)
         {
-            PullUp_Motor_String.setPower(.6);
+            PullUp_Motor_String.setPower(1.0);
         }
 
         if (!gamepad2.dpad_down && !gamepad2.dpad_up && !gamepad2.left_bumper && gamepad2.left_trigger == 0)

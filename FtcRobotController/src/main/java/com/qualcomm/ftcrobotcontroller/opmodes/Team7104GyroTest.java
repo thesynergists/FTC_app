@@ -50,7 +50,7 @@ public class Team7104GyroTest extends Team7104AutoHardware{
             //waitOneFullHardwareCycle();
             motorLeft2.setPower(SetPower);
             //waitOneFullHardwareCycle();
-            motorRight1.setPower(SetPower);
+            motorRight1.setPower(-SetPower);
             //waitOneFullHardwareCycle();
             motorRight2.setPower(-SetPower);
             //waitOneFullHardwareCycle();

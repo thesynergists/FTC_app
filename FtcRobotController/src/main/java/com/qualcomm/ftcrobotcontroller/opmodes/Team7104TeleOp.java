@@ -95,6 +95,64 @@ public class Team7104TeleOp extends Team7104Hardware
         // and 1 is full right
 
 
+        if (gamepad2.left_bumper)
+        {
+            PullUp_Motors_SetPower(1.0);
+        }
+
+        if (gamepad2.left_trigger > 0)
+        {
+            PullUp_Motors_SetPower(-1.0);
+        }
+
+        if(!gamepad2.left_bumper && gamepad2.left_trigger == 0)
+        {
+            PullUp_Motors_SetPower(0);
+        }
+
+
+
+        if (gamepad2.right_bumper)
+        {
+            PullUp_Motors_SetPower(1.0);
+        }
+
+        if (gamepad2.right_trigger > 0)
+        {
+            PullUp_Motors_SetPower(-1.0);
+        }
+
+        if (!gamepad2.right_bumper && gamepad2.right_trigger == 0)
+        {
+            PullUp_Motors_SetPower(0);
+        }
+
+
+
+        if (gamepad2.left_stick_y > 0.1)
+        {
+            PullUp_Motor_String.setPower(-1.0);
+        }
+
+        if (gamepad2.left_stick_y < 0.1 && !gamepad2.left_bumper && gamepad2.left_trigger == 0 && !gamepad2.right_bumper && gamepad2.right_trigger == 0)
+        {
+            PullUp_Motor_String.setPower(0);
+        }
+
+
+
+        if (gamepad2.left_stick_y < -0.1)
+        {
+            PullUp_Motor_Tape.setPower(1.0);
+        }
+
+        if (gamepad2.left_stick_y > -0.1 && !gamepad2.left_bumper && gamepad2.left_trigger == 0 && !gamepad2.right_bumper && gamepad2.right_trigger == 0)
+        {
+            PullUp_Motor_Tape.setPower(0);
+        }
+
+
+
         //STUFF FOR DRIVE TRAIN!!!
         float left = gamepad1.left_stick_y;
         float right = gamepad1.right_stick_y;
@@ -178,7 +236,7 @@ public class Team7104TeleOp extends Team7104Hardware
         if (gamepad2.b)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-            Scoop_Motor.setTargetPosition(280);      //Preset for Dumping Debris into Conveyor
+            Scoop_Motor.setTargetPosition(220);      //Preset for Dumping Debris into Conveyor
             Scoop_Motor.setPower(.1);
         }
 

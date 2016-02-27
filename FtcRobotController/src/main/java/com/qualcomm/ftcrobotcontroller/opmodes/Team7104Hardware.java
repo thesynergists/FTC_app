@@ -52,7 +52,7 @@ public class Team7104Hardware extends OpMode
     void PullUp_Motors_SetPower (double Power)
     {
         PullUp_Motor_String.setPower(-Power);       //String retracts on positive values, extends on negative values.
-        PullUp_Motor_Tape.setPower(.47 * Power);    //Tape retracts on negative values, extends on positive values.
+        PullUp_Motor_Tape.setPower(Power);    //Tape retracts on negative values, extends on positive values. Ratio is 1 to 1 now?
     }
 
 
