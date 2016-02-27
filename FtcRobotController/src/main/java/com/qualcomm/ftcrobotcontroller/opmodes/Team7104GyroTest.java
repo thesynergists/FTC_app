@@ -8,7 +8,8 @@ import static java.lang.Math.*;
 /**
  * Created by Daniel on 2/13/2016.
  */
-public class Team7104GyroTest extends Team7104AutoHardware{
+public class Team7104GyroTest extends Team7104AutoHardware
+{
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -21,7 +22,7 @@ public class Team7104GyroTest extends Team7104AutoHardware{
         telemetry.addData("Heading Current", headingCurrent);
         telemetry.addData("Heading Difference", headingDifference);
         telemetry.addData("Heading Target", headingTarget);
-        sleep(2000);
+        sleep(500);
 
         /*motorLeft1.setPower(-SetPower);
         waitOneFullHardwareCycle();
@@ -33,36 +34,42 @@ public class Team7104GyroTest extends Team7104AutoHardware{
         waitOneFullHardwareCycle();*/
         //Switch Left Direction from - to +
         //Right 2? Is negative now?
-        motorLeft1.setPower(.5);
+
+        //motorLeft1.setPower(0);
         //waitOneFullHardwareCycle();
-        motorLeft2.setPower(.5);
+
+        //motorLeft2.setPower(0);
         //waitOneFullHardwareCycle();
-        motorRight1.setPower(-.5);
+
+        //motorRight1.setPower(.5);
         //waitOneFullHardwareCycle();
-        motorRight2.setPower(-.5);
+
+        //motorRight2.setPower(.5);
         //waitOneFullHardwareCycle();
+        SetLeftMotors(0);
+        SetRightMotors(0.5);
 
         while(abs(headingDifference)<abs(headingTarget))
         {
             headingCurrent = sensorGyro.getHeading();
 
-            motorLeft1.setPower(SetPower);
+            //motorLeft1.setPower(SetPower);
             //waitOneFullHardwareCycle();
-            motorLeft2.setPower(SetPower);
+            //motorLeft2.setPower(SetPower);
             //waitOneFullHardwareCycle();
-            motorRight1.setPower(-SetPower);
+            //motorRight1.setPower(-SetPower);
             //waitOneFullHardwareCycle();
-            motorRight2.setPower(-SetPower);
+            //motorRight2.setPower(-SetPower);
             //waitOneFullHardwareCycle();
 
             GyroHeadingDifference();
 
-            telemetry.addData("Previous:", String.valueOf(headingPrevious));
-            telemetry.addData("Current:", String.valueOf(headingCurrent));
-            telemetry.addData("Target:", String.valueOf(headingTarget));
-            telemetry.addData("Difference:", String.valueOf(headingDifference));
-            telemetry.addData("Motor Power Left:" + motorLeft1.getPower(), motorLeft2.getPower());
-            telemetry.addData("Motor Power Right:" + motorRight1.getPower(), motorRight2.getPower());
+            //telemetry.addData("Previous:", String.valueOf(headingPrevious));
+            //telemetry.addData("Current:", String.valueOf(headingCurrent));
+            //telemetry.addData("Target:", String.valueOf(headingTarget));
+            //telemetry.addData("Difference:", String.valueOf(headingDifference));
+            //telemetry.addData("Motor Power Left:" + motorLeft1.getPower(), motorLeft2.getPower());
+            //telemetry.addData("Motor Power Right:" + motorRight1.getPower(), motorRight2.getPower());
         }
 
         motorLeft1.setPower(0);

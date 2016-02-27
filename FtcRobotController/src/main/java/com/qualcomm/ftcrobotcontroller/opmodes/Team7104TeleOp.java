@@ -95,21 +95,15 @@ public class Team7104TeleOp extends Team7104Hardware
         // and 1 is full right
 
         //PullUp!!!
-        if (gamepad2.left_bumper)
+        /*if (gamepad2.left_bumper)
         {
             PullUp_Motors_SetPower(1.0);
         }
 
-        if (gamepad2.left_trigger > 0)
+        if (gamepad2.left_trigger > 0.2)
         {
             PullUp_Motors_SetPower(-1.0);
-        }
-
-        if(!gamepad2.left_bumper && gamepad2.left_trigger == 0)
-        {
-            PullUp_Motors_SetPower(0);
-        }
-
+        }*/
 
 
         if (gamepad2.right_bumper)
@@ -117,14 +111,9 @@ public class Team7104TeleOp extends Team7104Hardware
             PullUp_Motors_SetPower(1.0);
         }
 
-        if (gamepad2.right_trigger > 0)
+        if (gamepad2.right_trigger > 0.2)
         {
             PullUp_Motors_SetPower(-1.0);
-        }
-
-        if (!gamepad2.right_bumper && gamepad2.right_trigger == 0)
-        {
-            PullUp_Motors_SetPower(0);
         }
 
 
@@ -134,9 +123,9 @@ public class Team7104TeleOp extends Team7104Hardware
             PullUp_Motor_Tape.setPower(-gamepad2.left_stick_y);
         }
 
-        if (gamepad2.left_stick_y < 0.1 && !gamepad2.left_bumper && gamepad2.left_trigger == 0 && !gamepad2.right_bumper && gamepad2.right_trigger == 0)
+        if (gamepad2.left_stick_y < 0.1 && !gamepad2.right_bumper && gamepad2.right_trigger <= 0.2)
         {
-            PullUp_Motor_Tape.setPower(0);
+            PullUp_Motor_Tape.setPower(0);                              //The tape stop.
         }
 
 
@@ -146,11 +135,16 @@ public class Team7104TeleOp extends Team7104Hardware
             PullUp_Motor_String.setPower(-gamepad2.left_stick_y);
         }
 
-        if (gamepad2.left_stick_y > -0.1 && !gamepad2.left_bumper && gamepad2.left_trigger == 0 && !gamepad2.right_bumper && gamepad2.right_trigger == 0)
+        if (gamepad2.left_stick_y > -0.1 && !gamepad2.right_bumper && gamepad2.right_trigger <= 0.2)
         {
-            PullUp_Motor_String.setPower(0);
+            PullUp_Motor_String.setPower(0);                            //The string stop.
         }
 
+
+        if (gamepad2.left_stick_y > -0.1 && gamepad2.left_stick_y < 0.1 && !gamepad2.right_bumper && gamepad2.right_trigger <= 0.2)
+        {
+            PullUp_Motors_SetPower(0);                                  //Both stop.
+        }
 
 
         //STUFF FOR DRIVE TRAIN!!!
@@ -228,7 +222,7 @@ public class Team7104TeleOp extends Team7104Hardware
         if (gamepad2.a)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-            Scoop_Motor.setTargetPosition(640);       //Preset for Collecting Debris
+            Scoop_Motor.setTargetPosition(670);     //Preset for Collecting Debris
             Scoop_Motor.setPower(.1);               //You set this as the max power the motor can have...
                                                     // (foresee issues depending on which side you are on)
         }
@@ -236,7 +230,7 @@ public class Team7104TeleOp extends Team7104Hardware
         if (gamepad2.b)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-            Scoop_Motor.setTargetPosition(220);      //Preset for Dumping Debris into Conveyor
+            Scoop_Motor.setTargetPosition(260);     //Preset for Dumping Debris into Conveyor
             Scoop_Motor.setPower(.1);
         }
 

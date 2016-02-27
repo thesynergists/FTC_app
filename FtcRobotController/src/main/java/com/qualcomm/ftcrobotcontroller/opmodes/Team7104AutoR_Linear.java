@@ -3,6 +3,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -83,12 +84,24 @@ public class Team7104AutoR_Linear extends LinearOpMode
         TotalTime.reset();
         telemetry.addData("Total time", TotalTime);
 
+        Scoop_Motor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+        Scoop_Motor.setTargetPosition(660);
+        Scoop_Motor.setPower(.1);
+
+
         mStateTime.reset();
-        while(mStateTime.time() <= 7)
+        while (mStateTime.time() < 2)
+        {
+
+        }
+
+        mStateTime.reset();
+        while(mStateTime.time() <= 5)
         {
             telemetry.addData("State: forward", 0);
-            MotorRightPower(-.5); //DRIVE FORWARD TO BEACON
-            MotorLeftPower(-.5);
+            MotorRightPower(.5); //DRIVE FORWARD TO BEACON
+            MotorLeftPower(.5);
         }//Wait...wait...wait
 
         mStateTime.reset();
@@ -114,19 +127,22 @@ public class Team7104AutoR_Linear extends LinearOpMode
         }
 
         mStateTime.reset();
-        while(mStateTime.time() <= 1.7)
+        while(mStateTime.time() <= 1.4)
         {
             telemetry.addData("State: forward", 2);
-            MotorRightPower(-.3); //DRIVE FORWARD INTO FLOOR GOAL
-            MotorLeftPower(-.3);
+            MotorRightPower(.3); //DRIVE FORWARD INTO FLOOR GOAL
+            MotorLeftPower(.3);
         }//Wait...wait...wait
 
-        while(mStateTime.time() <= 3 && mStateTime.time() > 1.7)
+        while(mStateTime.time() <= 3 && mStateTime.time() > 1.4)
         {
             MotorLeftPower(0);
             MotorRightPower(0);
             telemetry.addData("State: done", 3);
         }
+
+        Scoop_Motor.setTargetPosition(30);
+        Scoop_Motor.setPower(.1);
     }
 
     public void MotorRightPower(double RightPower)

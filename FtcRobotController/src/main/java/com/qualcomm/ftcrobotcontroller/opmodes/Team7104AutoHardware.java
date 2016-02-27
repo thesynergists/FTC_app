@@ -20,7 +20,8 @@ import static java.lang.Math.*;
     Turning With Encoders...Approximately:
       90*~11.5 inches
 */
-public class Team7104AutoHardware extends LinearOpMode {
+public class Team7104AutoHardware extends LinearOpMode
+{
 
     DcMotor motorLeft1;
     DcMotor motorLeft2;
@@ -94,8 +95,11 @@ public class Team7104AutoHardware extends LinearOpMode {
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
+        motorLeft1.setDirection(DcMotor.Direction.FORWARD);
+        motorLeft2.setDirection(DcMotor.Direction.FORWARD);
 
         //ENCODERS Setup
+
         waitOneFullHardwareCycle();
         motorLeft1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         motorLeft2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
@@ -103,9 +107,11 @@ public class Team7104AutoHardware extends LinearOpMode {
         motorRight2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         waitOneFullHardwareCycle();
         CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
-        telemetry.addData("Encoder Initializaiton Complete", 1);
+        telemetry.addData("Encoder Initialization Complete", 1);
         sleep(1500);
 
+
+        /*
         //GYRO Setup
         sensorGyro.calibrate();
         while (sensorGyro.isCalibrating()) {
@@ -122,9 +128,10 @@ public class Team7104AutoHardware extends LinearOpMode {
         telemetry.clearData();
         GyroHeadingDifference(); //Calculate Gyro Difference
         sleep(1000);
+
+*/
         telemetry.addData("Initialization Complete, Ready for Program", 5);
         telemetry.addData("Go!", 6);
-
         waitForStart();
 
         motorLeft1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
@@ -135,22 +142,42 @@ public class Team7104AutoHardware extends LinearOpMode {
 
     //REUSABLE FUNCTIONS
     //ENCODERS
-    public double EncoderCountsToInches(double InchesTarget) {
+
+    public void SetLeftMotors (double level)
+    {
+        motorRight1.setPower(level);
+        motorRight2.setPower(level);
+    }
+
+    public void SetRightMotors (double level)
+    {
+        motorLeft1.setPower(level);
+        motorLeft2.setPower(level);
+    }
+
+
+    public double EncoderCountsToInches(double InchesTarget)
+    {
         return ((InchesTarget * 1680) / (2 * PI * (11 / 4)));
     }
 
-    public void RunWithEncoders(double SetPowerLeft, double SetPowerRight, double TargetPosition, int TelemetryPosition) throws InterruptedException {
+    public void RunWithEncoders(double SetPowerLeft, double SetPowerRight, double TargetPosition, int TelemetryPosition) throws InterruptedException
+    {
         //telemetry.addData("Position in Program", TelemetryPosition);
         //telemetry.addData("Distance (In):", TargetPosition);
         //telemetry.addData("Motor Power Left/Right" + SetPowerLeft, SetPowerRight);
         //sleep(1000);
-        motorLeft1.setPower(SetPowerLeft);
-        motorLeft2.setPower(SetPowerLeft);
-        motorRight1.setPower(SetPowerRight);
-        motorRight2.setPower(SetPowerRight);
+
+        //Positive values on any of the motors SHOULD move it forward, with scoop as front.
+        //(There is strangeness with the motorLeft2, or front right motor!!!)
+        SetLeftMotors(SetPowerLeft);
+
+        SetRightMotors(SetPowerRight);
+
 
         telemetry.addData("Set Power", 1);
-        while (abs(CurrentPositionatEndOfEncoderRun - motorLeft1.getCurrentPosition()) < abs(EncoderCountsToInches(TargetPosition))) {
+        while (abs(CurrentPositionatEndOfEncoderRun - motorLeft1.getCurrentPosition()) < abs(EncoderCountsToInches(TargetPosition)))
+        {
             telemetry.addData("Position in Program", TelemetryPosition);
             telemetry.addData("Distance (In):", TargetPosition);
             telemetry.addData("Motor Power Left/Right" + SetPowerLeft, SetPowerRight);
@@ -165,10 +192,8 @@ public class Team7104AutoHardware extends LinearOpMode {
             //waitOneFullHardwareCycle();
         }
         telemetry.addData("Stop Motors", 1);
-        motorLeft1.setPower(0);
-        motorLeft2.setPower(0);
-        motorRight1.setPower(0);
-        motorRight2.setPower(0);
+        SetLeftMotors(0);
+        SetRightMotors(0);
 
         sleep(SLEEP);
         CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
@@ -181,14 +206,20 @@ public class Team7104AutoHardware extends LinearOpMode {
     }
 
     //GYRO
-    public void GyroHeadingDifference() {
+    public void GyroHeadingDifference()
+    {
         if (abs(headingPrevious - headingCurrent) > headingTarget) //If the difference is greater than the target
         {
             headingDifference = abs(abs(headingPrevious - headingCurrent) - 360); //Then the difference can be corrected by -360
-        } else {
+        }
+
+        else
+        {
             headingDifference = abs(headingPrevious - headingCurrent); //Otherwise, difference is in a good zone
         }
-        if (abs(headingTarget) > 180) {
+
+        if (abs(headingTarget) > 180)
+        {
             telemetry.addData("|Target Heading| > 180* !!!!!!!!!", 1); //If Target is over limit....then CAUTION!!!
         }
     }

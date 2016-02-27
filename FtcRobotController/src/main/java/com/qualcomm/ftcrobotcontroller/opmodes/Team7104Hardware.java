@@ -52,7 +52,7 @@ public class Team7104Hardware extends OpMode
     void PullUp_Motors_SetPower (double Power)
     {
         PullUp_Motor_String.setPower(-Power);       //String retracts on positive values, extends on negative values.
-        PullUp_Motor_Tape.setPower(Power);    //Tape retracts on negative values, extends on positive values. Ratio is 1 to 1 now?
+        PullUp_Motor_Tape.setPower(Power);          //Tape retracts on negative values, extends on positive values. Ratio is 1 to 1 now?
     }
 
 
@@ -266,7 +266,9 @@ public class Team7104Hardware extends OpMode
         FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
 
         PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
+        PullUp_Motor_Tape.setPower(0);
         PullUp_Motor_String = hardwareMap.dcMotor.get("PullUp_Motor_String");
+        PullUp_Motor_String.setPower(0);
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
