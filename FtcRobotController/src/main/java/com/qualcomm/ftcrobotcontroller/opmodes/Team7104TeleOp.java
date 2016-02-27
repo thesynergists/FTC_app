@@ -94,7 +94,7 @@ public class Team7104TeleOp extends Team7104Hardware
         // direction: left_stick_x ranges from -1 to 1, where -1 is full left
         // and 1 is full right
 
-
+        //PullUp!!!
         if (gamepad2.left_bumper)
         {
             PullUp_Motors_SetPower(1.0);
@@ -131,7 +131,7 @@ public class Team7104TeleOp extends Team7104Hardware
 
         if (gamepad2.left_stick_y > 0.1)
         {
-            PullUp_Motor_String.setPower(-1.0);
+            PullUp_Motor_String.setPower(gamepad2.left_stick_y);
         }
 
         if (gamepad2.left_stick_y < 0.1 && !gamepad2.left_bumper && gamepad2.left_trigger == 0 && !gamepad2.right_bumper && gamepad2.right_trigger == 0)
@@ -143,7 +143,7 @@ public class Team7104TeleOp extends Team7104Hardware
 
         if (gamepad2.left_stick_y < -0.1)
         {
-            PullUp_Motor_Tape.setPower(1.0);
+            PullUp_Motor_Tape.setPower(gamepad2.left_stick_y);
         }
 
         if (gamepad2.left_stick_y > -0.1 && !gamepad2.left_bumper && gamepad2.left_trigger == 0 && !gamepad2.right_bumper && gamepad2.right_trigger == 0)
