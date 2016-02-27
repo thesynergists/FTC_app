@@ -131,24 +131,24 @@ public class Team7104TeleOp extends Team7104Hardware
 
         if (gamepad2.left_stick_y > 0.1)
         {
-            PullUp_Motor_String.setPower(gamepad2.left_stick_y);
+            PullUp_Motor_Tape.setPower(-gamepad2.left_stick_y);
         }
 
         if (gamepad2.left_stick_y < 0.1 && !gamepad2.left_bumper && gamepad2.left_trigger == 0 && !gamepad2.right_bumper && gamepad2.right_trigger == 0)
         {
-            PullUp_Motor_String.setPower(0);
+            PullUp_Motor_Tape.setPower(0);
         }
 
 
 
         if (gamepad2.left_stick_y < -0.1)
         {
-            PullUp_Motor_Tape.setPower(gamepad2.left_stick_y);
+            PullUp_Motor_String.setPower(-gamepad2.left_stick_y);
         }
 
         if (gamepad2.left_stick_y > -0.1 && !gamepad2.left_bumper && gamepad2.left_trigger == 0 && !gamepad2.right_bumper && gamepad2.right_trigger == 0)
         {
-            PullUp_Motor_Tape.setPower(0);
+            PullUp_Motor_String.setPower(0);
         }
 
 
