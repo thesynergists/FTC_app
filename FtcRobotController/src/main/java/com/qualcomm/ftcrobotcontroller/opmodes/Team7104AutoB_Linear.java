@@ -88,6 +88,9 @@ public class Team7104AutoB_Linear extends  LinearOpMode
 
         Scoop_Motor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+
+        sleep(500);
+
         Scoop_Motor.setTargetPosition(660);
         Scoop_Motor.setPower(.1);
 
@@ -99,7 +102,7 @@ public class Team7104AutoB_Linear extends  LinearOpMode
         }
 
         mStateTime.reset();
-        while(mStateTime.time() <= 5.5)
+        while(mStateTime.time() <= 8.4)
         {
             telemetry.addData("State: forward", 0);
             MotorRightPower(.5); //DRIVE FORWARD TO BEACON
@@ -129,14 +132,14 @@ public class Team7104AutoB_Linear extends  LinearOpMode
         }
 
         mStateTime.reset();
-        while(mStateTime.time() <= 1)
+        while(mStateTime.time() <= 1.5)
         {
             telemetry.addData("State: forward", 2);
             MotorRightPower(.5); //DRIVE FORWARD INTO FLOOR GOAL
             MotorLeftPower(.5);
         }//Wait...wait...wait
 
-        while(mStateTime.time() <= 3 && mStateTime.time() > 1)
+        while(mStateTime.time() <= 3 && mStateTime.time() > 1.5)
         {
             MotorLeftPower(0);
             MotorRightPower(0);
