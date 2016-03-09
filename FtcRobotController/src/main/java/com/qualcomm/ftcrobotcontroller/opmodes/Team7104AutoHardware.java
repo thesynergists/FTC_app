@@ -59,7 +59,8 @@ public class Team7104AutoHardware extends LinearOpMode
     //double driveGain = 0.7;
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() throws InterruptedException
+    {
         motorLeft1 = hardwareMap.dcMotor.get("motorLeft1");
         motorLeft2 = hardwareMap.dcMotor.get("motorLeft2");
 
@@ -111,10 +112,11 @@ public class Team7104AutoHardware extends LinearOpMode
         sleep(1500);
 
 
-        /*
+
         //GYRO Setup
         sensorGyro.calibrate();
-        while (sensorGyro.isCalibrating()) {
+        while (sensorGyro.isCalibrating())
+        {
             telemetry.addData("Gyro Sensor Calibrating.......", 2);
         }
         telemetry.addData("Gyro Calibration Complete", 3);
@@ -129,7 +131,7 @@ public class Team7104AutoHardware extends LinearOpMode
         GyroHeadingDifference(); //Calculate Gyro Difference
         sleep(1000);
 
-*/
+
         telemetry.addData("Initialization Complete, Ready for Program", 5);
         telemetry.addData("Go!", 6);
         waitForStart();
@@ -169,7 +171,6 @@ public class Team7104AutoHardware extends LinearOpMode
         //sleep(1000);
 
         //Positive values on any of the motors SHOULD move it forward, with scoop as front.
-        //(There is strangeness with the motorLeft2, or front right motor!!!)
         SetLeftMotors(SetPowerLeft);
 
         SetRightMotors(SetPowerRight);

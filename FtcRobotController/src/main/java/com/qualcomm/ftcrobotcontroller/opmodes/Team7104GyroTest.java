@@ -46,7 +46,7 @@ public class Team7104GyroTest extends Team7104AutoHardware
 
         //motorRight2.setPower(.5);
         //waitOneFullHardwareCycle();
-        SetLeftMotors(0);
+        SetLeftMotors(-0.5);
         SetRightMotors(0.5);
 
         while(abs(headingDifference)<abs(headingTarget))
@@ -67,7 +67,7 @@ public class Team7104GyroTest extends Team7104AutoHardware
             //telemetry.addData("Previous:", String.valueOf(headingPrevious));
             //telemetry.addData("Current:", String.valueOf(headingCurrent));
             //telemetry.addData("Target:", String.valueOf(headingTarget));
-            //telemetry.addData("Difference:", String.valueOf(headingDifference));
+            telemetry.addData("Difference:", String.valueOf(headingDifference));
             //telemetry.addData("Motor Power Left:" + motorLeft1.getPower(), motorLeft2.getPower());
             //telemetry.addData("Motor Power Right:" + motorRight1.getPower(), motorRight2.getPower());
         }
