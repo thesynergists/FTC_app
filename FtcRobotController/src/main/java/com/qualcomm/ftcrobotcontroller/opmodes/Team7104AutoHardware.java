@@ -106,7 +106,7 @@ public class Team7104AutoHardware extends LinearOpMode
         motorRight1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         motorRight2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         waitOneFullHardwareCycle();
-        CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
+        CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
         telemetry.addData("Encoder Initialization Complete", 1);
         sleep(1500);
 
@@ -141,8 +141,8 @@ public class Team7104AutoHardware extends LinearOpMode
     }
 
     //REUSABLE FUNCTIONS
-    //ENCODERS
 
+    //POWER DEFINITIONS
     public void SetLeftMotors (double level)
     {
         motorRight1.setPower(level);
@@ -155,7 +155,7 @@ public class Team7104AutoHardware extends LinearOpMode
         motorLeft2.setPower(level);
     }
 
-
+    //ENCODERS
     public double EncoderCountsToInches(double InchesTarget)
     {
         return ((InchesTarget * 1680) / (2 * PI * (11 / 4)));
@@ -176,19 +176,19 @@ public class Team7104AutoHardware extends LinearOpMode
 
 
         telemetry.addData("Set Power", 1);
-        while (abs(CurrentPositionatEndOfEncoderRun - motorLeft1.getCurrentPosition()) < abs(EncoderCountsToInches(TargetPosition)))
+        while (abs(CurrentPositionatEndOfEncoderRun - motorRight1.getCurrentPosition()) <= abs(EncoderCountsToInches(TargetPosition)))
         {
             telemetry.addData("Position in Program", TelemetryPosition);
             telemetry.addData("Distance (In):", TargetPosition);
             telemetry.addData("Motor Power Left/Right" + SetPowerLeft, SetPowerRight);
 
             //telemetry.addData("Wait For Position", 2);
-            //telemetry.addData("Current Encoder Counts Right:", String.valueOf(motorRight1.getCurrentPosition()));
-            //telemetry.addData("Current Encoder Counts Left:", String.valueOf(motorLeft1.getCurrentPosition()));
-            //telemetry.addData("Left Motor Power:", String.valueOf(motorLeft1.getPower()));
-            //telemetry.addData("Left Motor Power:", String.valueOf(motorLeft2.getPower()));
-            //telemetry.addData("Right Motor Power:", String.valueOf(motorRight1.getPower()));
-            //telemetry.addData("Right Motor Power:", String.valueOf(motorRight2.getPower()));
+            telemetry.addData("Current Encoder Counts Right:", String.valueOf(motorRight1.getCurrentPosition()));
+            telemetry.addData("Current Encoder Counts Left:", String.valueOf(motorLeft1.getCurrentPosition()));
+            telemetry.addData("Left Motor Power:", String.valueOf(motorLeft1.getPower()));
+            telemetry.addData("Left Motor Power:", String.valueOf(motorLeft2.getPower()));
+            telemetry.addData("Right Motor Power:", String.valueOf(motorRight1.getPower()));
+            telemetry.addData("Right Motor Power:", String.valueOf(motorRight2.getPower()));
             //waitOneFullHardwareCycle();
         }
         telemetry.addData("Stop Motors", 1);
@@ -196,7 +196,7 @@ public class Team7104AutoHardware extends LinearOpMode
         SetRightMotors(0);
 
         sleep(SLEEP);
-        CurrentPositionatEndOfEncoderRun = motorLeft1.getCurrentPosition();
+        CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
         telemetry.addData("Total Distance 'Run':", TargetPosition);
         telemetry.addData("Current Encoder Counts @ End of Run:", String.valueOf(CurrentPositionatEndOfEncoderRun));
         waitOneFullHardwareCycle();
@@ -222,5 +222,11 @@ public class Team7104AutoHardware extends LinearOpMode
         {
             telemetry.addData("|Target Heading| > 180* !!!!!!!!!", 1); //If Target is over limit....then CAUTION!!!
         }
+    }
+
+    //COLOR SENSOR
+    public void ColorSensorDriving(double LeftMotorPower, double RightMotorPower, boolean BlueColor)
+    {
+
     }
 }
