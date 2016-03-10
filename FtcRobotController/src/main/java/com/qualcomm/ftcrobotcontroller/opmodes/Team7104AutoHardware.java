@@ -140,6 +140,9 @@ public class Team7104AutoHardware extends LinearOpMode
         motorLeft2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+
+        //CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
+        //TRY ADDING THIS???? ^ THIS MIGHT SOLVE SKIPPING THE FIRST STEP
     }
 
     //REUSABLE FUNCTIONS
@@ -196,14 +199,9 @@ public class Team7104AutoHardware extends LinearOpMode
         SetLeftMotors(0);
         SetRightMotors(0);
 
-        sleep(SLEEP);
-        CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
         telemetry.addData("Total Distance 'Run':", TargetPosition);
         telemetry.addData("Current Encoder Counts @ End of Run:", String.valueOf(CurrentPositionatEndOfEncoderRun));
-        waitOneFullHardwareCycle();
-        headingPrevious = sensorGyro.getHeading();
-        waitOneFullHardwareCycle();
-        sleep(SLEEP);
+        ResetAndPrepareAllVariables ();
     }
 
     //GYRO
@@ -243,12 +241,8 @@ public class Team7104AutoHardware extends LinearOpMode
         SetLeftMotors(0);
         SetRightMotors(0);
 
-        sleep(SLEEP);
-        headingPrevious = sensorGyro.getHeading();
         telemetry.addData("Previous Heading:", String.valueOf(headingPrevious));
-        waitOneFullHardwareCycle();
-        CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
-        sleep(SLEEP);
+        ResetAndPrepareAllVariables ();
     }
 
     public void GyroHeadingDifference()
@@ -272,6 +266,19 @@ public class Team7104AutoHardware extends LinearOpMode
     //COLOR SENSOR
     public void ColorSensorDriving(double LeftMotorPower, double RightMotorPower, boolean BlueColor)
     {
+        //If both sensors do not see color, go forward/backward
+        //If one sensor sees, put the side that sees the color into a slower reverse, other side that does not see slows down
+        //If both color sensors see, break!
 
+    }
+
+    //RESET and PREPARE ALL VARIABLES!!!
+    public void ResetAndPrepareAllVariables () throws InterruptedException
+    {
+        sleep(SLEEP);
+        headingPrevious = sensorGyro.getHeading();
+        waitOneFullHardwareCycle();
+        CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
+        sleep(SLEEP);
     }
 }
