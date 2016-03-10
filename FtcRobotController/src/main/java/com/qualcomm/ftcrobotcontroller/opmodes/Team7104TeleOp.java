@@ -592,8 +592,8 @@ public class Team7104TeleOp extends Team7104Hardware
         PullUp_Motor_Tape.setPower(0);
         setPowerLeftMotor(0);
         setPowerRightMotor(0);
-        Flipper_Servo_Left.setPosition(.40);
-        Flipper_Servo_Right.setPosition(.57);
+        Flipper_Servo_Left.setPosition(.59);
+        Flipper_Servo_Right.setPosition(.40);
         Climber_servo.setPosition(0);
         Scoop_Motor.setPower(0);
         Sweep_servo.setPosition(.5);

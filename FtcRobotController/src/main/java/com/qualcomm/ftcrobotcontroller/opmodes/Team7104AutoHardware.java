@@ -206,6 +206,44 @@ public class Team7104AutoHardware extends LinearOpMode
         sleep(SLEEP);
     }
 
+    /*
+    Gyro turn function (POSITIVE turn_power inputs will result in RIGHT turns
+    while NEGATIVE ones will result in LEFT turns)
+     */
+
+    public void Turn_degrees (double turn_power, int turn_degrees, int TelemetryPosition)
+    {
+        headingTarget = turn_degrees; //Code Turn Limits from -180 < Theta < +180....HW Limits likely -170 to 170
+
+        telemetry.addData("Position in Program", TelemetryPosition);
+        telemetry.addData("Heading Previous", headingPrevious);
+        telemetry.addData("Heading Current", headingCurrent);
+        telemetry.addData("Heading Difference", headingDifference);
+        telemetry.addData("Heading Target", headingTarget);
+
+        //sleep not a recognized function here...
+        //sleep(500);
+
+        SetLeftMotors(turn_power);
+        SetRightMotors(-turn_power);
+
+        while(abs(headingDifference)<abs(headingTarget))
+        {
+            headingCurrent = sensorGyro.getHeading();
+
+            GyroHeadingDifference();
+
+            telemetry.addData("Previous:", String.valueOf(headingPrevious));
+            telemetry.addData("Current:", String.valueOf(headingCurrent));
+            telemetry.addData("Target:", String.valueOf(headingTarget));
+            telemetry.addData("Difference:", String.valueOf(headingDifference));
+        }
+
+        SetLeftMotors(0);
+        SetRightMotors(0);
+    }
+
+
     //GYRO
     public void GyroHeadingDifference()
     {

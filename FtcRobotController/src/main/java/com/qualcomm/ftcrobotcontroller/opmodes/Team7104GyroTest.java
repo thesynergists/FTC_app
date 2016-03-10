@@ -12,7 +12,8 @@ public class Team7104GyroTest extends Team7104AutoHardware
 {
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() throws InterruptedException
+    {
         headingTarget = 90; //Code Turn Limits from -180 < Theta < +180....HW Limits likely -170 to 170
         SetPower = .5;
 
@@ -24,28 +25,7 @@ public class Team7104GyroTest extends Team7104AutoHardware
         telemetry.addData("Heading Target", headingTarget);
         sleep(500);
 
-        /*motorLeft1.setPower(-SetPower);
-        waitOneFullHardwareCycle();
-        motorLeft2.setPower(-SetPower);
-        waitOneFullHardwareCycle();
-        motorRight1.setPower(SetPower);
-        waitOneFullHardwareCycle();
-        motorRight2.setPower(SetPower);
-        waitOneFullHardwareCycle();*/
-        //Switch Left Direction from - to +
-        //Right 2? Is negative now?
 
-        //motorLeft1.setPower(0);
-        //waitOneFullHardwareCycle();
-
-        //motorLeft2.setPower(0);
-        //waitOneFullHardwareCycle();
-
-        //motorRight1.setPower(.5);
-        //waitOneFullHardwareCycle();
-
-        //motorRight2.setPower(.5);
-        //waitOneFullHardwareCycle();
         SetLeftMotors(-0.5);
         SetRightMotors(0.5);
 
@@ -53,20 +33,11 @@ public class Team7104GyroTest extends Team7104AutoHardware
         {
             headingCurrent = sensorGyro.getHeading();
 
-            //motorLeft1.setPower(SetPower);
-            //waitOneFullHardwareCycle();
-            //motorLeft2.setPower(SetPower);
-            //waitOneFullHardwareCycle();
-            //motorRight1.setPower(-SetPower);
-            //waitOneFullHardwareCycle();
-            //motorRight2.setPower(-SetPower);
-            //waitOneFullHardwareCycle();
-
             GyroHeadingDifference();
 
-            //telemetry.addData("Previous:", String.valueOf(headingPrevious));
-            //telemetry.addData("Current:", String.valueOf(headingCurrent));
-            //telemetry.addData("Target:", String.valueOf(headingTarget));
+            telemetry.addData("Previous:", String.valueOf(headingPrevious));
+            telemetry.addData("Current:", String.valueOf(headingCurrent));
+            telemetry.addData("Target:", String.valueOf(headingTarget));
             telemetry.addData("Difference:", String.valueOf(headingDifference));
             //telemetry.addData("Motor Power Left:" + motorLeft1.getPower(), motorLeft2.getPower());
             //telemetry.addData("Motor Power Right:" + motorRight1.getPower(), motorRight2.getPower());
