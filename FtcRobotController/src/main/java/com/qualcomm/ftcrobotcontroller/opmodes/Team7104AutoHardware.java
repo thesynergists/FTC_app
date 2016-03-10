@@ -82,9 +82,9 @@ public class Team7104AutoHardware extends LinearOpMode
         Climber_servo.setPosition(0);                               //Hopefully the neutral position...
 
         Flipper_Servo_Left = hardwareMap.servo.get("Flipper_Servo_Left");
-        Flipper_Servo_Left.setPosition(.40);
+        Flipper_Servo_Left.setPosition(.59);
         Flipper_Servo_Right = hardwareMap.servo.get("Flipper_Servo_Right");
-        Flipper_Servo_Right.setPosition(.57);
+        Flipper_Servo_Right.setPosition(.40);
 
         BaconColor = hardwareMap.colorSensor.get("Bacon_Color");
         FloorLeftColor = hardwareMap.colorSensor.get("Floor_Left_Color");

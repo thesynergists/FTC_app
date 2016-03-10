@@ -3,14 +3,18 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
+
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import static java.lang.Math.abs;
+
 /**
  * Created by thomasmatthews on 11/6/15.
  */
+
 public class Team7104Hardware extends OpMode
 {
     DcMotor motorLeft1;
@@ -41,7 +45,6 @@ public class Team7104Hardware extends OpMode
     ColorSensor FloorLeftColor;
 
     ElapsedTime Climber_loop = new ElapsedTime();
-
 
 
     //                                UNDER CONSTRUCTION!!!!!!!!!!!!!!!
@@ -232,6 +235,10 @@ public class Team7104Hardware extends OpMode
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
 
+        telemetry.addData("Initialization Complete, Ready for Program", 5);
+        telemetry.addData("Go!", 6);
+
+
 
         motorLeft1 = hardwareMap.dcMotor.get("motorLeft1");
         motorLeft2 = hardwareMap.dcMotor.get("motorLeft2");
@@ -257,13 +264,15 @@ public class Team7104Hardware extends OpMode
         Climber_servo.setPosition(0);                               //Hopefully the neutral position...
 
         Flipper_Servo_Left = hardwareMap.servo.get("Flipper_Servo_Left");
-        Flipper_Servo_Left.setPosition(.40);
+        Flipper_Servo_Left.setPosition(.59);    //Previous default was .40
         Flipper_Servo_Right = hardwareMap.servo.get("Flipper_Servo_Right");
-        Flipper_Servo_Right.setPosition(.57);
+        Flipper_Servo_Right.setPosition(.40);   //Previous default was .57
 
         BaconColor = hardwareMap.colorSensor.get("Bacon_Color");
         FloorLeftColor = hardwareMap.colorSensor.get("Floor_Left_Color");
         FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
+
+
 
         PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
         PullUp_Motor_Tape.setPower(0);
@@ -272,7 +281,7 @@ public class Team7104Hardware extends OpMode
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
-    }
+}
 
     @Override public void loop ()
     {
@@ -349,7 +358,6 @@ public class Team7104Hardware extends OpMode
         // return scaled value.
         return dScale;
     }
-
 
 
     public void setPowerRightMotor(double level)

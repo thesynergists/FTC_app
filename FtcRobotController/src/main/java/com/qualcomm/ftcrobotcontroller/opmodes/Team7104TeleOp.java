@@ -215,7 +215,7 @@ public class Team7104TeleOp extends Team7104Hardware
 
         if (!was_pressed_left_flipper)
         {
-            Flipper_Servo_Left.setPosition(.40);
+            Flipper_Servo_Left.setPosition(.59);
         }
 
 
@@ -264,7 +264,7 @@ public class Team7104TeleOp extends Team7104Hardware
 
         if (!was_pressed_right_flipper)
         {
-            Flipper_Servo_Right.setPosition(.57);
+            Flipper_Servo_Right.setPosition(.40);
         }
 
 
