@@ -49,7 +49,7 @@ public class Team7104GyroTest extends Team7104AutoHardware
         motorRight2.setPower(0);
 
         sleep(SLEEP);
-        headingPrevious = motorRight1.getCurrentPosition();
+        headingPrevious = sensorGyro.getHeading();
         telemetry.addData("Previous Heading:", String.valueOf(headingPrevious));
         waitOneFullHardwareCycle();
         sleep(SLEEP);
