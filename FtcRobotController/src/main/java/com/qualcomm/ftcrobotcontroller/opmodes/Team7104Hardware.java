@@ -235,11 +235,6 @@ public class Team7104Hardware extends OpMode
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
 
-        telemetry.addData("Initialization Complete, Ready for Program", 5);
-        telemetry.addData("Go!", 6);
-
-
-
         motorLeft1 = hardwareMap.dcMotor.get("motorLeft1");
         motorLeft2 = hardwareMap.dcMotor.get("motorLeft2");
 
@@ -281,6 +276,9 @@ public class Team7104Hardware extends OpMode
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
+
+        telemetry.addData("Initialization Complete, Ready for Program", 5);
+        telemetry.addData("Go!", 6);
 }
 
     @Override public void loop ()

@@ -5,6 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+//import com.qualcomm.robotcore.ftcrobotcontroller.ColorSensorDriver.java;
+
 import static java.lang.Math.*;
 
 /**
@@ -48,9 +51,12 @@ public class Team7104AutoHardware extends LinearOpMode
     ColorSensor FloorLeftColor;
     GyroSensor sensorGyro;
 
+    private ElapsedTime mStateTime = new ElapsedTime();
+    private ElapsedTime TotalTime = new ElapsedTime();
+
     int CurrentPositionatEndOfEncoderRun;
     final int SLEEP = 250;
-    int headingTarget;
+    double headingTarget;
     int headingCurrent;
     int headingPrevious;
     double headingDifference;
@@ -91,7 +97,7 @@ public class Team7104AutoHardware extends LinearOpMode
         FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
         sensorGyro = hardwareMap.gyroSensor.get("gyro");
 
-        //PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
+        PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
         //PullUp_Motor_String = hardwareMap.dcMotor.get("PullUp_Motor_String");
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
@@ -109,6 +115,7 @@ public class Team7104AutoHardware extends LinearOpMode
         waitOneFullHardwareCycle();
         CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
         telemetry.addData("Encoder Initialization Complete", 1);
+        telemetry.addData("Don't start yet!", 1);
         sleep(1500);
 
 
@@ -131,11 +138,12 @@ public class Team7104AutoHardware extends LinearOpMode
         GyroHeadingDifference(); //Calculate Gyro Difference
         sleep(1000);
 
-
-        telemetry.addData("Initialization Complete, Ready for Program", 5);
         telemetry.addData("Go!", 6);
-        waitForStart();
+        telemetry.addData("Initialization Complete, Ready for Program", 5);
+        waitForStart(); //WAIT FOR START
 
+        TotalTime.reset();
+        telemetry.addData("Total Time:", TotalTime);
         motorLeft1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorLeft2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
@@ -145,8 +153,8 @@ public class Team7104AutoHardware extends LinearOpMode
         //TRY ADDING THIS???? ^ THIS MIGHT SOLVE SKIPPING THE FIRST STEP
     }
 
-    //REUSABLE FUNCTIONS
 
+    //REUSABLE FUNCTIONS
     //POWER DEFINITIONS
     public void SetLeftMotors (double level)
     {
@@ -182,7 +190,7 @@ public class Team7104AutoHardware extends LinearOpMode
         telemetry.addData("Set Power", 1);
         while (abs(CurrentPositionatEndOfEncoderRun - motorRight1.getCurrentPosition()) <= abs(EncoderCountsToInches(TargetPosition)))
         {
-            telemetry.addData("Position in Program", TelemetryPosition);
+            telemetry.addData("Position in Program:", TelemetryPosition);
             telemetry.addData("Distance (In):", TargetPosition);
             telemetry.addData("Motor Power Left/Right" + SetPowerLeft, SetPowerRight);
 
@@ -210,18 +218,17 @@ public class Team7104AutoHardware extends LinearOpMode
     while NEGATIVE ones will result in LEFT turns)
      */
 
-    public void Turn_degrees (double turn_power, int turn_degrees, int TelemetryPosition) throws InterruptedException
+    public void Turn_degrees (double turn_power, double turn_degrees, int TelemetryPosition) throws InterruptedException
     {
         headingTarget = turn_degrees; //Code Turn Limits from -180 < Theta < +180....HW Limits likely -170 to 170
 
-        telemetry.addData("Position in Program", TelemetryPosition);
+        telemetry.addData("Position in Program:", TelemetryPosition);
         telemetry.addData("Heading Previous", headingPrevious);
         telemetry.addData("Heading Current", headingCurrent);
         telemetry.addData("Heading Difference", headingDifference);
         telemetry.addData("Heading Target", headingTarget);
 
-        //sleep not a recognized function here...
-        sleep(SLEEP);
+        //sleep(SLEEP);
 
         SetLeftMotors(turn_power);
         SetRightMotors(-turn_power);
@@ -242,7 +249,7 @@ public class Team7104AutoHardware extends LinearOpMode
         SetRightMotors(0);
 
         telemetry.addData("Previous Heading:", String.valueOf(headingPrevious));
-        ResetAndPrepareAllVariables ();
+        ResetAndPrepareAllVariables();
     }
 
     public void GyroHeadingDifference()
@@ -264,12 +271,27 @@ public class Team7104AutoHardware extends LinearOpMode
     }
 
     //COLOR SENSOR
-    public void ColorSensorDriving(double LeftMotorPower, double RightMotorPower, boolean BlueColor)
+    public void ColorSensorDriving(double LeftMotorPower, double RightMotorPower, boolean BlueColor, int TelemetryPosition) throws InterruptedException
     {
         //If both sensors do not see color, go forward/backward
         //If one sensor sees, put the side that sees the color into a slower reverse, other side that does not see slows down
-        //If both color sensors see, break!
+        //If both color sensors see, break
+        ResetAndPrepareAllVariables();
+    }
 
+    //Run for TIME
+    public void RunForTime(double LeftMotorPower, double RightMotorPower, double TimeToRun, int TelemetryPosition) throws InterruptedException
+    {
+        telemetry.addData("Position in Program:", TelemetryPosition);
+        mStateTime.reset();
+        waitOneFullHardwareCycle();
+        while (mStateTime.time() < TimeToRun)
+        {
+            SetLeftMotors(LeftMotorPower);
+            SetRightMotors(RightMotorPower);
+            telemetry.addData("mStateTime", mStateTime.time());
+        }
+        ResetAndPrepareAllVariables();
     }
 
     //RESET and PREPARE ALL VARIABLES!!!
