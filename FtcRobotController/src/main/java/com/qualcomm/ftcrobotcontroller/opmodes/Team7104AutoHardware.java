@@ -277,7 +277,15 @@ public class Team7104AutoHardware extends LinearOpMode
         //If both sensors do not see color, go forward/backward
         //If one sensor sees, put the side that sees the color into a slower reverse, other side that does not see slows down
         //If both color sensors see, break
-        ResetAndPrepareAllVariables();
+        while(true)
+        {
+            telemetry.addData("Red:", FloorLeftColor.red());
+            telemetry.addData("Blue:", FloorLeftColor.blue());
+            telemetry.addData("Green:", FloorLeftColor.green());
+            telemetry.addData("argb:", FloorLeftColor.argb());
+            telemetry.addData("Alpha:", FloorLeftColor.alpha());
+        }
+        //ResetAndPrepareAllVariables();
     }
 
     //Run for TIME
