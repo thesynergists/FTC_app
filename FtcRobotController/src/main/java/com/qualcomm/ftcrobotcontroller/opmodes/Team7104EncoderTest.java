@@ -23,8 +23,18 @@ public class Team7104EncoderTest extends Team7104AutoHardware{
         //sleep(2000);
         //RunWithEncoders(-.5,-.5, 35, 3);
         //sleep(2000);
-        RunWithEncoders(.5,.5,.1,0); //A check to see if the program skips the first run.
-        RunWithEncoders(.8,.8, 10, 1);
+        //RunWithEncoders(.5,.5,.1,0); //A check to see if the program skips the first run.
+        RunWithEncoders(.8, .8, 10, 1);
+        sleep(2000);
+        Turn_degrees(.8, 20, 1);
+        sleep(2000);
+        Turn_degrees(-.2, 20, 1);
+        sleep(2000);
+        //Turn_degrees(.3, 175, 1);
+        RunForTime(.5, .5, 1, 1);
+        sleep(2000);
+        //Turn_degrees(-.8, 179, 1);
+        RunForTime(-.5, -.5, 5, 1);
         sleep(2000);
         RunWithEncoders(-.5,.5, 11.5, 2);
         sleep(2000);

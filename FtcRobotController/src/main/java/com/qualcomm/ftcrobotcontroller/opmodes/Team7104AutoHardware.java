@@ -149,8 +149,7 @@ public class Team7104AutoHardware extends LinearOpMode
         motorRight1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
 
-        //CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
-        //TRY ADDING THIS???? ^ THIS MIGHT SOLVE SKIPPING THE FIRST STEP
+        CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
     }
 
 
@@ -222,6 +221,8 @@ public class Team7104AutoHardware extends LinearOpMode
     {
         headingTarget = turn_degrees; //Code Turn Limits from -180 < Theta < +180....HW Limits likely -170 to 170
 
+        GyroHeadingDifference();
+
         telemetry.addData("Position in Program:", TelemetryPosition);
         telemetry.addData("Heading Previous", headingPrevious);
         telemetry.addData("Heading Current", headingCurrent);
@@ -291,6 +292,8 @@ public class Team7104AutoHardware extends LinearOpMode
             SetRightMotors(RightMotorPower);
             telemetry.addData("mStateTime", mStateTime.time());
         }
+        SetLeftMotors(0);
+        SetRightMotors(0);
         ResetAndPrepareAllVariables();
     }
 

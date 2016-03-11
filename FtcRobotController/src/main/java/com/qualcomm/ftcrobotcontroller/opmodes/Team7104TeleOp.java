@@ -573,6 +573,7 @@ public class Team7104TeleOp extends Team7104Hardware
         telemetry.addData("Scoop Encoder value", Scoop_Motor.getCurrentPosition());
         telemetry.addData("Scoop Motor Power", Scoop_Motor.getPower());
         telemetry.addData("PullUp Tape Motor Power", PullUp_Motor_Tape.getPower());
+        telemetry.addData("Climber Position", Climber_servo.getPosition());
         /*
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
