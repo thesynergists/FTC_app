@@ -37,20 +37,11 @@ import com.qualcomm.robotcore.util.Range;
 
 import static java.lang.Math.pow;
 
-/**
- * TeleOp Mode
- * <p>
- * Enables control of the robot via the gamepad
- */
 public class Team7104TeleOp extends Team7104Hardware
 {
 
-    /**
-     * Constructor
-     */
     public Team7104TeleOp()
     {
-
     }
 
     /*
@@ -90,19 +81,6 @@ public class Team7104TeleOp extends Team7104Hardware
     @Override
     public void loop()
     {
-
-		/*
-		 * Gamepad 1
-		 * 
-		 * Gamepad 1 controls the motors via the left stick, and it controls the
-		 * wrist/claw via the a,b, x, y buttons
-		 */
-
-        // throttle: left_stick_y ranges from -1 to 1, where -1 is full up, and
-        // 1 is full down
-        // direction: left_stick_x ranges from -1 to 1, where -1 is full left
-        // and 1 is full right
-
         //PullUp!!!
         /*if (gamepad2.left_bumper)
         {
@@ -114,32 +92,24 @@ public class Team7104TeleOp extends Team7104Hardware
             PullUp_Motors_SetPower(-1.0);
         }*/
 
-
-
         //Climber control variable!
         if (!gamepad2.a && !gamepad2.b && !gamepad2.y && gamepad2.right_stick_y > -.05 && gamepad2.right_stick_y < .05)
         {
             climber_bypass = false;
         }
-
-
         if (gamepad2.right_bumper)
         {
             PullUp_Motors_SetPower(1.0);
         }
-
         if (gamepad2.right_trigger > 0.2)
         {
             PullUp_Motors_SetPower(-1.0);
         }
 
-
-
         if (gamepad2.left_stick_y > 0.1)
         {
             PullUp_Motor_Tape.setPower(-gamepad2.left_stick_y);
         }
-
         if (gamepad2.left_stick_y < 0.1 && !gamepad2.right_bumper && gamepad2.right_trigger <= 0.2)
         {
             PullUp_Motor_Tape.setPower(0);                              //The tape stop.
@@ -185,10 +155,6 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
         //FLIPPERS!!!
-
-
-
-
         if (the_stop_button_left_flipper)
         {
             if (!gamepad2.dpad_right)
@@ -232,12 +198,6 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
 
-
-
-
-
-
-
         if (the_stop_button_right_flipper)
         {
             if (!gamepad2.dpad_left)
@@ -278,8 +238,6 @@ public class Team7104TeleOp extends Team7104Hardware
         {
             Flipper_Servo_Right.setPosition(.40);
         }
-
-
 
 
 
@@ -338,7 +296,6 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
         //SCOOP!!!
-
         if (gamepad2.a)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
@@ -382,7 +339,6 @@ public class Team7104TeleOp extends Team7104Hardware
 
         //if joystick 2, right joystick
         //Stop Motor
-
         if (gamepad2.right_stick_y < 0.05 && gamepad2.right_stick_y > -0.05 && !gamepad2.a && !gamepad2.b && !gamepad2.y && !gamepad2.x)
         {
             Scoop_Motor.setMode((DcMotorController.RunMode.RUN_USING_ENCODERS));
@@ -398,17 +354,8 @@ public class Team7104TeleOp extends Team7104Hardware
         }
         //END Scoop Fine-Tuning
 
-        //We still need preset encoder values and buttons. The above is a temporary manual workaround.
-
-
-
-
-
-
-
 
         //Sweeper!!!
-
         boolean locked_controls = false;
         if (gamepad1.a && gamepad1.y)       //Pressing A and Y buttons at same time will reset Sweeper.
         {
@@ -473,8 +420,6 @@ public class Team7104TeleOp extends Team7104Hardware
             Sweep_servo.setPosition(.5);
         }
 
-
-
         if (the_stop_button_y)
         {
             if (!gamepad1.y)
@@ -536,70 +481,12 @@ public class Team7104TeleOp extends Team7104Hardware
         }
 
 
-        /*float wrist_elevation = gamepad2.left_stick_y;
-
-
-        wrist_elevation = Range.clip(wrist_elevation, -1, 1);
-        double converted_wrist_elevation = (wrist_elevation + 1)/2;
-        // scale the joystick value to make it easier to control
-        // the robot more precisely at slower speeds.
-
-        right = (float)scaleInput(right);
-        left =  (float)scaleInput(left);
-
-
-
-		//Make the IF move up and down based on controller
-		IronFist_change_elevation(converted_wrist_elevation);
-        */
-
-
-        /*
-        Variables that will hold values showing
-        degree that left and right bumpers
-        are pressed in order to control Iron Fist rotation
-        (trigger buttons are analog, so adjustments were made.
-        */
-
-        /*
-        float wrist_rotation_left = gamepad2.left_trigger;
-        float wrist_rotation_right = gamepad2.right_trigger;
-
-        wrist_rotation_left = Range.clip(wrist_rotation_left, 0, 1);
-        wrist_rotation_right = Range.clip(wrist_rotation_right, 0, 1);
-
-        //Split the range of 0 to 1 of the rotation servo between the two triggers.
-        double converted_wrist_rotation_left = (1 - wrist_rotation_left)/2;
-        double converted_wrist_rotation_right = (wrist_rotation_right + 1)/2;
-
-        //Control IF rotation.
-        Iron_Fist_rotate(converted_wrist_rotation_left, converted_wrist_rotation_right);
-        */
-
-        /*
-        //Make it stop!!!
-        if(converted_wrist_elevation == .5)
-        {
-            IronFist_stop_elevation();
-        }
-        not necessary */
-
-
-		/*
-		 * Send telemetry data back to driver station. Note that if we are using
-		 * a legacy NXT-compatible motor controller, then the getPower() method
-		 * will return a null value. The legacy NXT-compatible motor controllers
-		 * are currently write only.
-		 */
         //telemetry.addData("Text", "*** Robot Data***");
         telemetry.addData("Scoop Encoder value", Scoop_Motor.getCurrentPosition());
         telemetry.addData("Scoop Motor Power", Scoop_Motor.getPower());
         telemetry.addData("PullUp Tape Motor Power", PullUp_Motor_Tape.getPower());
+        telemetry.addData("PullUp String Motor Power", PullUp_Motor_String.getPower());
         telemetry.addData("Climber Position", Climber_servo.getPosition());
-        /*
-        telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
-        telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
-        */
     }
 
     /*
