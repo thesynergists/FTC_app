@@ -96,6 +96,8 @@ public class Team7104AutoHardware extends LinearOpMode
         FloorLeftColor = hardwareMap.colorSensor.get("Floor_Left_Color");
         FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
         sensorGyro = hardwareMap.gyroSensor.get("gyro");
+        FloorLeftColor.enableLed(true);
+        FloorRightColor.enableLed(true);
 
         PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
         //PullUp_Motor_String = hardwareMap.dcMotor.get("PullUp_Motor_String");

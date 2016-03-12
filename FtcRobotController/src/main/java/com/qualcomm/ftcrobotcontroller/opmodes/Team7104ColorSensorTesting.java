@@ -10,6 +10,9 @@ public class Team7104ColorSensorTesting extends Team7104AutoHardware{
     public void runOpMode() throws InterruptedException{
         super.runOpMode();
 
+        FloorLeftColor.enableLed(true);
+        ColorSensorDriving(.1, .1, true, 1);
 
+        //Change 2nd i2c address to 0x70?
     }
 }
