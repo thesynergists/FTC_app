@@ -115,7 +115,7 @@ public class Team7104TeleOp extends Team7104Hardware
             PullUp_Motors_SetPower(-1.0);
         }*/
 
-        
+
 
         //Climber control variable!
         if (!gamepad2.a && !gamepad2.b && !gamepad2.y && gamepad2.right_stick_y > -.05 && gamepad2.right_stick_y < .05)
@@ -343,12 +343,12 @@ public class Team7104TeleOp extends Team7104Hardware
         if (gamepad2.a)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-            Scoop_Motor.setTargetPosition(5);      //Preset for Collecting Debris, previously was 670
+            Scoop_Motor.setTargetPosition(5);       //Preset for Collecting Debris, previously was 670
                                                     // (assumes scoop is ALL THE WAY TO THE FLOOR AT INIT)
             Scoop_Motor.setPower(.1);               //You set this as the max power the motor can have...
                                                     // (foresee issues depending on which side you are on)
 
-            if (Scoop_Motor.getCurrentPosition() < -410)
+            if (Scoop_Motor.getCurrentPosition() < -100)
             {
                 Climber_servo.setPosition(.6);
             }
@@ -367,7 +367,7 @@ public class Team7104TeleOp extends Team7104Hardware
             Scoop_Motor.setTargetPosition(-410);     //Preset for Dumping Debris into Conveyor, previously was 260
             Scoop_Motor.setPower(.1);
 
-            if (Scoop_Motor.getCurrentPosition() < -410)
+            if (Scoop_Motor.getCurrentPosition() < -100)
             {
                 Climber_servo.setPosition(.6);
             }
@@ -416,7 +416,7 @@ public class Team7104TeleOp extends Team7104Hardware
             Scoop_Motor.setMode((DcMotorController.RunMode.RUN_USING_ENCODERS));
             Scoop_Motor.setPower(Scoop_Motor_Power);
 
-            if (Scoop_Motor.getCurrentPosition() < -410)
+            if (Scoop_Motor.getCurrentPosition() < -100)
             {
                 Climber_servo.setPosition(.6);
             }
