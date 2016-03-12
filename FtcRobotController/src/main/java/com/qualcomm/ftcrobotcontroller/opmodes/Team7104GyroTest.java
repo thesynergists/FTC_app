@@ -10,63 +10,10 @@ import static java.lang.Math.*;
  */
 public class Team7104GyroTest extends Team7104AutoHardware
 {
-
     @Override
     public void runOpMode() throws InterruptedException
     {
-        headingTarget = 90; //Code Turn Limits from -180 < Theta < +180....HW Limits likely -170 to 170
-        SetPower = .5;
-
         super.runOpMode();
-
-        telemetry.addData("Heading Previous", headingPrevious);
-        telemetry.addData("Heading Current", headingCurrent);
-        telemetry.addData("Heading Difference", headingDifference);
-        telemetry.addData("Heading Target", headingTarget);
-        sleep(500);
-
-
-        SetLeftMotors(-0.5);
-        SetRightMotors(0.5);
-
-        while(abs(headingDifference)<abs(headingTarget))
-        {
-            headingCurrent = sensorGyro.getHeading();
-
-            GyroHeadingDifference();
-
-            telemetry.addData("Previous:", String.valueOf(headingPrevious));
-            telemetry.addData("Current:", String.valueOf(headingCurrent));
-            telemetry.addData("Target:", String.valueOf(headingTarget));
-            telemetry.addData("Difference:", String.valueOf(headingDifference));
-            //telemetry.addData("Motor Power Left:" + motorLeft1.getPower(), motorLeft2.getPower());
-            //telemetry.addData("Motor Power Right:" + motorRight1.getPower(), motorRight2.getPower());
-        }
-
-        motorLeft1.setPower(0);
-        motorLeft2.setPower(0);
-        motorRight1.setPower(0);
-        motorRight2.setPower(0);
-
-        sleep(SLEEP);
-        headingPrevious = sensorGyro.getHeading();
-        telemetry.addData("Previous Heading:", String.valueOf(headingPrevious));
-        waitOneFullHardwareCycle();
-        sleep(SLEEP);
-    }
-    public void GyroHeadingDifference()
-    {
-        if(abs(headingPrevious-headingCurrent) > headingTarget) //If the difference is greater than the target
-        {
-            headingDifference = abs(abs(headingPrevious-headingCurrent)-360); //Then the difference can be corrected by -360
-        }
-        else
-        {
-            headingDifference = abs(headingPrevious-headingCurrent); //Otherwise, difference is in a good zone
-        }
-        if(abs(headingTarget) > 180)
-        {
-            telemetry.addData("|Target Heading| > 180* !!!!!!!!!", 1); //If Target is over limit....then CAUTION!!!
-        }
+        Turn_degrees(.8, 20, 1);
     }
 }

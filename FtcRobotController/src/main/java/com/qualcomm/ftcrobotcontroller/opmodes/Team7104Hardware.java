@@ -268,9 +268,6 @@ public class Team7104Hardware extends OpMode
         Bacon_servo = hardwareMap.servo.get("Bacon_servo");
         Bacon_servo.setPosition(.5);
 
-        //pitch_servo_left = hardwareMap.servo.get("pitch_servo_left");
-        //pitch_servo_right = hardwareMap.servo.get("pitch_servo_right");
-
         Sweep_servo = hardwareMap.servo.get("Sweep_servo");
         Sweep_servo.setPosition(.5);
 
@@ -298,6 +295,7 @@ public class Team7104Hardware extends OpMode
 
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
+        PullUp_Motor_Tape.setDirection(DcMotor.Direction.FORWARD);
 
         telemetry.addData("Initialization Complete, Ready for Program", 5);
         telemetry.addData("Go!", 6);
@@ -307,15 +305,6 @@ public class Team7104Hardware extends OpMode
     {
 
     }
-    //
-    // start
-    //
-    /**
-     * Perform any actions that are necessary when the OpMode is enabled.
-     *
-     * The system calls this member once when the OpMode is enabled.
-     */
-
 
     @Override public void start ()
     {
@@ -329,14 +318,6 @@ public class Team7104Hardware extends OpMode
     } // start
 
 
-    //
-    // stop
-    //
-    /**
-     * Perform any actions that are necessary when the OpMode is disabled.
-     *
-     * The system calls this member once when the OpMode is disabled.
-     */
     @Override public void stop ()
     {
         //

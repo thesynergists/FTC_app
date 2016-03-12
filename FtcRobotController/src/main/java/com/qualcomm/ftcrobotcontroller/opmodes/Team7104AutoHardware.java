@@ -1,4 +1,9 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
+import android.app.Activity;
+import android.graphics.Color;
+import android.view.View;
+
+import com.qualcomm.ftcrobotcontroller.R;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -64,6 +69,11 @@ public class Team7104AutoHardware extends LinearOpMode
     //double driveSteering;
     //double driveGain = 0.7;
 
+    //Color Sensor Set Up
+    float hsvValues[] = {0F,0F,0F};
+    final float values[] = hsvValues;
+    final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(R.id.RelativeLayout);
+
     @Override
     public void runOpMode() throws InterruptedException
     {
@@ -95,9 +105,9 @@ public class Team7104AutoHardware extends LinearOpMode
         BaconColor = hardwareMap.colorSensor.get("Bacon_Color");
         FloorLeftColor = hardwareMap.colorSensor.get("Floor_Left_Color");
         FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
-        sensorGyro = hardwareMap.gyroSensor.get("gyro");
-        FloorLeftColor.enableLed(true);
-        FloorRightColor.enableLed(true);
+        sensorGyro = hardwareMap.gyroSensor.get("gyro"); waitOneFullHardwareCycle();
+        FloorLeftColor.enableLed(true); waitOneFullHardwareCycle();
+        FloorRightColor.enableLed(true); waitOneFullHardwareCycle();
 
         PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
         //PullUp_Motor_String = hardwareMap.dcMotor.get("PullUp_Motor_String");
@@ -105,16 +115,13 @@ public class Team7104AutoHardware extends LinearOpMode
         motorRight1.setDirection(DcMotor.Direction.REVERSE);
         motorRight2.setDirection(DcMotor.Direction.REVERSE);
         motorLeft1.setDirection(DcMotor.Direction.FORWARD);
-        motorLeft2.setDirection(DcMotor.Direction.FORWARD);
+        motorLeft2.setDirection(DcMotor.Direction.FORWARD); waitOneFullHardwareCycle();
 
         //ENCODERS Setup
-
-        waitOneFullHardwareCycle();
         motorLeft1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         motorLeft2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         motorRight1.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        motorRight2.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        waitOneFullHardwareCycle();
+        motorRight2.setMode(DcMotorController.RunMode.RESET_ENCODERS); waitOneFullHardwareCycle();
         CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
         telemetry.addData("Encoder Initialization Complete", 1);
         telemetry.addData("Don't start yet!", 1);
@@ -131,10 +138,8 @@ public class Team7104AutoHardware extends LinearOpMode
         telemetry.addData("Gyro Calibration Complete", 3);
         waitOneFullHardwareCycle();
         sleep(2000);
-        headingPrevious = sensorGyro.getHeading();
-        waitOneFullHardwareCycle();
-        headingCurrent = sensorGyro.getHeading();
-        waitOneFullHardwareCycle();
+        headingPrevious = sensorGyro.getHeading(); waitOneFullHardwareCycle();
+        headingCurrent = sensorGyro.getHeading(); waitOneFullHardwareCycle();
         telemetry.addData("Gyro Initialization Complete", 4);
         telemetry.clearData();
         GyroHeadingDifference(); //Calculate Gyro Difference
@@ -238,7 +243,7 @@ public class Team7104AutoHardware extends LinearOpMode
 
         while(abs(headingDifference)<abs(headingTarget))
         {
-            headingCurrent = sensorGyro.getHeading();
+            headingCurrent = sensorGyro.getHeading(); waitOneFullHardwareCycle();
 
             GyroHeadingDifference();
 
@@ -281,11 +286,27 @@ public class Team7104AutoHardware extends LinearOpMode
         //If both color sensors see, break
         while(true)
         {
-            telemetry.addData("Red:", FloorLeftColor.red());
-            telemetry.addData("Blue:", FloorLeftColor.blue());
-            telemetry.addData("Green:", FloorLeftColor.green());
-            telemetry.addData("argb:", FloorLeftColor.argb());
-            telemetry.addData("Alpha:", FloorLeftColor.alpha());
+            Color.RGBToHSV(FloorLeftColor.red()*8, FloorLeftColor.green()*8, FloorLeftColor.blue()*8, hsvValues);
+
+            // send the info back to driver station using telemetry function.
+            telemetry.addData("Clear", FloorLeftColor.alpha());
+            telemetry.addData("Red  ", FloorLeftColor.red());
+            telemetry.addData("Green", FloorLeftColor.green());
+            telemetry.addData("Blue ", FloorLeftColor.blue());
+            telemetry.addData("Hue", hsvValues[0]);
+
+            // change the background color to match the color detected by the RGB sensor.
+            // pass a reference to the hue, saturation, and value array as an argument
+            // to the HSVToColor method.
+            relativeLayout.post(new Runnable()
+            {
+                public void run()
+                {
+                    relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
+                }
+            });
+
+            // wait a hardware cycle before iterating.
         }
         //ResetAndPrepareAllVariables();
     }
@@ -294,8 +315,7 @@ public class Team7104AutoHardware extends LinearOpMode
     public void RunForTime(double LeftMotorPower, double RightMotorPower, double TimeToRun, int TelemetryPosition) throws InterruptedException
     {
         telemetry.addData("Position in Program:", TelemetryPosition);
-        mStateTime.reset();
-        waitOneFullHardwareCycle();
+        mStateTime.reset(); waitOneFullHardwareCycle();
         while (mStateTime.time() < TimeToRun)
         {
             SetLeftMotors(LeftMotorPower);
@@ -311,8 +331,7 @@ public class Team7104AutoHardware extends LinearOpMode
     public void ResetAndPrepareAllVariables () throws InterruptedException
     {
         sleep(SLEEP);
-        headingPrevious = sensorGyro.getHeading();
-        waitOneFullHardwareCycle();
+        headingPrevious = sensorGyro.getHeading(); waitOneFullHardwareCycle();
         CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
         sleep(SLEEP);
     }
