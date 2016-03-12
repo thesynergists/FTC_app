@@ -52,8 +52,8 @@ public class Team7104AutoHardware extends LinearOpMode
     DcMotor PullUp_Motor_String;
 
     ColorSensor BaconColor;
-    ColorSensor FloorRightColor;
-    ColorSensor FloorLeftColor;
+    //ColorSensor FloorRightColor;
+    //ColorSensor FloorLeftColor;
     GyroSensor sensorGyro;
 
     private ElapsedTime mStateTime = new ElapsedTime();
@@ -70,13 +70,14 @@ public class Team7104AutoHardware extends LinearOpMode
     //double driveGain = 0.7;
 
     //Color Sensor Set Up
-    float hsvValues[] = {0F,0F,0F};
+    /*float hsvValues[] = {0F,0F,0F};
     final float values[] = hsvValues;
     final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(R.id.RelativeLayout);
-
+*/
     @Override
     public void runOpMode() throws InterruptedException
     {
+        //hardwareMap.logDevices();
         motorLeft1 = hardwareMap.dcMotor.get("motorLeft1");
         motorLeft2 = hardwareMap.dcMotor.get("motorLeft2");
 
@@ -103,11 +104,11 @@ public class Team7104AutoHardware extends LinearOpMode
         Flipper_Servo_Right.setPosition(.40);
 
         BaconColor = hardwareMap.colorSensor.get("Bacon_Color");
-        FloorLeftColor = hardwareMap.colorSensor.get("Floor_Left_Color");
-        FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
+        //FloorLeftColor = hardwareMap.colorSensor.get("Floor_Left_Color");
+        //FloorRightColor = hardwareMap.colorSensor.get("Floor_Right_Color");
         sensorGyro = hardwareMap.gyroSensor.get("gyro"); waitOneFullHardwareCycle();
-        FloorLeftColor.enableLed(true); waitOneFullHardwareCycle();
-        FloorRightColor.enableLed(true); waitOneFullHardwareCycle();
+        //FloorLeftColor.enableLed(true); waitOneFullHardwareCycle();
+        //FloorRightColor.enableLed(true); waitOneFullHardwareCycle();
 
         PullUp_Motor_Tape = hardwareMap.dcMotor.get("PullUp_Motor_Tape");
         //PullUp_Motor_String = hardwareMap.dcMotor.get("PullUp_Motor_String");
@@ -278,6 +279,11 @@ public class Team7104AutoHardware extends LinearOpMode
         }
     }
 
+    //float hsvValues[] = {0F,0F,0F};
+    //final float values[] = hsvValues;
+    //final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(R.id.RelativeLayout);
+
+    /*
     //COLOR SENSOR
     public void ColorSensorDriving(double LeftMotorPower, double RightMotorPower, boolean BlueColor, int TelemetryPosition) throws InterruptedException
     {
@@ -298,10 +304,8 @@ public class Team7104AutoHardware extends LinearOpMode
             // change the background color to match the color detected by the RGB sensor.
             // pass a reference to the hue, saturation, and value array as an argument
             // to the HSVToColor method.
-            relativeLayout.post(new Runnable()
-            {
-                public void run()
-                {
+            relativeLayout.post(new Runnable() {
+                public void run() {
                     relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
                 }
             });
@@ -310,7 +314,7 @@ public class Team7104AutoHardware extends LinearOpMode
         }
         //ResetAndPrepareAllVariables();
     }
-
+*/
     //Run for TIME
     public void RunForTime(double LeftMotorPower, double RightMotorPower, double TimeToRun, int TelemetryPosition) throws InterruptedException
     {

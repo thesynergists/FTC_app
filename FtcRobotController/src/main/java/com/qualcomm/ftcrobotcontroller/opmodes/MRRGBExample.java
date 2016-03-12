@@ -64,7 +64,7 @@ public class MRRGBExample extends LinearOpMode {
     hardwareMap.logDevices();
 
     // get a reference to our ColorSensor object.
-    sensorRGB = hardwareMap.colorSensor.get("Floor_Left_Color");
+    sensorRGB = hardwareMap.colorSensor.get("Floor_Right_Color");
 
     // bEnabled represents the state of the LED.
     boolean bEnabled = true;
@@ -98,6 +98,7 @@ public class MRRGBExample extends LinearOpMode {
       // check the status of the x button on either gamepad.
       bCurrState = gamepad1.x || gamepad2.x;
 
+      sensorRGB.enableLed(true);
       // check for button state transitions.
       if (bCurrState == true && bCurrState != bPrevState)  {
         // button is transitioning to a pressed state.
@@ -126,7 +127,7 @@ public class MRRGBExample extends LinearOpMode {
         bEnabled = false;
 
         // turn off the LED.
-        sensorRGB.enableLed(false);
+        //sensorRGB.enableLed(false);
       }
 
       // convert the RGB values to HSV values.

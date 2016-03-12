@@ -350,7 +350,7 @@ public class Team7104TeleOp extends Team7104Hardware
             Scoop_Motor.setMode((DcMotorController.RunMode.RUN_USING_ENCODERS));
             Scoop_Motor.setPower(Scoop_Motor_Power);
 
-            MoveClimberDepositor(150);
+            MoveClimberDepositor(200);
         }
         //END Scoop Fine-Tuning
 
