@@ -60,7 +60,7 @@ public class Team7104Hardware extends OpMode
     int climber_limit_for_Scoop = -400;
     boolean climber_bypass = false;
     double default_climber_position = 0.06;
-    double climber_safe_from_smashing_position = .45;
+    double climber_safe_from_smashing_position = .35;
 
     void Climber_dump (boolean dump_active)
     {
