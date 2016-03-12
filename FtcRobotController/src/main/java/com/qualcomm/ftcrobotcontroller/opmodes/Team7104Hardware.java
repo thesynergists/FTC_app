@@ -60,6 +60,12 @@ public class Team7104Hardware extends OpMode
 
 
     //Climber!!!
+
+    int climber_limit_for_Scoop = -400;
+    boolean climber_bypass = false;
+    double default_climber_position = 0.06;
+    double climber_safe_from_smashing_position = .5;
+
     void Climber_dump (boolean dump_active)
     {
         if (dump_active)
@@ -69,8 +75,23 @@ public class Team7104Hardware extends OpMode
 
         if (!dump_active)
         {
-                Climber_servo.setPosition(0);
+                Climber_servo.setPosition(default_climber_position);
         }
+    }
+
+    public void MoveClimberDepositor(int CorrectionValue)
+    {
+        if (Scoop_Motor.getCurrentPosition() < (climber_limit_for_Scoop+CorrectionValue))
+        {
+            Climber_servo.setPosition(climber_safe_from_smashing_position);
+        }
+
+        else
+        {
+            Climber_servo.setPosition(default_climber_position);
+        }
+
+        climber_bypass = true;
     }
 
 
@@ -257,7 +278,7 @@ public class Team7104Hardware extends OpMode
         Conveyor_servo.setPosition(.5);
 
         Climber_servo = hardwareMap.servo.get("Climber_servo");
-        Climber_servo.setPosition(0);                               //Hopefully the neutral position...
+        Climber_servo.setPosition(default_climber_position);                               //Hopefully the neutral position...
 
         Flipper_Servo_Left = hardwareMap.servo.get("Flipper_Servo_Left");
         Flipper_Servo_Left.setPosition(.59);    //Previous default was .40

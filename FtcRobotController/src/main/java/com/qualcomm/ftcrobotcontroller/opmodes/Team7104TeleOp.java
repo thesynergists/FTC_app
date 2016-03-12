@@ -73,7 +73,6 @@ public class Team7104TeleOp extends Team7104Hardware
     boolean the_stop_button_left_flipper = false;
     boolean the_stop_button_right_flipper = false;
 
-    boolean climber_bypass = false;
 
     @Override
     public void init()
@@ -347,18 +346,7 @@ public class Team7104TeleOp extends Team7104Hardware
                                                     // (assumes scoop is ALL THE WAY TO THE FLOOR AT INIT)
             Scoop_Motor.setPower(.1);               //You set this as the max power the motor can have...
                                                     // (foresee issues depending on which side you are on)
-
-            if (Scoop_Motor.getCurrentPosition() < -200)
-            {
-                Climber_servo.setPosition(.6);
-            }
-
-            else
-            {
-                Climber_servo.setPosition(0);
-            }
-
-            climber_bypass = true;
+            MoveClimberDepositor(0);
         }
 
         if (gamepad2.b)
@@ -367,17 +355,7 @@ public class Team7104TeleOp extends Team7104Hardware
             Scoop_Motor.setTargetPosition(-360);     //Preset for Dumping Debris into Conveyor, previously was 260
             Scoop_Motor.setPower(.1);
 
-            if (Scoop_Motor.getCurrentPosition() < -200)
-            {
-                Climber_servo.setPosition(.6);
-            }
-
-            else
-            {
-                Climber_servo.setPosition(0);
-            }
-
-            climber_bypass = true;
+            MoveClimberDepositor(0);
         }
 
         if (gamepad2.y)
@@ -386,7 +364,7 @@ public class Team7104TeleOp extends Team7104Hardware
             Scoop_Motor.setTargetPosition(-640);     //Preset for Storage, previously was 30
             Scoop_Motor.setPower(.1);
 
-            Climber_servo.setPosition(.6);
+            Climber_servo.setPosition(climber_safe_from_smashing_position);
 
             climber_bypass = true;
         }
@@ -416,17 +394,7 @@ public class Team7104TeleOp extends Team7104Hardware
             Scoop_Motor.setMode((DcMotorController.RunMode.RUN_USING_ENCODERS));
             Scoop_Motor.setPower(Scoop_Motor_Power);
 
-            if (Scoop_Motor.getCurrentPosition() < -200)
-            {
-                Climber_servo.setPosition(.6);
-            }
-
-            else
-            {
-                Climber_servo.setPosition(0);
-            }
-
-            climber_bypass = true;
+            MoveClimberDepositor(150);
         }
         //END Scoop Fine-Tuning
 
