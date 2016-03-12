@@ -69,7 +69,7 @@ public class Team7104Hardware extends OpMode
 
         if (!dump_active)
         {
-            Climber_servo.setPosition(0);
+                Climber_servo.setPosition(0);
         }
     }
 

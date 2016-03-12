@@ -73,6 +73,8 @@ public class Team7104TeleOp extends Team7104Hardware
     boolean the_stop_button_left_flipper = false;
     boolean the_stop_button_right_flipper = false;
 
+    boolean climber_bypass = false;
+
     @Override
     public void init()
     {
@@ -112,6 +114,14 @@ public class Team7104TeleOp extends Team7104Hardware
         {
             PullUp_Motors_SetPower(-1.0);
         }*/
+
+        
+
+        //Climber control variable!
+        if (!gamepad2.a && !gamepad2.b && !gamepad2.y && gamepad2.right_stick_y > -.05 && gamepad2.right_stick_y < .05)
+        {
+            climber_bypass = false;
+        }
 
 
         if (gamepad2.right_bumper)
@@ -169,7 +179,10 @@ public class Team7104TeleOp extends Team7104Hardware
 
 
         //CLIMBER!!!
-        Climber_dump(gamepad1.b);
+        if (!climber_bypass)
+        {
+            Climber_dump(gamepad1.b);
+        }
 
 
         //FLIPPERS!!!
@@ -330,23 +343,52 @@ public class Team7104TeleOp extends Team7104Hardware
         if (gamepad2.a)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-            Scoop_Motor.setTargetPosition(670);     //Preset for Collecting Debris
+            Scoop_Motor.setTargetPosition(5);      //Preset for Collecting Debris, previously was 670
+                                                    // (assumes scoop is ALL THE WAY TO THE FLOOR AT INIT)
             Scoop_Motor.setPower(.1);               //You set this as the max power the motor can have...
                                                     // (foresee issues depending on which side you are on)
+
+            if (Scoop_Motor.getCurrentPosition() < -410)
+            {
+                Climber_servo.setPosition(.6);
+            }
+
+            else
+            {
+                Climber_servo.setPosition(0);
+            }
+
+            climber_bypass = true;
         }
 
         if (gamepad2.b)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-            Scoop_Motor.setTargetPosition(260);     //Preset for Dumping Debris into Conveyor
+            Scoop_Motor.setTargetPosition(-410);     //Preset for Dumping Debris into Conveyor, previously was 260
             Scoop_Motor.setPower(.1);
+
+            if (Scoop_Motor.getCurrentPosition() < -410)
+            {
+                Climber_servo.setPosition(.6);
+            }
+
+            else
+            {
+                Climber_servo.setPosition(0);
+            }
+
+            climber_bypass = true;
         }
 
         if (gamepad2.y)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-            Scoop_Motor.setTargetPosition(30);     //Preset for Storage
+            Scoop_Motor.setTargetPosition(-640);     //Preset for Storage, previously was 30
             Scoop_Motor.setPower(.1);
+
+            Climber_servo.setPosition(.6);
+
+            climber_bypass = true;
         }
 
         if (gamepad2.x)
@@ -373,6 +415,18 @@ public class Team7104TeleOp extends Team7104Hardware
         {
             Scoop_Motor.setMode((DcMotorController.RunMode.RUN_USING_ENCODERS));
             Scoop_Motor.setPower(Scoop_Motor_Power);
+
+            if (Scoop_Motor.getCurrentPosition() < -410)
+            {
+                Climber_servo.setPosition(.6);
+            }
+
+            else
+            {
+                Climber_servo.setPosition(0);
+            }
+
+            climber_bypass = true;
         }
         //END Scoop Fine-Tuning
 

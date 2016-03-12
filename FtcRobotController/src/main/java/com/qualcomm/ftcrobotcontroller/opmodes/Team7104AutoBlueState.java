@@ -20,6 +20,15 @@ public class Team7104AutoBlueState extends Team7104AutoHardware
 
         Scoop_Motor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+
+        Climber_servo.setPosition(.6);
+        Scoop_time.reset();
+        while (Scoop_time.time() < 1)
+        {
+
+        }
+
+
         Scoop_time.reset();
         Scoop_Motor.setTargetPosition(500);     //Should be 660!!! Temporarily adjusted because PullUp is in way.
         Scoop_Motor.setPower(.1);
@@ -29,6 +38,8 @@ public class Team7104AutoBlueState extends Team7104AutoHardware
             SetLeftMotors(0);
             SetRightMotors(0);
         }
+
+        Climber_servo.setPosition(0);
 
         //11.5 encoders are about 90 degree turn.
         RunWithEncoders(.6, .6, 6, 1);      //Small drive forward
@@ -45,14 +56,5 @@ public class Team7104AutoBlueState extends Team7104AutoHardware
 
         RunWithEncoders(.5, .5, 5, 5);      //Push to wall.
         sleep(500);
-
-        Scoop_Motor.setTargetPosition(30);
-        Scoop_Motor.setPower(.1);
-
-        Scoop_time.reset();
-        while (Scoop_time.time() < 3)
-        {
-        }
-        Scoop_Motor.setPower(0);
     }
 }
