@@ -68,14 +68,16 @@ public class Team7104AutoHardware extends LinearOpMode {
     //double driveSteering;
     //double driveGain = 0.7;
 
-    //Color Sensor Set Up
-    /*float hsvValues[] = {0F,0F,0F};
-    final float values[] = hsvValues;
-    final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(R.id.RelativeLayout);
-*/
-
     //GLOBAL VARIABLES
     double Climber_Saftey_Position = .33;
+    double Climber_Default_Position = .06;
+    int Scoop_Floor = 610;
+    int Scoop_Deposit = 250;
+    int Scoop_Storage = 50;
+    int Sweeper_Forward = 0;
+    double Sweeper_Reverse = .75;
+    int SLEEP_After_Movement = 1000;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -98,7 +100,7 @@ public class Team7104AutoHardware extends LinearOpMode {
         Conveyor_servo.setPosition(.5);
 
         Climber_servo = hardwareMap.servo.get("Climber_servo");
-        Climber_servo.setPosition(0);                               //Hopefully the neutral position...
+        Climber_servo.setPosition(Climber_Default_Position);                               //Hopefully the neutral position...
 
         Flipper_Servo_Left = hardwareMap.servo.get("Flipper_Servo_Left");
         Flipper_Servo_Left.setPosition(.59);
@@ -165,6 +167,7 @@ public class Team7104AutoHardware extends LinearOpMode {
         motorLeft2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight1.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         motorRight2.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+        Scoop_Motor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
 
         //Color Sensor Setup
@@ -365,6 +368,6 @@ public class Team7104AutoHardware extends LinearOpMode {
         sleep(SLEEP);
         headingPrevious = sensorGyro.getHeading(); waitOneFullHardwareCycle();
         CurrentPositionatEndOfEncoderRun = motorRight1.getCurrentPosition();
-        sleep(SLEEP);
+        sleep(SLEEP_After_Movement);
     }
 }

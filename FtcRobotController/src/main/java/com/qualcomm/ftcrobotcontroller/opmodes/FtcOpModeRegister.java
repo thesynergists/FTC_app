@@ -68,7 +68,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("Team7104GyroTest", Team7104GyroTest.class);
 
     manager.register("Team7104AutoRedState", Team7104AutoRedState.class);
-    manager.register("Team7104AutoBlueState", Team7104AutoBlueState.class);
+    manager.register("Team7104AutoBlueState", Team7104AutoBlueFloorPark.class);
 
     //manager.register("MatrixK9TeleOp", MatrixK9TeleOp.class);
     //manager.register("K9TeleOp", K9TeleOp.class);
