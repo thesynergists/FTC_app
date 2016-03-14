@@ -70,13 +70,12 @@ public class MRRGBExample extends LinearOpMode {
     boolean bEnabled = true;
 
     // turn the LED on in the beginning, just so user will know that the sensor is active.
-    sensorRGB.enableLed(true);
-
-    // wait one cycle.
-    waitOneFullHardwareCycle();
+    sensorRGB.enableLed(false);  waitOneFullHardwareCycle();
 
     // wait for the start button to be pressed.
     waitForStart();
+
+    sensorRGB.enableLed(true);  waitOneFullHardwareCycle();
 
     // hsvValues is an array that will hold the hue, saturation, and value information.
     float hsvValues[] = {0F,0F,0F};

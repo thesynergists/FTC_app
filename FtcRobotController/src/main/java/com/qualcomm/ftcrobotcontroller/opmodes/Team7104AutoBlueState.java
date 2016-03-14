@@ -21,7 +21,7 @@ public class Team7104AutoBlueState extends Team7104AutoHardware
         Scoop_Motor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
         Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
 
-        Climber_servo.setPosition(.35);
+        Climber_servo.setPosition(Climber_Saftey_Position);
         Scoop_time.reset();
         while (Scoop_time.time() < 1)
         {
@@ -30,7 +30,7 @@ public class Team7104AutoBlueState extends Team7104AutoHardware
 
 
         Scoop_time.reset();
-        Scoop_Motor.setTargetPosition(670);     //Should be 660!!! Temporarily adjusted because PullUp is in way.
+        Scoop_Motor.setTargetPosition(660);     //Should be 660!!! Temporarily adjusted because PullUp is in way.
         Scoop_Motor.setPower(.1);
 
         while (Scoop_time.time() < 2)
@@ -38,7 +38,10 @@ public class Team7104AutoBlueState extends Team7104AutoHardware
             SetLeftMotors(0);
             SetRightMotors(0);
         }
+        telemetry.addData("Scoop Motors Stopped", toString());
+        sleep(1000);
 
+        //Climber_servo.setPosition(.15);
         Climber_servo.setPosition(0);
 
         //11.5 encoders are about 90 degree turn.
@@ -56,5 +59,23 @@ public class Team7104AutoBlueState extends Team7104AutoHardware
 
         RunWithEncoders(.5, .5, 5, 5);      //Push to wall.
         sleep(500);
+
+        sleep(5000);
+        Climber_servo.setPosition(Climber_Saftey_Position);
+        //Scoop_time.reset();
+        //while (Scoop_time.time() < 1){        }
+
+
+        Scoop_time.reset();
+        Scoop_Motor.setTargetPosition(5);     //Should be 660!!! Temporarily adjusted because PullUp is in way.
+        Scoop_Motor.setPower(.1);
+
+        while (Scoop_time.time() < .5)
+        {
+            SetLeftMotors(0);
+            SetRightMotors(0);
+        }
+        telemetry.addData("Scoop Motors Stopped", toString());
+        sleep(1000);
     }
 }
