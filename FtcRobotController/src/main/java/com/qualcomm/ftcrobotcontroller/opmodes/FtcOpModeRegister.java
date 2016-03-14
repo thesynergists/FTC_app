@@ -54,9 +54,9 @@ public class FtcOpModeRegister implements OpModeRegister {
      *
      * If two or more op modes are registered with the same name, the app will display an error.
      */
-    manager.register("Team7104Telemetry", Team7104Telemetry.class);
+    //manager.register("Team7104Telemetry", Team7104Telemetry.class);
     manager.register("Team7104TeleOp", Team7104TeleOp.class);
-    manager.register("Team7104AutoEncoder", Team7104AutoEncoder.class);
+    //manager.register("Team7104AutoEncoder", Team7104AutoEncoder.class);
     //manager.register("Team7104AutoR_FloorGoal", Team7104AutoR_FloorGoal.class);
     manager.register("Team7104AutoR_Linear", Team7104AutoR_Linear.class);
     manager.register("Team7104AutoB_Linear", Team7104AutoB_Linear.class);
@@ -67,8 +67,8 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("Team7104EncoderTest", Team7104EncoderTest.class);
     manager.register("Team7104GyroTest", Team7104GyroTest.class);
 
-    manager.register("Team7104AutoRedState", Team7104AutoRedState.class);
-    manager.register("Team7104AutoBlueState", Team7104AutoBlueFloorPark.class);
+    manager.register("Team7104AutoRedFloorPark", Team7104AutoRedFloorPark.class);
+    manager.register("Team7104AutoBlueFloorPark", Team7104AutoBlueFloorPark.class);
 
     //manager.register("MatrixK9TeleOp", MatrixK9TeleOp.class);
     //manager.register("K9TeleOp", K9TeleOp.class);

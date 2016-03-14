@@ -3,13 +3,15 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import java.util.Set;
+
 /**
  * Created by thomasmatthews on 2/27/16.
  */
-public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
+public class Team7104AutoRedFloorPark extends Team7104AutoHardware
 {
-    @Override public void runOpMode() throws InterruptedException
-    {
+
+    @Override public void runOpMode() throws InterruptedException {
         super.runOpMode();
 
         Climber_servo.setPosition(Climber_Saftey_Position);
@@ -22,8 +24,7 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
         Scoop_Motor.setTargetPosition(Scoop_Floor);     //Should be 660!!! Temporarily adjusted because PullUp is in way.
         Scoop_Motor.setPower(.1);
 
-        while (Scoop_time.time() < 2)
-        {
+        while (Scoop_time.time() < 2) {
             SetLeftMotors(0);
             SetRightMotors(0);
         }
@@ -35,10 +36,10 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
         Sweep_servo.setPosition(Sweeper_Reverse);
 
         RunWithEncoders(.6, .6, 6, 1);      //Small drive forward
-        Turn_degrees(.5, 45, 2);            //45 degree turn right using gyro
+        Turn_degrees(-.5, 45, 2);            //45 degree turn right using gyro
         Scoop_Motor.setPower(0);
         RunWithEncoders(.6, .6, 40, 3);     //Long drive forward
-        Turn_degrees(-.5, 50, 4);           //45 degree turn right using gyro
+        Turn_degrees(.5, 50, 4);           //45 degree turn right using gyro
         sleep(1000);
         Sweep_servo.setPosition(Sweeper_Forward);
         RunWithEncoders(.5, .5, 8, 5);      //Forward to Collect Some Debris
@@ -50,12 +51,13 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
         //Move Conveyor
         Conveyor_time.reset();
         Conveyor_servo.setPosition(.6);
-        while (Conveyor_time.time() < 2) {} //Do nothing
+        while (Conveyor_time.time() < 2) {
+        } //Do nothing
         Conveyor_servo.setPosition(.5);
 
         Scoop_Motor.setTargetPosition(Scoop_Floor);
         Scoop_Motor.setPower(.1);
-        Turn_degrees(-.5, 90, 6);
+        Turn_degrees(.5, 90, 6);
         Scoop_Motor.setPower(0);
         RunForTime(-.5, -.5, .5, 1);
         SetLeftMotors(0);

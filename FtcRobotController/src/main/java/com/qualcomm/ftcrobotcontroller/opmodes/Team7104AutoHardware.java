@@ -28,6 +28,7 @@ import static java.lang.Math.*;
     Turning With Encoders...Approximately:
       90*~11.5 inches
 */
+
 public class Team7104AutoHardware extends LinearOpMode {
 
     DcMotor motorLeft1;
@@ -73,12 +74,14 @@ public class Team7104AutoHardware extends LinearOpMode {
     double Climber_Default_Position = .06;
     int Scoop_Floor = 610;
     int Scoop_Deposit = 250;
-    int Scoop_Storage = 50;
+    int Scoop_Storage = 25;
     int Sweeper_Forward = 0;
     double Sweeper_Reverse = .75;
     int SLEEP_After_Movement = 1000;
 
 
+    public ElapsedTime Scoop_time = new ElapsedTime();
+    public ElapsedTime Conveyor_time = new ElapsedTime();
     @Override
     public void runOpMode() throws InterruptedException {
         //hardwareMap.logDevices();
