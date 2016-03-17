@@ -97,6 +97,8 @@ public class Team7104TeleOp extends Team7104Hardware
         {
             climber_bypass = false;
         }
+
+        //Pull Up
         if (gamepad2.right_bumper)
         {
             PullUp_Motors_SetPower(1.0);
@@ -503,9 +505,9 @@ public class Team7104TeleOp extends Team7104Hardware
         PullUp_Motor_Tape.setPower(0);
         setPowerLeftMotor(0);
         setPowerRightMotor(0);
-        Flipper_Servo_Left.setPosition(.59);
-        Flipper_Servo_Right.setPosition(.40);
-        Climber_servo.setPosition(0.06);
+        //Flipper_Servo_Left.setPosition(.59);
+        //Flipper_Servo_Right.setPosition(.40);
+        //Climber_servo.setPosition(default_climber_position);
         Scoop_Motor.setPower(0);
         Sweep_servo.setPosition(.5);
     }

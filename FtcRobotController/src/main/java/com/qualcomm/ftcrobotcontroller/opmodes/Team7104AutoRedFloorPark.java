@@ -10,8 +10,8 @@ import java.util.Set;
  */
 public class Team7104AutoRedFloorPark extends Team7104AutoHardware
 {
-
-    @Override public void runOpMode() throws InterruptedException {
+    @Override public void runOpMode() throws InterruptedException
+    {
         super.runOpMode();
 
         Climber_servo.setPosition(Climber_Saftey_Position);
@@ -24,7 +24,8 @@ public class Team7104AutoRedFloorPark extends Team7104AutoHardware
         Scoop_Motor.setTargetPosition(Scoop_Floor);     //Should be 660!!! Temporarily adjusted because PullUp is in way.
         Scoop_Motor.setPower(.1);
 
-        while (Scoop_time.time() < 2) {
+        while (Scoop_time.time() < 2)
+        {
             SetLeftMotors(0);
             SetRightMotors(0);
         }
@@ -33,6 +34,9 @@ public class Team7104AutoRedFloorPark extends Team7104AutoHardware
         Climber_servo.setPosition(Climber_Default_Position + .1);
         sleep(1000);
         Climber_servo.setPosition(Climber_Default_Position);
+
+        sleep(MatchWaitTime);
+
         Sweep_servo.setPosition(Sweeper_Reverse);
 
         RunWithEncoders(.6, .6, 6, 1);      //Small drive forward

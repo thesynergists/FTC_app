@@ -32,16 +32,19 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
         Climber_servo.setPosition(Climber_Default_Position + .1);
         sleep(1000);
         Climber_servo.setPosition(Climber_Default_Position);
+
+        sleep(MatchWaitTime);
+
         Sweep_servo.setPosition(Sweeper_Reverse);
 
         RunWithEncoders(.6, .6, 6, 1);      //Small drive forward
-        Turn_degrees(.5, 45, 2);            //45 degree turn right using gyro
+        Turn_degrees(.4, 45, 2);            //45 degree turn right using gyro
         Scoop_Motor.setPower(0);
         RunWithEncoders(.6, .6, 40, 3);     //Long drive forward
         Turn_degrees(-.5, 50, 4);           //45 degree turn right using gyro
         sleep(1000);
         Sweep_servo.setPosition(Sweeper_Forward);
-        RunWithEncoders(.5, .5, 8, 5);      //Forward to Collect Some Debris
+        RunWithEncoders(.5, .5, 8, 5);      //Forward to Collect Some Debris in front of Beacon
         Sweep_servo.setPosition(.5);        //Stop Sweeper
         Scoop_Motor.setTargetPosition(Scoop_Deposit);
         Scoop_Motor.setPower(.1);

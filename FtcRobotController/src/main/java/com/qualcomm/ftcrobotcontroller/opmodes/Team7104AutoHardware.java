@@ -79,6 +79,8 @@ public class Team7104AutoHardware extends LinearOpMode {
     double Sweeper_Reverse = .75;
     int SLEEP_After_Movement = 1000;
 
+    int MatchWaitTime = 0;
+
 
     public ElapsedTime Scoop_time = new ElapsedTime();
     public ElapsedTime Conveyor_time = new ElapsedTime();
