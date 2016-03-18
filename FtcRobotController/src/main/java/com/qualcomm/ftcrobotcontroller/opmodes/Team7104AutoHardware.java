@@ -70,24 +70,28 @@ public class Team7104AutoHardware extends LinearOpMode {
     //double driveGain = 0.7;
 
     //GLOBAL VARIABLES
-    double Climber_Saftey_Position = .33;
+    double Climber_Saftey_Position = .355;
     double Climber_Default_Position = .06;
-    int Scoop_Floor = 610;
+    int Scoop_Floor = 622;
     int Scoop_Deposit = 250;
     int Scoop_Storage = 25;
-    int Sweeper_Forward = 0;
-    double Sweeper_Reverse = .75;
+    double Sweeper_Forward = 0.2;
+    double Sweeper_Reverse = .6;
     int SLEEP_After_Movement = 1000;
 
     //Floor Park Variables
-    int MatchWaitTime = 0;
-    double FPSmallDrive = 6; double FP_SD_MPLeft = .6; double FP_SD_MPRight = .6;
-    double FPFirstTurn = 30; double FP_FT_MP = .5;
-    double FPLongDrive = 40; double FP_LD_MPLeft = .6; double FP_LD_MPRight = .6;
-    double FPSecondTurnNearBeacon = 50; double FP_BeaconTurn_MP = .5;
-    double FPForwardtoCollectSomeDebris = 8; double FP_Debris_MPLeft = .5; double FP_Debris_MPRight = .5;
+    int MatchWaitTime = 0; //In Milliseconds
+    double FP_Prep = 5; double FP_Prep_MPLeft = .4; double FP_Prep_MPRight = .4;
+    double FP_Prep_Time = .75;
+    double FPSmallDrive = 13; double FP_SD_MPLeft = .75; double FP_SD_MPRight = .6;
+    double FPFirstTurn = 25; double FP_FT_MP = .5;
+    double FPLongDrive = 55; double FP_LD_MPLeft = .72; double FP_LD_MPRight = .6;
+    double FP_IntoWall_MPLeft = .3; double FP_IntoWall_MPRight = .3; double FP_IntoWall_Time = .5;
+    double FP_BackupWall = 2; double FP_BackupWall_MPLeft = -.3; double FP_BackupWall_MPRight = -.3;
+    double FPSecondTurnNearBeacon = FPFirstTurn + 12; double FP_BeaconTurn_MP = .5;
+    double FPForwardtoCollectSomeDebris = 10; double FP_Debris_MPLeft = .5; double FP_Debris_MPRight = .5;
     double FP90Turn = 90; double FP90Turn_MP = .5;
-    double FPForTime_Time = .5; double FPForTime_MPLeft = .5; double FPForTime_MPRight = .5;
+    double FPForTime_Time = .75; double FPForTime_MPLeft = .3; double FPForTime_MPRight = .3;
 
 
     public ElapsedTime Scoop_time = new ElapsedTime();

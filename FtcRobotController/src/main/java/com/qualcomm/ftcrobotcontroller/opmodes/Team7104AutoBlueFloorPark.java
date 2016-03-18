@@ -12,6 +12,10 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
     {
         super.runOpMode();
 
+        //Move Forward to Try to Move Blocks out of Sweeper
+        RunWithEncoders(FP_Prep_MPLeft, FP_Prep_MPRight, FP_Prep, 1);
+        RunForTime(-FP_Prep_MPLeft, -FP_Prep_MPRight, FP_Prep_Time, 1);
+
         Climber_servo.setPosition(Climber_Saftey_Position);
         Scoop_time.reset();
         sleep(500);
@@ -29,8 +33,8 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
         }
         sleep(1000);
 
-        Climber_servo.setPosition(Climber_Default_Position + .1);
-        sleep(1000);
+        Climber_servo.setPosition(Climber_Default_Position + .15);
+        sleep(750);
         Climber_servo.setPosition(Climber_Default_Position);
 
         sleep(MatchWaitTime);
@@ -39,13 +43,18 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
 
         RunWithEncoders(FP_SD_MPLeft, FP_SD_MPRight, FPSmallDrive, 1);      //Small drive forward
         Turn_degrees(FP_FT_MP, FPFirstTurn, 2);            //45 degree turn right using gyro
-        Scoop_Motor.setPower(0);
         RunWithEncoders(FP_LD_MPLeft, FP_LD_MPRight, FPLongDrive, 3);     //Long drive forward
+        Scoop_Motor.setPower(0);
+        Sweep_servo.setPosition(Sweeper_Forward);
+        RunForTime(FP_IntoWall_MPLeft, FP_IntoWall_MPRight, FP_IntoWall_Time, 1); //Forward 'into wall' to get closer to wall
+        RunWithEncoders(FP_BackupWall_MPLeft, FP_BackupWall_MPRight, FP_BackupWall, 3);     //Backup from wall a little
         Turn_degrees(-FP_BeaconTurn_MP, FPSecondTurnNearBeacon, 4);           //45 degree turn right using gyro
         sleep(1000);
-        Sweep_servo.setPosition(Sweeper_Forward);
+
+        //Collect Debris
+        Scoop_Motor.setTargetPosition(Scoop_Floor);
+        Scoop_Motor.setPower(.1);
         RunWithEncoders(FP_Debris_MPLeft, FP_Debris_MPRight, FPForwardtoCollectSomeDebris, 5);      //Forward to Collect Some Debris in front of Beacon
-        Sweep_servo.setPosition(.5);        //Stop Sweeper
         Scoop_Motor.setTargetPosition(Scoop_Deposit);
         Scoop_Motor.setPower(.1);
         sleep(750);
@@ -55,6 +64,7 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
         Conveyor_servo.setPosition(.6);
         while (Conveyor_time.time() < 2) {} //Do nothing
         Conveyor_servo.setPosition(.5);
+        Sweep_servo.setPosition(.5);        //Stop Sweeper
 
         Scoop_Motor.setTargetPosition(Scoop_Floor);
         Scoop_Motor.setPower(.1);
