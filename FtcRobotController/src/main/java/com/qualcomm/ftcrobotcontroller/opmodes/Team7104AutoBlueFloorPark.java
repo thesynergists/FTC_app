@@ -52,7 +52,7 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
         sleep(1000);
 
         //Collect Debris
-        Scoop_Motor.setTargetPosition(Scoop_Floor);
+        Scoop_Motor.setTargetPosition(Scoop_Floor); //To ensure the scoop is low enough to collect debris
         Scoop_Motor.setPower(.1);
         RunWithEncoders(FP_Debris_MPLeft, FP_Debris_MPRight, FPForwardtoCollectSomeDebris, 5);      //Forward to Collect Some Debris in front of Beacon
         Scoop_Motor.setTargetPosition(Scoop_Deposit);
