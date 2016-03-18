@@ -79,7 +79,15 @@ public class Team7104AutoHardware extends LinearOpMode {
     double Sweeper_Reverse = .75;
     int SLEEP_After_Movement = 1000;
 
+    //Floor Park Variables
     int MatchWaitTime = 0;
+    double FPSmallDrive = 6; double FP_SD_MPLeft = .6; double FP_SD_MPRight = .6;
+    double FPFirstTurn = 30; double FP_FT_MP = .5;
+    double FPLongDrive = 40; double FP_LD_MPLeft = .6; double FP_LD_MPRight = .6;
+    double FPSecondTurnNearBeacon = 50; double FP_BeaconTurn_MP = .5;
+    double FPForwardtoCollectSomeDebris = 8; double FP_Debris_MPLeft = .5; double FP_Debris_MPRight = .5;
+    double FP90Turn = 90; double FP90Turn_MP = .5;
+    double FPForTime_Time = .5; double FPForTime_MPLeft = .5; double FPForTime_MPRight = .5;
 
 
     public ElapsedTime Scoop_time = new ElapsedTime();

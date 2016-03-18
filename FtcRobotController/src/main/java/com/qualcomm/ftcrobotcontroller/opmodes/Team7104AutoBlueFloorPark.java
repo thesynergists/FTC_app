@@ -37,14 +37,14 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
 
         Sweep_servo.setPosition(Sweeper_Reverse);
 
-        RunWithEncoders(.6, .6, 6, 1);      //Small drive forward
-        Turn_degrees(.4, 45, 2);            //45 degree turn right using gyro
+        RunWithEncoders(FP_SD_MPLeft, FP_SD_MPRight, FPSmallDrive, 1);      //Small drive forward
+        Turn_degrees(FP_FT_MP, FPFirstTurn, 2);            //45 degree turn right using gyro
         Scoop_Motor.setPower(0);
-        RunWithEncoders(.6, .6, 40, 3);     //Long drive forward
-        Turn_degrees(-.5, 50, 4);           //45 degree turn right using gyro
+        RunWithEncoders(FP_LD_MPLeft, FP_LD_MPRight, FPLongDrive, 3);     //Long drive forward
+        Turn_degrees(-FP_BeaconTurn_MP, FPSecondTurnNearBeacon, 4);           //45 degree turn right using gyro
         sleep(1000);
         Sweep_servo.setPosition(Sweeper_Forward);
-        RunWithEncoders(.5, .5, 8, 5);      //Forward to Collect Some Debris in front of Beacon
+        RunWithEncoders(FP_Debris_MPLeft, FP_Debris_MPRight, FPForwardtoCollectSomeDebris, 5);      //Forward to Collect Some Debris in front of Beacon
         Sweep_servo.setPosition(.5);        //Stop Sweeper
         Scoop_Motor.setTargetPosition(Scoop_Deposit);
         Scoop_Motor.setPower(.1);
@@ -58,9 +58,9 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
 
         Scoop_Motor.setTargetPosition(Scoop_Floor);
         Scoop_Motor.setPower(.1);
-        Turn_degrees(-.5, 90, 6);
+        Turn_degrees(-FP90Turn_MP, FP90Turn, 6);
         Scoop_Motor.setPower(0);
-        RunForTime(-.5, -.5, .5, 1);
+        RunForTime(-FPForTime_MPLeft, -FPForTime_MPRight, FPForTime_Time, 1);
         SetLeftMotors(0);
         SetRightMotors(0);
 
