@@ -31,7 +31,7 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
             SetLeftMotors(0);
             SetRightMotors(0);
         }
-        sleep(1000);
+        sleep(FP_Prep_Scoop_Time);
 
         Climber_servo.setPosition(Climber_Default_Position + .15);
         sleep(750);
@@ -49,7 +49,6 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
         RunForTime(FP_IntoWall_MPLeft, FP_IntoWall_MPRight, FP_IntoWall_Time, 1); //Forward 'into wall' to get closer to wall
         RunWithEncoders(FP_BackupWall_MPLeft, FP_BackupWall_MPRight, FP_BackupWall, 3);     //Backup from wall a little
         Turn_degrees(-FP_BeaconTurn_MP, FPSecondTurnNearBeacon, 4);           //45 degree turn right using gyro
-        sleep(1000);
 
         //Collect Debris
         Scoop_Motor.setTargetPosition(Scoop_Floor); //To ensure the scoop is low enough to collect debris
@@ -73,27 +72,5 @@ public class Team7104AutoBlueFloorPark extends Team7104AutoHardware
         RunForTime(-FPForTime_MPLeft, -FPForTime_MPRight, FPForTime_Time, 1);
         SetLeftMotors(0);
         SetRightMotors(0);
-
-
-
-/*
-        sleep(4000);
-        Climber_servo.setPosition(Climber_Saftey_Position);
-        //Scoop_time.reset();
-        //while (Scoop_time.time() < 1){        }
-
-
-        Scoop_time.reset();
-        Scoop_Motor.setTargetPosition(Scoop_Storage);     //Should be 660!!! Temporarily adjusted because PullUp is in way.
-        Scoop_Motor.setPower(.1);
-
-        while (Scoop_time.time() < .5)
-        {
-            SetLeftMotors(0);
-            SetRightMotors(0);
-        }
-        telemetry.addData("Scoop Motors Stopped", 1);
-        sleep(1000);
-   */
     }
 }
