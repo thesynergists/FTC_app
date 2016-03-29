@@ -14,32 +14,9 @@ public class Team7104AutoRedFloorPark extends Team7104AutoHardware
     {
         super.runOpMode();
 
-        //Move Forward to Try to Move Blocks out of Sweeper
-        RunWithEncoders(FP_Prep_MPLeft, FP_Prep_MPRight, FP_Prep, 1);
-        RunForTime(-FP_Prep_MPLeft, -FP_Prep_MPRight, FP_Prep_Time, 1);
-
-        Climber_servo.setPosition(Climber_Saftey_Position);
-        Scoop_time.reset();
-        sleep(500);
-
-
-        Scoop_time.reset();
-        Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-        Scoop_Motor.setTargetPosition(Scoop_Floor);     //Should be 660!!! Temporarily adjusted because PullUp is in way.
-        Scoop_Motor.setPower(.1);
-
-        while (Scoop_time.time() < 2)
-        {
-            SetLeftMotors(0);
-            SetRightMotors(0);
-        }
-        sleep(FP_Prep_Scoop_Time);
-
-        Climber_servo.setPosition(Climber_Default_Position + .15);
-        sleep(750);
-        Climber_servo.setPosition(Climber_Default_Position);
-
-        sleep(MatchWaitTime);
+        sleep(MatchWaitTimeBEFOREScoop);
+        ScoopPrep();
+        sleep(MatchWaitTimeAFTERScoop);
 
         Sweep_servo.setPosition(Sweeper_Reverse);
 

@@ -195,7 +195,7 @@ public class Team7104TeleOp extends Team7104Hardware
 
         if (!was_pressed_left_flipper)
         {
-            Flipper_Servo_Left.setPosition(.59);
+            Flipper_Servo_Left.setPosition(.6); //Was .59
         }
 
 
@@ -238,7 +238,7 @@ public class Team7104TeleOp extends Team7104Hardware
 
         if (!was_pressed_right_flipper)
         {
-            Flipper_Servo_Right.setPosition(.40);
+            Flipper_Servo_Right.setPosition(.4);
         }
 
 
@@ -311,7 +311,7 @@ public class Team7104TeleOp extends Team7104Hardware
         if (gamepad2.b)
         {
             Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
-            Scoop_Motor.setTargetPosition(-375);     //Preset for Dumping Debris into Conveyor, previously was 260
+            Scoop_Motor.setTargetPosition(-355);     //Preset for Dumping Debris into Conveyor, previously was -375
             Scoop_Motor.setPower(.11);
 
             MoveClimberDepositor(0);
@@ -489,6 +489,8 @@ public class Team7104TeleOp extends Team7104Hardware
         telemetry.addData("PullUp Tape Motor Power", PullUp_Motor_Tape.getPower());
         telemetry.addData("PullUp String Motor Power", PullUp_Motor_String.getPower());
         telemetry.addData("Climber Position", Climber_servo.getPosition());
+        telemetry.addData("Left Motor Power:" +motorLeft1.getPower(), motorLeft2.getPower());
+        telemetry.addData("Right Motor Power:" +motorRight1.getPower(), motorRight2.getPower());
     }
 
     /*

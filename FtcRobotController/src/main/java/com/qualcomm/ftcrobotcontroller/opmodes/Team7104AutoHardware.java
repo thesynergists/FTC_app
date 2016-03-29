@@ -80,16 +80,18 @@ public class Team7104AutoHardware extends LinearOpMode {
     int SLEEP_After_Movement = 500;
 
     //Floor Park Variables
-    int MatchWaitTime = 0; //In Milliseconds
+    int MatchWaitTimeBEFOREScoop = 0; //In Milliseconds
+    int MatchWaitTimeAFTERScoop = 0;
     double FP_Prep = 13; double FP_Prep_MPLeft = .4; double FP_Prep_MPRight = .4;
-    double FP_Prep_Time = 1.6;
+    double FP_Prep_Time = 1.4; double FP_Prep_MPBackLeft = .3; double FP_Prep_MPBackRight = .3;
+    double FP_OffWall_Time = .5; double FP_OffWall_Distance = 1.5; double FP_OffWall_MPLeft = .1; double FP_OffWall_MPRight = .1;
     int FP_Prep_Scoop_Time = 500;
     double FPSmallDrive = 13; double FP_SD_MPLeft = .75; double FP_SD_MPRight = .6;
-    double FPFirstTurn = 25; double FP_FT_MP = .5;
+    double FPFirstTurn = 9; double FP_FT_MP = .5;
     double FPLongDrive = 55; double FP_LD_MPLeft = .72; double FP_LD_MPRight = .6;
     double FP_IntoWall_MPLeft = .3; double FP_IntoWall_MPRight = .3; double FP_IntoWall_Time = .75;
     double FP_BackupWall = 5; double FP_BackupWall_MPLeft = -.3; double FP_BackupWall_MPRight = -.3;
-    double FPSecondTurnNearBeacon = FPFirstTurn + 12; double FP_BeaconTurn_MP = .5;
+    double FPSecondTurnNearBeacon = FPFirstTurn + 5; double FP_BeaconTurn_MP = .5; // '+5 to over turn a little
     double FPForwardtoCollectSomeDebris = 10; double FP_Debris_MPLeft = .5; double FP_Debris_MPRight = .5;
     double FP90Turn = 90; double FP90Turn_MP = .5;
     double FPForTime_Time = 1; double FPForTime_MPLeft = .3; double FPForTime_MPRight = .3;
@@ -378,6 +380,37 @@ public class Team7104AutoHardware extends LinearOpMode {
         SetLeftMotors(0);
         SetRightMotors(0);
         ResetAndPrepareAllVariables();
+    }
+
+    //SCOOP PREP
+    public void ScoopPrep() throws InterruptedException
+    {
+        RunWithEncoders(FP_Prep_MPLeft, FP_Prep_MPRight, FP_Prep, 1);
+        RunForTime(-FP_Prep_MPBackLeft, -FP_Prep_MPBackRight, FP_Prep_Time, 1);
+        RunWithEncoders(FP_OffWall_MPLeft, FP_OffWall_MPRight, FP_OffWall_Distance, 1);
+        //RunForTime(FP_OffWall_MPLeft, FP_OffWall_MPRight, FP_OffWall_Time, 1);
+
+        Climber_servo.setPosition(Climber_Saftey_Position);
+        Scoop_time.reset();
+        sleep(500);
+        ResetAndPrepareAllVariables();
+
+
+        Scoop_time.reset();
+        Scoop_Motor.setMode(DcMotorController.RunMode.RUN_TO_POSITION);
+        Scoop_Motor.setTargetPosition(Scoop_Floor);     //Should be 660!!! Temporarily adjusted because PullUp is in way.
+        Scoop_Motor.setPower(.1);
+
+        while (Scoop_time.time() < 2)
+        {
+            SetLeftMotors(0);
+            SetRightMotors(0);
+        }
+        sleep(FP_Prep_Scoop_Time);
+
+        Climber_servo.setPosition(Climber_Default_Position + .15);
+        sleep(750);
+        Climber_servo.setPosition(Climber_Default_Position);
     }
 
     //RESET and PREPARE ALL VARIABLES!!!
